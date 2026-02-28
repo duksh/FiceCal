@@ -1,0 +1,12 @@
+{
+  "name": "ficecal-monorepo",
+  "private": true,
+  "version": "0.1.0",
+  "description": "Public monorepo bootstrap for FiceCal v2 web, MCP, and modular contracts.",
+  "packageManager": "pnpm@10.6.0",
+  "scripts": {
+    "validate:feature-catalog": "python3 scripts/validate-feature-catalog.py",
+    "validate:docs-links": "python3 scripts/validate-doc-links.py",
+    "validate": "npm run validate:feature-catalog && npm run validate:docs-links"
+  }
+}

@@ -1,0 +1,23 @@
+# Node / workspace
+node_modules/
+.pnpm-store/
+
+# Build outputs
+dist/
+build/
+coverage/
+
+# Env and secrets
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+*.p12
+
+# Logs
+npm-debug.log*
+pnpm-debug.log*
+
+# OS
+.DS_Store

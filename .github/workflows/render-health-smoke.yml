@@ -1,0 +1,86 @@
+name: Render Agent Health Smoke
+
+on:
+  workflow_dispatch:
+    inputs:
+      health_url:
+        description: "Optional full Render health URL override"
+        required: false
+        type: string
+  schedule:
+    - cron: '0 * * * *'
+
+permissions:
+  contents: read
+
+jobs:
+  health-smoke:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+
+    steps:
+      - name: Resolve health URL
+        id: resolve
+        shell: bash
+        env:
+          INPUT_HEALTH_URL: ${{ github.event.inputs.health_url }}
+          VAR_HEALTH_URL: ${{ vars.RENDER_AGENT_HEALTH_URL }}
+          SECRET_HEALTH_URL: ${{ secrets.RENDER_AGENT_HEALTH_URL }}
+        run: |
+          set -e
+          health_url="$INPUT_HEALTH_URL"
+          if [ -z "$health_url" ]; then
+            health_url="$VAR_HEALTH_URL"
+          fi
+          if [ -z "$health_url" ]; then
+            health_url="$SECRET_HEALTH_URL"
+          fi
+
+          if [ -z "$health_url" ]; then
+            echo "Missing health URL. Set vars.RENDER_AGENT_HEALTH_URL or secrets.RENDER_AGENT_HEALTH_URL, or pass workflow_dispatch input."
+            exit 1
+          fi
+
+          echo "::add-mask::$health_url"
+          echo "health_url=$health_url" >> "$GITHUB_OUTPUT"
+
+      - name: Run health smoke
+        shell: bash
+        run: |
+          set -e
+          url="${{ steps.resolve.outputs.health_url }}"
+          status_code=""
+
+          for attempt in 1 2 3 4 5; do
+            status_code="$(curl -sS -o /tmp/render-health.json -w '%{http_code}' "$url" || true)"
+            echo "Attempt $attempt -> HTTP $status_code"
+            if [ "$status_code" = "200" ]; then
+              break
+            fi
+            sleep 8
+          done
+
+          if [ "$status_code" != "200" ]; then
+            echo "Render health check failed after retries."
+            cat /tmp/render-health.json || true
+            exit 1
+          fi
+
+      - name: Upload health response
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: render-health-${{ github.run_id }}
+          path: /tmp/render-health.json
+          if-no-files-found: warn
+          retention-days: 30
+
+      - name: Write summary
+        if: always()
+        shell: bash
+        run: |
+          {
+            echo "## Render Health Smoke"
+            echo "- Health endpoint: configured"
+            echo "- Result: see job status and artifact \\`render-health-${{ github.run_id }}\\`"
+          } >> "$GITHUB_STEP_SUMMARY"

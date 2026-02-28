@@ -1,0 +1,29 @@
+{
+  "id": "community.sample-finops-adapter",
+  "name": "Community Sample FinOps Adapter",
+  "version": "0.1.0",
+  "owner": "community-contributor",
+  "sponsor": "@duksh",
+  "status": "experimental",
+  "required": false,
+  "contributionType": "ai-assisted",
+  "trustTier": "tier-1",
+  "dependsOn": ["economics-module"],
+  "uiModes": ["operator", "architect"],
+  "inputs": [
+    "sourceProvider",
+    "sourcePayload"
+  ],
+  "outputs": [
+    "normalizedLineItems",
+    "mappingCoveragePct"
+  ],
+  "healthSignals": [
+    "community.sample_adapter.parse_success_rate",
+    "community.sample_adapter.contract_parity_pass_rate"
+  ],
+  "contracts": [
+    "docs/contracts/community-module-contribution-contract.md",
+    "docs/contracts/ai-agent-contribution-policy.md"
+  ]
+}

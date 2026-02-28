@@ -1,0 +1,29 @@
+# Global default owner
+* @duksh
+
+# Apps
+/apps/web/ @duksh
+/apps/docs/ @duksh
+
+# MCP service
+/services/mcp/ @duksh
+
+# Shared packages
+/packages/core-economics/ @duksh
+/packages/feature-registry/ @duksh
+/packages/features/ @duksh
+/packages/features/community/ @duksh
+/packages/integrations/ @duksh
+/packages/mcp-tooling/ @duksh
+/packages/schemas/ @duksh
+
+# Contracts and architecture
+/docs/contracts/ @duksh
+/docs/contracts/community-module-contribution-contract.md @duksh
+/docs/contracts/ai-agent-contribution-policy.md @duksh
+/docs/architecture/ @duksh
+/docs/playbooks/ @duksh
+/docs/references/ @duksh
+
+# CI/GitOps controls
+/.github/ @duksh

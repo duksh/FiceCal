@@ -1,0 +1,43 @@
+name: Contract Drift Guard
+
+on:
+  pull_request:
+
+jobs:
+  contract-drift:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Verify module changes include contract updates
+        shell: bash
+        run: |
+          set -e
+          base="origin/${{ github.base_ref }}"
+          git fetch origin "${{ github.base_ref }}" --depth=1
+          changed_files="$(git diff --name-only "$base"...HEAD)"
+
+          echo "Changed files:"
+          echo "$changed_files"
+
+          module_changed=false
+          contract_changed=false
+
+          if echo "$changed_files" | grep -E '^packages/features/.+/feature.json$|^src/features/.+/feature.json$' >/dev/null; then
+            module_changed=true
+          fi
+
+          if echo "$changed_files" | grep -E '^docs/contracts/.+\.md$|^docs/.+-contract\.md$' >/dev/null; then
+            contract_changed=true
+          fi
+
+          if [ "$module_changed" = true ] && [ "$contract_changed" = false ]; then
+            echo "Feature manifest changed but no contract doc update detected."
+            echo "Update docs/contracts/* (or docs/*-contract.md) in same PR."
+            exit 1
+          fi
+
+          echo "Contract drift guard passed."

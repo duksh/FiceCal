@@ -1,0 +1,16 @@
+{
+  "version": "1.0.0-draft",
+  "updatedAt": "2026-02-28",
+  "modules": [
+    {
+      "id": "community.sample-finops-adapter",
+      "version": "0.1.0",
+      "path": "packages/features/community/community.sample-finops-adapter/feature.json",
+      "trustTier": "tier-1",
+      "contributionType": "ai-assisted",
+      "owner": "community-contributor",
+      "sponsor": "@duksh",
+      "status": "experimental"
+    }
+  ]
+}

@@ -1,0 +1,21 @@
+{
+  "integrationRunId": "00000000-0000-4000-8000-000000000103",
+  "providerAdapterId": "azure-billing",
+  "scope": {
+    "startDate": "2026-01-01",
+    "endDate": "2026-01-31",
+    "currency": "USD"
+  },
+  "canonical": {
+    "infraTotal": 0,
+    "cudPct": 0,
+    "budgetCap": 0,
+    "nRef": 0
+  },
+  "provenance": {
+    "sourceVersion": "azure-stub-v0.1.0",
+    "coveragePct": 0,
+    "mappingConfidence": "low",
+    "warnings": ["Stub adapter: replace with Azure Cost Management + mapping profile implementation."]
+  }
+}

@@ -1,0 +1,8 @@
+{
+  "integrationRunId": "00000000-0000-4000-8000-000000000102",
+  "startDate": "2026-01-01",
+  "endDate": "2026-01-31",
+  "currency": "USD",
+  "mappingProfile": "default-aws-billing-v1",
+  "accountScope": ["123456789012"]
+}

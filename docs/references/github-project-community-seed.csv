@@ -1,0 +1,13 @@
+Title,Type,Workstream,Status,Priority,Target Wave,QA Evidence,Risk,Owner Team,Labels,Acceptance Criteria
+Epic: Community Module Intake and Governance,Epic,CMS,Backlog,P1,Wave 1,Not Required,Medium,governance-office,"community-module,governance","Policy docs, templates, and approvals active"
+Epic: Community Sample Module Baseline,Epic,Integrations,Backlog,P1,Wave 1,Required-Pending,Medium,platform-core,"community-module,sample","Sample module scaffold, fixtures, and docs merged"
+Epic: AI/Agent Contribution Disclosure Enforcement,Epic,QA,Backlog,P1,Wave 1,Required-Pending,High,governance-office,"ai-generated,policy","PR provenance section enforced and reviewed"
+Story: Enable community module CODEOWNERS path,Story,Platform,Ready,P1,Wave 1,Not Required,Low,platform-core,"community-module,codeowners","CODEOWNERS includes community path and policy docs"
+Story: Add community registry governance checks,Story,Platform,Ready,P1,Wave 1,Not Required,Medium,platform-core,"community-module,registry","Registry updated with schema and review checklist"
+Story: Seed first module community.sample-finops-adapter,Story,Integrations,Ready,P1,Wave 1,Required-Pending,Medium,integrations-team,"community-module,starter","Module contains feature.json, src, tests, fixtures"
+Task: Verify Playwright evidence path for community UI changes,Task,QA,Backlog,P1,Wave 1,Required-Pending,Medium,qa-team,"qa,playwright","Screenshots/logs attached for user-facing paths"
+Task: Run security SBOM workflow for sample module PR,Task,Security,Backlog,P1,Wave 1,Not Required,High,governance-office,"security,sbom","Security/SBOM workflow green for PR"
+Story: Add sponsor review policy for AI-assisted PRs,Story,Governance,Backlog,P1,Wave 1,Not Required,High,governance-office,"ai-generated,sponsor","Sponsor required field verified in PR"
+Task: Publish community contribution guide,Task,Docs,Ready,P2,Wave 1,Not Required,Low,docs-team,"docs,community-module","Guide explains required files and checks"
+Story: Define trust-tier promotion flow,Story,Governance,Backlog,P2,Wave 2,Not Required,Medium,governance-office,"community-module,trust-tier","Tier-0 to Tier-3 promotion criteria documented"
+Task: Launch first contributor-ready PR bundle,Task,Platform,Ready,P1,Wave 1,Required-Pending,Medium,platform-core,"community-module,starter-pr","Starter PR bundle template and checklist published"

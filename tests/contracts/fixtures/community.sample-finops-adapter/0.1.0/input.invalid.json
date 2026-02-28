@@ -1,0 +1,6 @@
+{
+  "sourceProvider": "sample-cloud",
+  "sourcePayload": [
+    { "service": "compute", "cost": "not-a-number" }
+  ]
+}

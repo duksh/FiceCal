@@ -1,0 +1,138 @@
+name: QA Playwright Evidence
+
+on:
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  playwright-evidence:
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Install workspace dependencies (if lockfile exists)
+        shell: bash
+        run: |
+          if [ -f pnpm-lock.yaml ]; then
+            corepack enable
+            pnpm install --frozen-lockfile
+          elif [ -f package-lock.json ]; then
+            npm ci
+          elif [ -f package.json ]; then
+            npm install
+          else
+            echo "No package metadata found."
+          fi
+
+      - name: Resolve Playwright command
+        id: resolve
+        shell: bash
+        run: |
+          set -e
+          cmd=""
+
+          if [ -f package.json ]; then
+            if node -e "const fs=require('fs'); const p=JSON.parse(fs.readFileSync('package.json','utf8')); process.exit((p.scripts && p.scripts['test:playwright']) ? 0 : 1);"; then
+              if [ -f pnpm-lock.yaml ]; then
+                cmd="pnpm run test:playwright"
+              else
+                cmd="npm run test:playwright"
+              fi
+            elif node -e "const fs=require('fs'); const p=JSON.parse(fs.readFileSync('package.json','utf8')); process.exit((p.scripts && p.scripts['test:e2e']) ? 0 : 1);"; then
+              if [ -f pnpm-lock.yaml ]; then
+                cmd="pnpm run test:e2e"
+              else
+                cmd="npm run test:e2e"
+              fi
+            fi
+          fi
+
+          if [ -z "$cmd" ] && [ -f playwright.config.ts -o -f playwright.config.js -o -f playwright.config.mjs ]; then
+            cmd="npx playwright test"
+          fi
+
+          if [ -z "$cmd" ]; then
+            echo "Playwright suite not configured. Add test:playwright/test:e2e script or playwright.config.*"
+            exit 1
+          fi
+
+          echo "command=$cmd" >> "$GITHUB_OUTPUT"
+
+      - name: Install Playwright browsers
+        shell: bash
+        run: |
+          npx playwright install --with-deps
+
+      - name: Run Playwright tests and capture logs
+        id: run_playwright
+        shell: bash
+        run: |
+          set +e
+          mkdir -p tests/evidence/playwright/{screenshots,videos,traces}
+          mkdir -p tests/evidence/reports/{html,junit}
+          mkdir -p tests/evidence/logs/ci
+
+          eval "${{ steps.resolve.outputs.command }}" 2>&1 | tee tests/evidence/logs/ci/playwright-run.log
+          exit_code=${PIPESTATUS[0]}
+
+          echo "exit_code=$exit_code" >> "$GITHUB_OUTPUT"
+          exit 0
+
+      - name: Collect common Playwright outputs
+        if: always()
+        shell: bash
+        run: |
+          set +e
+          mkdir -p tests/evidence/reports/html
+          mkdir -p tests/evidence/playwright/traces
+
+          if [ -d playwright-report ]; then
+            cp -R playwright-report/. tests/evidence/reports/html/
+          fi
+
+          if [ -d test-results ]; then
+            cp -R test-results/. tests/evidence/playwright/traces/
+          fi
+
+      - name: Upload QA evidence artifacts
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: playwright-evidence-${{ github.run_id }}
+          path: |
+            tests/evidence/
+            playwright-report/
+            test-results/
+          if-no-files-found: warn
+          retention-days: 30
+
+      - name: Enforce pass gate
+        if: always()
+        shell: bash
+        run: |
+          if [ "${{ steps.run_playwright.outputs.exit_code }}" != "0" ]; then
+            echo "Playwright tests failed. See uploaded QA evidence artifacts."
+            exit 1
+          fi
+
+      - name: Write QA summary
+        if: always()
+        shell: bash
+        run: |
+          {
+            echo "## QA Playwright Evidence"
+            echo "- Command: \\`${{ steps.resolve.outputs.command }}\\`"
+            echo "- Exit code: \\`${{ steps.run_playwright.outputs.exit_code }}\\`"
+            echo "- Artifacts: \\`playwright-evidence-${{ github.run_id }}\\`"
+          } >> "$GITHUB_STEP_SUMMARY"

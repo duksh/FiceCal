@@ -1,0 +1,79 @@
+name: CI Guardrails
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Install workspace dependencies (if lockfile exists)
+        shell: bash
+        run: |
+          if [ -f pnpm-lock.yaml ]; then
+            corepack enable
+            pnpm install --frozen-lockfile
+          else
+            echo "No pnpm-lock.yaml found. Skipping dependency install."
+          fi
+
+      - name: Run feature catalog validation (if present)
+        shell: bash
+        run: |
+          if [ -f scripts/validate-feature-catalog.py ]; then
+            python3 scripts/validate-feature-catalog.py
+          else
+            echo "scripts/validate-feature-catalog.py not found. Skipping."
+          fi
+
+      - name: Run docs link validation (if present)
+        shell: bash
+        run: |
+          if [ -f scripts/validate-doc-links.py ]; then
+            python3 scripts/validate-doc-links.py
+          else
+            echo "scripts/validate-doc-links.py not found. Skipping."
+          fi
+
+      - name: Enforce no absolute local paths in tracked text files
+        shell: bash
+        run: |
+          set -e
+          if grep -RInE '/Users/|[A-Za-z]:\\\\Users\\\\' . \
+            --exclude-dir=.git \
+            --exclude-dir=node_modules \
+            --exclude='*.png' --exclude='*.jpg' --exclude='*.jpeg' --exclude='*.gif' --exclude='*.pdf' \
+            >/tmp/abs_paths.txt; then
+            echo "Absolute local paths detected."
+            cat /tmp/abs_paths.txt
+            exit 1
+          else
+            echo "No absolute local paths detected."
+          fi
+
+      - name: Run workspace tests (if available)
+        shell: bash
+        run: |
+          if [ -f pnpm-lock.yaml ]; then
+            pnpm -r test --if-present
+          elif [ -f package.json ]; then
+            npm test --if-present
+          else
+            echo "No package manager metadata found. Skipping tests."
+          fi
