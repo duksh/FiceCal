@@ -74,6 +74,11 @@ docs/
 - Playbook:
   - `docs/playbooks/billing-phase1-stubs.md`
 
+## Program lock roadmap (Phase P00)
+
+- Recovery and authoritative contract index:
+  - `docs/roadmap/ficecal-v2-recovery-index.md`
+
 ## GitOps expectations
 
 - `main` is protected; no direct pushes.
