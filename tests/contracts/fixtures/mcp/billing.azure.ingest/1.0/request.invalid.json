@@ -4,5 +4,6 @@
   "endDate": "2026-01-31",
   "currency": "USD",
   "mappingProfile": "default-azure-billing-v1",
+  "authMode": "write",
   "subscriptionScope": "sub-1234"
 }

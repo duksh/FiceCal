@@ -4,6 +4,64 @@ import { createDefaultMcpContext, McpRequestContext, McpToolEnvelope, validateMc
 
 export type BillingIngestEnvelope = McpToolEnvelope<BillingIngestRequest>;
 
+export type BillingIngestErrorCode =
+  | "auth_error"
+  | "permission_error"
+  | "rate_limit"
+  | "timeout"
+  | "upstream_unavailable"
+  | "validation_error"
+  | "unknown_runtime_error";
+
+export class BillingIngestError extends Error {
+  readonly code: BillingIngestErrorCode;
+  readonly adapterId: BillingAdapterId;
+
+  constructor(code: BillingIngestErrorCode, adapterId: BillingAdapterId, message: string) {
+    super(message);
+    this.name = "BillingIngestError";
+    this.code = code;
+    this.adapterId = adapterId;
+  }
+}
+
+function inferValidationErrorCode(errors: string[]): BillingIngestErrorCode {
+  const combined = errors.join(" ").toLowerCase();
+  if (combined.includes("authmode") || combined.includes("credentialref")) {
+    return "auth_error";
+  }
+  if (combined.includes("permission")) {
+    return "permission_error";
+  }
+  return "validation_error";
+}
+
+function normalizeRuntimeError(adapterId: BillingAdapterId, error: unknown): BillingIngestError {
+  if (error instanceof BillingIngestError) {
+    return error;
+  }
+
+  const message = error instanceof Error ? error.message : String(error);
+  const lowered = message.toLowerCase();
+
+  let code: BillingIngestErrorCode = "unknown_runtime_error";
+  if (lowered.includes("auth") || lowered.includes("credential")) {
+    code = "auth_error";
+  } else if (lowered.includes("permission") || lowered.includes("forbidden")) {
+    code = "permission_error";
+  } else if (lowered.includes("rate") && lowered.includes("limit")) {
+    code = "rate_limit";
+  } else if (lowered.includes("timeout")) {
+    code = "timeout";
+  } else if (lowered.includes("unavailable") || lowered.includes("upstream")) {
+    code = "upstream_unavailable";
+  } else if (lowered.includes("invalid") || lowered.includes("validation")) {
+    code = "validation_error";
+  }
+
+  return new BillingIngestError(code, adapterId, `Billing ingest failed for ${adapterId}: ${message}`);
+}
+
 function hasEnvelopeShape(value: unknown): value is BillingIngestEnvelope {
   return (
     typeof value === "object" &&
@@ -59,10 +117,18 @@ async function runIngest(
 
   const validation = adapter.validateBillingPayload(payload);
   if (!validation.valid) {
-    throw new Error(`Invalid payload for ${resolvedAdapterId}: ${validation.errors.join(", ")}`);
+    throw new BillingIngestError(
+      inferValidationErrorCode(validation.errors),
+      resolvedAdapterId,
+      `Invalid payload for ${resolvedAdapterId}: ${validation.errors.join(", ")}`,
+    );
   }
 
-  return adapter.mapToCanonical(request, payload);
+  try {
+    return adapter.mapToCanonical(request, payload);
+  } catch (error) {
+    throw normalizeRuntimeError(resolvedAdapterId, error);
+  }
 }
 
 async function runIngestFromEnvelope(

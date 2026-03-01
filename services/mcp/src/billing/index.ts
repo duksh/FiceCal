@@ -14,6 +14,7 @@ export type {
   BillingProvenance,
 } from "./types";
 export {
+  BillingIngestError,
   billingAwsIngest,
   billingAwsIngestV2,
   billingAzureIngest,
@@ -23,4 +24,4 @@ export {
   billingOpenopsIngest,
   billingOpenopsIngestV2,
 } from "./tools/billing-ingest-tools";
-export type { BillingIngestEnvelope } from "./tools/billing-ingest-tools";
+export type { BillingIngestEnvelope, BillingIngestErrorCode } from "./tools/billing-ingest-tools";

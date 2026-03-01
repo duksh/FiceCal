@@ -104,16 +104,22 @@ Use this when implementation context must be reconstructed only from repository 
 
 - `services/mcp/src/billing/adapters/openops.ts`
 - `services/mcp/src/billing/adapters/aws.ts`
+- `services/mcp/src/billing/adapters/azure.ts`
 - `services/mcp/src/billing/tools/billing-ingest-tools.ts`
 - `docs/environment-secret-management-contract.md`
 - `docs/billing-adapter-aws-contract.md`
+- `docs/billing-adapter-azure-contract.md`
 - `tests/contracts/fixtures/mcp/billing.openops.ingest/1.0/`
 - `tests/contracts/fixtures/mcp/billing.aws.ingest/1.0/`
+- `tests/contracts/fixtures/mcp/billing.azure.ingest/1.0/`
 - `tests/evidence/p07/f2-story-071-openops-real-ingest.md`
 - `tests/evidence/p07/f2-task-075-credentials-contract.md`
 - `tests/evidence/p07/f2-story-072-aws-real-ingest.md`
 - `tests/evidence/p07/f2-task-076-retry-rate-limit-strategy.md`
 - `tests/evidence/p07/f2-task-081-aws-mapping-profiles.md`
+- `tests/evidence/p07/f2-story-073-azure-real-ingest.md`
+- `tests/evidence/p07/f2-task-077-pagination-incremental-sync.md`
+- `tests/evidence/p07/f2-task-082-error-normalization.md`
 
 ### Backlog and project traceability
 

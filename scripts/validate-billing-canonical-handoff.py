@@ -178,6 +178,32 @@ def validate_phase1_tool(tool_name: str, expected_adapter_id: str) -> None:
                 f"{tool_name}.response.provenance.warnings must include retry policy baseline entry"
             )
 
+    if tool_name == "billing.azure.ingest":
+        source_version = require_non_empty_string(
+            provenance, "sourceVersion", f"{tool_name}.response.provenance"
+        )
+        if not source_version.startswith("azure-readonly-"):
+            fail(
+                f"{tool_name}.response.provenance.sourceVersion must start with "
+                "'azure-readonly-' for P07 baseline"
+            )
+
+        infra_total = require_number(canonical, "infraTotal", f"{tool_name}.response.canonical")
+        if infra_total <= 0:
+            fail(f"{tool_name}.response.canonical.infraTotal must be > 0 for Azure real ingest baseline")
+
+        pagination_warning_prefix = "Pagination policy: pageSize="
+        if not any(isinstance(item, str) and item.startswith(pagination_warning_prefix) for item in warnings):
+            fail(
+                f"{tool_name}.response.provenance.warnings must include pagination policy baseline entry"
+            )
+
+        incremental_warning = "Incremental sync baseline anchored to requested billing window."
+        if incremental_warning not in warnings:
+            fail(
+                f"{tool_name}.response.provenance.warnings must include incremental sync baseline entry"
+            )
+
 
 def validate() -> None:
     for tool_name, expected_adapter_id in PHASE1_BILLING_TOOLS.items():

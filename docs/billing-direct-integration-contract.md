@@ -15,9 +15,12 @@ This contract covers:
 - `F2-TASK-064` Define canonical handoff validation checks
 - `F2-STORY-071` Implement OpenOps real ingestion
 - `F2-STORY-072` Implement AWS real ingestion
+- `F2-STORY-073` Implement Azure real ingestion
 - `F2-TASK-075` Define credentials contract for tier-1 providers
 - `F2-TASK-076` Implement retry and rate-limit strategy
+- `F2-TASK-077` Implement pagination and incremental sync
 - `F2-TASK-081` Document provider-specific mapping profiles
+- `F2-TASK-082` Add ingest error normalization
 
 ## 3. Shared adapter interface contract
 
@@ -102,12 +105,27 @@ Baseline implementation requirements:
 2. Profile changes require fixture deltas and evidence in the same PR.
 3. AWS profile baseline is documented in `docs/billing-adapter-aws-contract.md`.
 
-## 10. Validation command anchors
+## 10. Azure real-ingest baseline (`F2-STORY-073`, `F2-TASK-077`)
+
+Baseline implementation requirements:
+
+1. Azure adapter emits deterministic non-zero canonical snapshot fields.
+2. Provenance source version uses `azure-readonly-*` namespace.
+3. Pagination and incremental-sync baseline is declared in provenance warnings.
+4. Fixture baseline for `billing.azure.ingest` reflects read-only credential and pagination controls.
+
+## 11. Error normalization baseline (`F2-TASK-082`)
+
+1. Billing ingest validation and runtime failures map to normalized error codes.
+2. Normalized error payload includes adapter identity context.
+3. `BillingIngestError` surface is exported for MCP/UI consumers.
+
+## 12. Validation command anchors
 
 - `python3 scripts/validate-billing-canonical-handoff.py`
 - `npm run validate`
 
-## 11. Exit criteria for P06-P07 foundation slice
+## 13. Exit criteria for P06-P07 foundation slice
 
 P06-P07 foundation slice is ready when:
 
@@ -115,4 +133,5 @@ P06-P07 foundation slice is ready when:
 2. Shared adapter interface contract remains provider-neutral.
 3. Canonical handoff checks are executable against fixture baselines.
 4. Tier-1 credential policy is documented and enforceable via adapter validation.
-5. Tier-1 real-ingest baselines (OpenOps + AWS) are contract-validated with deterministic fixtures.
+5. Tier-1 real-ingest baselines (OpenOps + AWS + Azure) are contract-validated with deterministic fixtures.
+6. Ingest error normalization is available for adapter validation and runtime failures.

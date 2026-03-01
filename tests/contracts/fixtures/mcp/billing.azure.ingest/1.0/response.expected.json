@@ -7,15 +7,18 @@
     "currency": "USD"
   },
   "canonical": {
-    "infraTotal": 0,
-    "cudPct": 0,
-    "budgetCap": 0,
-    "nRef": 0
+    "infraTotal": 1736,
+    "cudPct": 65,
+    "budgetCap": 1926.96,
+    "nRef": 4
   },
   "provenance": {
-    "sourceVersion": "azure-stub-v0.1.0",
-    "coveragePct": 0,
-    "mappingConfidence": "low",
-    "warnings": ["Stub adapter: replace with Azure Cost Management + mapping profile implementation."]
+    "sourceVersion": "azure-readonly-v1.0.0",
+    "coveragePct": 89.2,
+    "mappingConfidence": "medium",
+    "warnings": [
+      "Pagination policy: pageSize=5, pages=1, totalRows=4.",
+      "Incremental sync baseline anchored to requested billing window."
+    ]
   }
 }
