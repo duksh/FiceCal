@@ -79,6 +79,49 @@ When contributors are onboarded, ownership transitions from single-operator mode
 | Community/AI policy enforcement and onboarding | `governance-office`, `docs-team` | `governance-office` | `platform-core`, `security-team` | `qa-team` | `docs/community-module-contribution-contract.md`; `docs/ai-agent-contribution-policy.md` |
 | Cutover rehearsal and hypercare coordination | `platform-core` | `platform-core` | `qa-team`, `security-team`, `governance-office` | all teams | `docs/monorepo-cutover-runbook.md` |
 
+## Blocker severity policy (F2-TASK-004)
+
+### Current operating mode (now)
+
+Single-operator assignment for blocker management:
+
+- **Severity decision owner:** `duksh`
+- **Tracking owner:** `duksh`
+- **Follow-up and closure owner:** `duksh`
+- **AI support:** Cascade supports triage notes, impact analysis, and action checklists
+
+### Future scale-out model (target)
+
+When teams are onboarded, blocker ownership follows this model:
+
+- **Severity decision (R):** `security-team`
+- **Program escalation (A):** `governance-office`
+- **Domain remediation (R):** owning team for impacted area (`platform-core`, `agent-platform`, `integration-team`, `qa-team`, etc.)
+- **Release gate confirmation (R):** `qa-team` + `security-team`
+
+### Severity levels and SLA targets
+
+| Severity | Definition | First response SLA | Update cadence | Target closure SLA | Phase/release impact |
+|---|---|---|---|---|---|
+| Critical | Active security exposure, data risk, or hard release blocker with no workaround | 1 hour | every 4 hours | 24 hours | Blocks active phase closure and release |
+| High | Material correctness/reliability risk or gate failure with limited workaround | 4 hours | daily | 3 business days | Blocks phase closure; may block release |
+| Medium | Important issue with workaround and contained scope | 1 business day | twice weekly | 10 business days | Does not block release unless aggregated risk increases |
+| Low | Minor defect, documentation/process gap, or optimization item | 2 business days | weekly | next planned cycle | No direct release block |
+
+### Escalation and closure rules
+
+1. Any unresolved **Critical** or **High** blocker prevents phase completion.
+2. Critical blockers require same-day mitigation or explicit rollback plan.
+3. High blockers require named owner, due date, and daily follow-up until closure.
+4. Medium/Low blockers can be deferred only with documented rationale and target milestone.
+5. A blocker is closed only when fix evidence and retest evidence are linked in artifacts.
+
+### Tracking discipline
+
+- Maintain blocker status in the issue tracker with fields: severity, owner, due date, last update, evidence links.
+- Add blocker references in weekly governance review notes.
+- Re-check open Critical/High blockers before any release go/no-go decision.
+
 ## Complete catalog (grouped by phase)
 
 ## P00 - Program lock
