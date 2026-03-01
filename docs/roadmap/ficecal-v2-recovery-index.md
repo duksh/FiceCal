@@ -90,12 +90,15 @@ Use this when implementation context must be reconstructed only from repository 
 ### Billing adapter framework baseline
 
 - `docs/billing-direct-integration-contract.md`
+- `docs/playbooks/billing-phase1-stubs.md`
 - `services/mcp/src/billing/types.ts`
 - `services/mcp/src/billing/registry.ts`
 - `services/mcp/src/billing/tools/billing-ingest-tools.ts`
 - `scripts/validate-billing-canonical-handoff.py`
 - `tests/evidence/p06/f2-task-063-registry-routing-hardening.md`
 - `tests/evidence/p06/f2-task-064-canonical-handoff-validation.md`
+- `tests/evidence/p06/f2-task-065-phase1-stub-playbook.md`
+- `tests/evidence/p06/f2-task-066-stub-fixture-version-mapping.md`
 
 ### Backlog and project traceability
 
