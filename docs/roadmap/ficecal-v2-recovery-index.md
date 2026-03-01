@@ -14,11 +14,16 @@ Use this index to recover baseline governance context directly from the reposito
 1. `README.md`
 2. `CONTRIBUTING.md`
 3. `docs/roadmap/ficecal-v2-recovery-index.md`
-4. `.github/branch-protection-checklist.md`
-5. `.github/PULL_REQUEST_TEMPLATE.md`
-6. `.github/CODEOWNERS`
+4. `docs/roadmap/ficecal-v2-execution-plan-updated.md`
+5. `.github/branch-protection-checklist.md`
+6. `.github/PULL_REQUEST_TEMPLATE.md`
+7. `.github/CODEOWNERS`
 
 ## Authoritative governance and contract set
+
+### Program sequencing and quality gates
+
+- `docs/roadmap/ficecal-v2-execution-plan-updated.md`
 
 ### Contribution governance contracts
 

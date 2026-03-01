@@ -78,6 +78,8 @@ docs/
 
 - Recovery and authoritative contract index:
   - `docs/roadmap/ficecal-v2-recovery-index.md`
+- Phase sequencing, entry criteria, exit criteria, and gate references:
+  - `docs/roadmap/ficecal-v2-execution-plan-updated.md`
 
 ## GitOps expectations
 
