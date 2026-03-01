@@ -114,5 +114,6 @@ Additional validators can be added as fixture coverage expands.
 
 - `docs/mcp-evolution-contract.md`
 - `docs/modularization-playbook.md`
+- `docs/operational-incident-playbooks.md`
 - `docs/roadmap/ficecal-v2-execution-plan-updated.md`
 - `docs/roadmap/ficecal-v2-task-issue-registry.csv`

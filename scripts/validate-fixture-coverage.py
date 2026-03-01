@@ -20,6 +20,7 @@ REPO_ROOT = Path(__file__).resolve().parents[1]
 FIXTURE_ROOT = REPO_ROOT / "tests" / "contracts" / "fixtures"
 MODULE_ROOT = FIXTURE_ROOT
 MCP_ROOT = FIXTURE_ROOT / "mcp"
+PARITY_ROOT = MCP_ROOT / "legacy-alias-parity"
 
 REQUIRED_MODULE_PACKS = {
     "community.sample-finops-adapter",
@@ -45,6 +46,20 @@ def load_json(path: Path, context: str) -> Any:
         fail(f"{context} invalid JSON: {exc}")
 
 
+def load_json_object(path: Path, context: str) -> dict[str, Any]:
+    payload = load_json(path, context)
+    if not isinstance(payload, dict):
+        fail(f"{context} must be a JSON object")
+    return payload
+
+
+def require_non_empty_string(container: dict[str, Any], key: str, context: str) -> str:
+    value = container.get(key)
+    if not isinstance(value, str) or not value:
+        fail(f"{context}.{key} must be a non-empty string")
+    return value
+
+
 def list_version_dirs(pack_path: Path, context: str) -> list[Path]:
     versions = sorted(child for child in pack_path.iterdir() if child.is_dir())
     if not versions:
@@ -53,18 +68,13 @@ def list_version_dirs(pack_path: Path, context: str) -> list[Path]:
 
 
 def required_mcp_files_for_pack(pack_name: str) -> set[str]:
-    if pack_name.startswith("billing."):
-        return {"request.valid.json", "request.invalid.json", "response.expected.json"}
     if pack_name == "mcp.capabilities.get":
         return {"response.expected.json"}
     if pack_name == "mcp.context.envelope":
         return {"request.valid.json", "request.invalid.json"}
     if pack_name == "legacy-alias-parity":
         return {"parity.rows.json"}
-    fail(
-        f"Unsupported MCP fixture pack '{pack_name}'. "
-        "Update validate-fixture-coverage.py with explicit rules."
-    )
+    return {"request.valid.json", "request.invalid.json", "response.expected.json"}
 
 
 def validate_module_pack(pack_name: str, pack_path: Path) -> None:
@@ -96,7 +106,7 @@ def validate_module_pack(pack_name: str, pack_path: Path) -> None:
             load_json(json_path, f"module pack '{pack_name}'/{version.name}/{json_path.name}")
 
 
-def capabilities_billing_tools() -> set[str]:
+def capabilities_billing_tools() -> tuple[set[str], str]:
     capabilities_pack = MCP_ROOT / "mcp.capabilities.get"
     versions = list_version_dirs(capabilities_pack, "MCP pack 'mcp.capabilities.get'")
 
@@ -108,9 +118,7 @@ def capabilities_billing_tools() -> set[str]:
             f"'{latest.name}' missing response.expected.json"
         )
 
-    payload = load_json(response_path, "mcp.capabilities.get response.expected")
-    if not isinstance(payload, dict):
-        fail("mcp.capabilities.get response.expected must be a JSON object")
+    payload = load_json_object(response_path, "mcp.capabilities.get response.expected")
 
     namespaces = payload.get("toolNamespaces")
     if not isinstance(namespaces, list):
@@ -125,10 +133,63 @@ def capabilities_billing_tools() -> set[str]:
             fail(f"toolNamespaces[{idx}].tools must be an array of strings")
         tools.update(ns_tools)
 
-    billing_tools = {tool for tool in tools if tool.startswith("billing.")}
-    if not billing_tools:
-        fail("No billing.* tools found in mcp.capabilities.get fixture")
-    return billing_tools
+    if not tools:
+        fail("No MCP tools found in mcp.capabilities.get fixture")
+
+    compatibility = payload.get("compatibility")
+    if not isinstance(compatibility, dict):
+        fail("mcp.capabilities.get response.expected.compatibility must be an object")
+
+    parity_fixture_version = require_non_empty_string(
+        compatibility,
+        "parityFixtureVersion",
+        "mcp.capabilities.get response.expected.compatibility",
+    )
+
+    return tools, parity_fixture_version
+
+
+def validate_legacy_alias_parity_contract(tools: set[str], expected_parity_version: str) -> None:
+    parity_pack = PARITY_ROOT / expected_parity_version
+    if not parity_pack.exists() or not parity_pack.is_dir():
+        fail(
+            "legacy alias parity fixture version from capabilities does not exist: "
+            f"legacy-alias-parity/{expected_parity_version}"
+        )
+
+    parity_rows_path = parity_pack / "parity.rows.json"
+    if not parity_rows_path.exists():
+        fail(
+            "legacy alias parity pack missing parity.rows.json at "
+            f"legacy-alias-parity/{expected_parity_version}"
+        )
+
+    payload = load_json_object(
+        parity_rows_path,
+        f"legacy-alias-parity/{expected_parity_version}/parity.rows.json",
+    )
+
+    fixture_version = require_non_empty_string(payload, "fixtureVersion", "parity.rows")
+    if fixture_version != expected_parity_version:
+        fail(
+            "legacy alias parity fixtureVersion must match capabilities parityFixtureVersion "
+            f"('{expected_parity_version}'), got '{fixture_version}'"
+        )
+
+    rows = payload.get("rows")
+    if not isinstance(rows, list) or not rows:
+        fail("parity.rows.rows must be a non-empty array")
+
+    for idx, row in enumerate(rows):
+        context = f"parity.rows.rows[{idx}]"
+        if not isinstance(row, dict):
+            fail(f"{context} must be an object")
+        canonical_tool = require_non_empty_string(row, "canonicalTool", context)
+        if canonical_tool not in tools:
+            fail(
+                f"{context}.canonicalTool '{canonical_tool}' not found in "
+                "mcp.capabilities.get toolNamespaces"
+            )
 
 
 def validate_mcp_pack(pack_name: str, pack_path: Path) -> None:
@@ -146,7 +207,7 @@ def validate_mcp_pack(pack_name: str, pack_path: Path) -> None:
                 fail(
                     f"MCP pack '{pack_name}' version '{version.name}' missing required file: {file_name}"
                 )
-            load_json(target, f"MCP pack '{pack_name}'/{version.name}/{file_name}")
+            load_json_object(target, f"MCP pack '{pack_name}'/{version.name}/{file_name}")
 
 
 def validate() -> None:
@@ -167,19 +228,29 @@ def validate() -> None:
         validate_module_pack(module_pack, MODULE_ROOT / module_pack)
 
     mcp_pack_names = sorted(child.name for child in MCP_ROOT.iterdir() if child.is_dir())
-    billing_tools = capabilities_billing_tools()
-    required_mcp_packs = ALWAYS_REQUIRED_MCP_PACKS | billing_tools
+    capability_tools, parity_fixture_version = capabilities_billing_tools()
+    required_mcp_packs = ALWAYS_REQUIRED_MCP_PACKS | capability_tools
 
     missing_mcp_packs = required_mcp_packs - set(mcp_pack_names)
     if missing_mcp_packs:
         fail(f"Missing required MCP fixture packs: {sorted(missing_mcp_packs)}")
 
+    unexpected_mcp_packs = set(mcp_pack_names) - required_mcp_packs
+    if unexpected_mcp_packs:
+        fail(
+            "Unexpected MCP fixture packs not declared in capabilities baseline: "
+            f"{sorted(unexpected_mcp_packs)}"
+        )
+
     for mcp_pack in sorted(required_mcp_packs):
         validate_mcp_pack(mcp_pack, MCP_ROOT / mcp_pack)
 
+    validate_legacy_alias_parity_contract(capability_tools, parity_fixture_version)
+
     print(
         "[fixture-coverage] OK: validated "
-        f"{len(module_pack_names)} module packs and {len(required_mcp_packs)} required MCP packs"
+        f"{len(module_pack_names)} module packs and {len(required_mcp_packs)} required MCP packs "
+        f"(parity fixture version {parity_fixture_version})"
     )
 
 

@@ -72,6 +72,8 @@ Use this when implementation context must be reconstructed only from repository 
 
 - `docs/contract-test-fixture-pack.md`
 - `scripts/validate-fixture-coverage.py`
+- `docs/operational-incident-playbooks.md`
+- `tests/evidence/p04/f2-task-044-mcp-fixture-coverage.md`
 
 ### Backlog and project traceability
 

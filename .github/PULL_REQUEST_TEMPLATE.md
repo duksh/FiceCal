@@ -19,9 +19,18 @@
 ## Validation
 
 - [ ] `python3 scripts/validate-feature-catalog.py` (if present)
+- [ ] `python3 scripts/validate-fixture-coverage.py` (if present)
 - [ ] `python3 scripts/validate-doc-links.py` (if present)
 - [ ] MCP/tool schema checks (if applicable)
 - [ ] Unit/integration tests passed
+
+## Fixture Parity Review (required when touching contracts, MCP fixtures, or module fixtures)
+
+- [ ] Contract delta and fixture delta are included in the same PR
+- [ ] Correct fixture version folder strategy used (existing immutable vs new version)
+- [ ] `notes.md` updated for rationale and normalization assumptions
+- [ ] Determinism constraints checked (stable ordering, no runtime-specific expected values)
+- [ ] `python3 scripts/validate-legacy-alias-parity.py` executed when alias parity may be impacted
 
 ## QA Automated Testing Evidence (required for user-facing changes)
 
