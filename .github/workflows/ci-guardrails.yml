@@ -58,7 +58,7 @@ jobs:
           if grep -RInE '/Users/|[A-Za-z]:\\\\Users\\\\' . \
             --exclude-dir=.git \
             --exclude-dir=node_modules \
-            --exclude='.github/workflows/ci-guardrails.yml' \
+            --exclude='ci-guardrails.yml' \
             --exclude='*.png' --exclude='*.jpg' --exclude='*.jpeg' --exclude='*.gif' --exclude='*.pdf' \
             >/tmp/abs_paths.txt; then
             echo "Absolute local paths detected."
