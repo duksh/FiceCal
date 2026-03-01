@@ -41,6 +41,21 @@ This plan is memory-loss safe: sequencing, dependencies, and acceptance gates ar
 | `G-007` | Runtime smoke health | `.github/workflows/render-health-smoke.yml` |
 | `G-008` | Release checks | `.github/workflows/release.yml` |
 
+### 4.1) Quality gate phase matrix (F2-TASK-005)
+
+| Gate ID | Primary phase coverage | Release blocking behavior |
+|---|---|---|
+| `G-001` | P00, P01 | Blocks governance/foundation closure until branch controls are validated |
+| `G-002` | P01-P13 | Blocks active phase closure when CI guardrails are red |
+| `G-003` | P00-P13 (contract-touching changes) | Blocks contract-affecting merges and phase closure until drift is resolved |
+| `G-004` | P05, P08, P11, P12 (user-facing evidence phases) | Blocks user-facing completion claims and go/no-go when evidence is missing |
+| `G-005` | P00, P01, P07, P10-P12 | Any Critical/High unresolved security finding blocks release |
+| `G-006` | P05, P11, P12 | Blocks release readiness when deployment health is red |
+| `G-007` | P07, P11, P12 | Treated as High blocker for active phase and release readiness |
+| `G-008` | P11, P12 | Final release blocker; release cannot proceed unless all checks are green |
+
+Enforcement policy: any required gate in red state for the active phase is treated as an open blocker and must be tracked to closure with evidence.
+
 ## 5) Phase execution with explicit entry/exit criteria
 
 ### Phase P00 - Program lock and governance baseline

@@ -122,6 +122,47 @@ When teams are onboarded, blocker ownership follows this model:
 - Add blocker references in weekly governance review notes.
 - Re-check open Critical/High blockers before any release go/no-go decision.
 
+## Quality gate matrix (F2-TASK-005)
+
+### Current operating mode (now)
+
+Single-operator gate ownership for P00 through early implementation:
+
+- **Gate decision owner:** `duksh`
+- **Evidence verification owner:** `duksh`
+- **Escalation owner:** `duksh`
+- **AI support:** Cascade supports evidence checklisting, gate result summaries, and remediation task drafting
+
+### Future scale-out model (target)
+
+When teams are onboarded, quality gate operations follow this model:
+
+- **Gate operation (R):** `qa-team` + impacted domain owner (`platform-core`, `agent-platform`, `integration-team`, etc.)
+- **Program accountability (A):** `governance-office`
+- **Security gate authority (R/A for G-005):** `security-team`
+- **Release go/no-go confirmation (R):** `qa-team` + `security-team` with final approval by `governance-office`
+
+### Canonical gate matrix
+
+| Gate ID | Gate name | Reference | Current owner (now) | Future owner (target) | Required evidence | Failure handling and SLA |
+|---|---|---|---|---|---|---|
+| `G-001` | Branch protection checklist | `.github/branch-protection-checklist.md` | `duksh` | `platform-core` + `governance-office` | Branch rules snapshot and review note | Open blocker within same business day; remediation plan before merge |
+| `G-002` | CI guardrails | `.github/workflows/ci-guardrails.yml` | `duksh` | `platform-core` + `qa-team` | Latest successful workflow run link | Immediate triage; restore green pipeline within 1 business day |
+| `G-003` | Contract drift | `.github/workflows/contract-drift.yml` | `duksh` | `platform-core` + `agent-platform` | Drift check report and fixture delta reference | Block contract-affecting PRs until passing |
+| `G-004` | Playwright evidence | `.github/workflows/qa-playwright-evidence.yml` | `duksh` | `qa-team` + `ui-foundation-team` | Playwright report/artifacts attached to issue or PR | No user-facing completion claim without evidence |
+| `G-005` | Security and SBOM | `.github/workflows/security-sbom.yml` | `duksh` | `security-team` | Security scan output and SBOM artifact | Any critical finding is escalated immediately and blocks release |
+| `G-006` | Pages deployment health | `.github/workflows/pages-deploy.yml` | `duksh` | `platform-core` + `qa-team` | Successful deploy run and smoke URL check | Recover deployment health within 1 business day |
+| `G-007` | Runtime smoke health | `.github/workflows/render-health-smoke.yml` | `duksh` | `platform-core` + `integration-team` | Runtime smoke run link and failure logs if red | Treat red status as High blocker for active phase |
+| `G-008` | Release checks | `.github/workflows/release.yml` | `duksh` | `governance-office` + `qa-team` + `security-team` | Release checklist completion evidence | Release is blocked until all required checks are green |
+
+### Gate enforcement rules
+
+1. A phase cannot be closed if any required gate for that phase is red.
+2. Every gate failure must map to a tracked issue with owner, ETA, and evidence links.
+3. Gate waivers are exceptional and must include explicit rationale, expiry, and approver record.
+4. Security gate (`G-005`) and release checks (`G-008`) are mandatory for any release decision.
+5. Gate status must be reviewed in weekly governance review notes and before go/no-go checkpoints.
+
 ## Complete catalog (grouped by phase)
 
 ## P00 - Program lock
