@@ -1,0 +1,16 @@
+{
+  "status": "ok",
+  "fallbackApplied": false,
+  "failedModuleIds": [],
+  "reasonCodes": [],
+  "coreSummary": {
+    "baselineMonthlyCost": 1200,
+    "currency": "USD"
+  },
+  "optionalEnrichment": [
+    {
+      "moduleId": "recommendation-module",
+      "items": 2
+    }
+  ]
+}

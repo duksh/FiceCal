@@ -9,6 +9,12 @@ This service folder contains Phase 1 billing ingestion stubs for provider adapte
 - `billing.azure.ingest`
 - `billing.gcp.ingest`
 
+## MCP v2 baseline surface
+
+- `mcpCapabilitiesGet()` capability handshake helper
+- shared MCP context envelope types and validators (`services/mcp/src/mcp/`)
+- v2 billing tool entrypoints that consume context envelopes
+
 ## Source layout
 
 ```text

@@ -1,0 +1,33 @@
+{
+  "fixtureVersion": "1.0",
+  "rows": [
+    {
+      "legacyAlias": "finops.billing.openops.ingest",
+      "canonicalTool": "billing.openops.ingest",
+      "requestFixture": "../../billing.openops.ingest/1.0/request.valid.json",
+      "expectedResponseFixture": "../../billing.openops.ingest/1.0/response.expected.json",
+      "parityCheck": "response_shape"
+    },
+    {
+      "legacyAlias": "finops.billing.aws.ingest",
+      "canonicalTool": "billing.aws.ingest",
+      "requestFixture": "../../billing.aws.ingest/1.0/request.valid.json",
+      "expectedResponseFixture": "../../billing.aws.ingest/1.0/response.expected.json",
+      "parityCheck": "response_shape"
+    },
+    {
+      "legacyAlias": "finops.billing.azure.ingest",
+      "canonicalTool": "billing.azure.ingest",
+      "requestFixture": "../../billing.azure.ingest/1.0/request.valid.json",
+      "expectedResponseFixture": "../../billing.azure.ingest/1.0/response.expected.json",
+      "parityCheck": "response_shape"
+    },
+    {
+      "legacyAlias": "finops.billing.gcp.ingest",
+      "canonicalTool": "billing.gcp.ingest",
+      "requestFixture": "../../billing.gcp.ingest/1.0/request.valid.json",
+      "expectedResponseFixture": "../../billing.gcp.ingest/1.0/response.expected.json",
+      "parityCheck": "response_shape"
+    }
+  ]
+}

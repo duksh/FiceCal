@@ -54,6 +54,18 @@ Use this when implementation context must be reconstructed only from repository 
 
 - `docs/roadmap/ficecal-v2-execution-plan-updated.md`
 
+### Architecture decisions and traceability
+
+- `docs/architecture-decision-traceability-map.md`
+- `docs/adr-0001-d3-first-chart-policy.md`
+- `docs/adr-0002-fastify-mcp-sdk-stack.md`
+- `docs/adr-0003-monorepo-structure-choice.md`
+
+### MCP evolution baseline
+
+- `docs/mcp-evolution-contract.md`
+- `tests/contracts/fixtures/mcp/legacy-alias-parity/1.0/`
+
 ### Backlog and project traceability
 
 - `docs/roadmap/ficecal-v2-task-issue-registry.csv`

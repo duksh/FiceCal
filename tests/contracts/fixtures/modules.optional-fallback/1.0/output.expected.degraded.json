@@ -1,0 +1,11 @@
+{
+  "status": "degraded",
+  "fallbackApplied": true,
+  "failedModuleIds": ["recommendation-module"],
+  "reasonCodes": ["timeout_or_rate_limit"],
+  "coreSummary": {
+    "baselineMonthlyCost": 1200,
+    "currency": "USD"
+  },
+  "optionalEnrichment": []
+}

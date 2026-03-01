@@ -1,0 +1,24 @@
+{
+  "mcpVersion": "2.0",
+  "schemaVersion": "2026-03-01",
+  "toolNamespaces": [
+    {
+      "namespace": "billing",
+      "version": "1.0",
+      "tools": [
+        "billing.openops.ingest",
+        "billing.aws.ingest",
+        "billing.azure.ingest",
+        "billing.gcp.ingest"
+      ],
+      "ownerTeam": "integration-team",
+      "stability": "phase-1-stub"
+    }
+  ],
+  "compatibility": {
+    "legacyAliasesEnabled": true,
+    "aliasNamespace": "finops",
+    "parityFixtureVersion": "1.0"
+  },
+  "featureFlags": ["mcp_v2", "legacy_alias_parity"]
+}

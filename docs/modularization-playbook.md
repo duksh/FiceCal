@@ -68,6 +68,11 @@ For changes touching optional-module fallback behavior:
 2. Provide one retest proving stable degraded behavior.
 3. Link evidence artifacts in PR summary and issue fields.
 
+Current evidence anchors for `F2-TASK-024`:
+
+- `tests/contracts/fixtures/modules.optional-fallback/1.0/`
+- `tests/evidence/p02/f2-task-024-optional-module-fallback.md`
+
 ## Exit criteria anchors
 
 - Core and optional module boundaries are explicit and documented.

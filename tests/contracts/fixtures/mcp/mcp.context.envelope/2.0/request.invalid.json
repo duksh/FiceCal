@@ -1,0 +1,27 @@
+{
+  "context": {
+    "requestId": "",
+    "traceId": "",
+    "mode": "operator",
+    "workspaceId": "",
+    "actor": "human",
+    "timeRange": {
+      "start": "2026-01-01",
+      "end": "2026-01-31",
+      "tz": "UTC"
+    },
+    "contractVersions": {
+      "mcp": "2.0",
+      "tool": "1.0",
+      "fixture": "1.0"
+    },
+    "featureFlags": "mcp_v2"
+  },
+  "input": {
+    "integrationRunId": "00000000-0000-4000-8000-000000000101",
+    "startDate": "2026-01-01",
+    "endDate": "2026-01-31",
+    "currency": "USD",
+    "mappingProfile": "default-openops-billing-v1"
+  }
+}

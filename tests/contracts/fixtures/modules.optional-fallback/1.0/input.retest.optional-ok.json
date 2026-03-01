@@ -1,0 +1,16 @@
+{
+  "requestId": "f2-task-024-retest-healthy",
+  "coreModules": {
+    "economics": {
+      "status": "ok",
+      "baselineMonthlyCost": 1200
+    }
+  },
+  "optionalModules": [
+    {
+      "moduleId": "recommendation-module",
+      "enabled": true,
+      "simulatedFailure": null
+    }
+  ]
+}
