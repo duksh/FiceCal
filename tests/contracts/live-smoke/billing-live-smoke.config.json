@@ -1,0 +1,40 @@
+{
+  "version": "1.0",
+  "updatedAt": "2026-03-01T00:00:00Z",
+  "maxReportAgeHours": 24,
+  "defaultVarianceThresholdPct": 3.0,
+  "providers": [
+    {
+      "providerId": "openops",
+      "adapterId": "openops-billing",
+      "fixtureToolName": "billing.openops.ingest",
+      "credentialRefEnv": "FICECAL_OPENOPS_CREDENTIAL_REF",
+      "smokeCommandEnv": "FICECAL_OPENOPS_LIVE_SMOKE_CMD",
+      "varianceThresholdPct": 2.0
+    },
+    {
+      "providerId": "aws",
+      "adapterId": "aws-billing",
+      "fixtureToolName": "billing.aws.ingest",
+      "credentialRefEnv": "FICECAL_AWS_CREDENTIAL_REF",
+      "smokeCommandEnv": "FICECAL_AWS_LIVE_SMOKE_CMD",
+      "varianceThresholdPct": 2.5
+    },
+    {
+      "providerId": "azure",
+      "adapterId": "azure-billing",
+      "fixtureToolName": "billing.azure.ingest",
+      "credentialRefEnv": "FICECAL_AZURE_CREDENTIAL_REF",
+      "smokeCommandEnv": "FICECAL_AZURE_LIVE_SMOKE_CMD",
+      "varianceThresholdPct": 2.5
+    },
+    {
+      "providerId": "gcp",
+      "adapterId": "gcp-billing",
+      "fixtureToolName": "billing.gcp.ingest",
+      "credentialRefEnv": "FICECAL_GCP_CREDENTIAL_REF",
+      "smokeCommandEnv": "FICECAL_GCP_LIVE_SMOKE_CMD",
+      "varianceThresholdPct": 2.5
+    }
+  ]
+}

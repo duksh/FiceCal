@@ -1,5 +1,11 @@
 import { BillingAdapterResolutionError, isBillingAdapterIdFormat, resolveBillingAdapter } from "../registry";
-import { BillingAdapterId, BillingCanonicalHandoff, BillingIngestRequest } from "../types";
+import { resolveBillingCredentialRef } from "../credentials";
+import {
+  BillingAdapterId,
+  BillingCanonicalHandoff,
+  BillingIngestMode,
+  BillingIngestRequest,
+} from "../types";
 import { createDefaultMcpContext, McpRequestContext, McpToolEnvelope, validateMcpContext } from "../../mcp";
 import { emitBillingTelemetryEvent } from "../telemetry";
 
@@ -24,6 +30,28 @@ export class BillingIngestError extends Error {
     this.code = code;
     this.adapterId = adapterId;
   }
+}
+
+type RuntimeEnv = {
+  BILLING_INGEST_MODE?: string;
+};
+
+function getRuntimeEnv(): RuntimeEnv {
+  const runtime = globalThis as { process?: { env?: RuntimeEnv } };
+  return runtime.process?.env ?? {};
+}
+
+function resolveIngestMode(request: BillingIngestRequest): BillingIngestMode {
+  if (request.ingestMode === "live" || request.ingestMode === "deterministic") {
+    return request.ingestMode;
+  }
+
+  const configuredMode = getRuntimeEnv().BILLING_INGEST_MODE;
+  if (configuredMode === "live" || configuredMode === "deterministic") {
+    return configuredMode;
+  }
+
+  return "deterministic";
 }
 
 function inferValidationErrorCode(errors: string[]): BillingIngestErrorCode {
@@ -99,6 +127,7 @@ async function runIngest(
   context: McpRequestContext,
 ): Promise<BillingCanonicalHandoff> {
   const startedAt = Date.now();
+  const ingestMode = resolveIngestMode(request);
 
   const resolution = (() => {
     try {
@@ -118,6 +147,7 @@ async function runIngest(
           traceId: context.traceId,
           workspaceId: context.workspaceId,
           mode: context.mode,
+          ingestMode,
           status: "failed",
           durationMs: Date.now() - startedAt,
           errorCode: "validation_error",
@@ -134,6 +164,35 @@ async function runIngest(
   })();
 
   const { adapter, resolvedAdapterId, usedFallback } = resolution;
+  const credentialResolution = resolveBillingCredentialRef(
+    resolvedAdapterId,
+    ingestMode,
+    request.credentialRef,
+  );
+  if (!credentialResolution.resolved) {
+    emitBillingTelemetryEvent({
+      eventName: "billing.run",
+      timestamp: new Date().toISOString(),
+      adapterId: resolvedAdapterId,
+      integrationRunId: request.integrationRunId,
+      requestId: context.requestId,
+      traceId: context.traceId,
+      workspaceId: context.workspaceId,
+      mode: context.mode,
+      ingestMode,
+      status: "failed",
+      durationMs: Date.now() - startedAt,
+      usedFallback,
+      errorCode: "auth_error",
+    });
+
+    throw new BillingIngestError(
+      "auth_error",
+      resolvedAdapterId,
+      `Credential resolution failed for ${resolvedAdapterId} in ${ingestMode} mode: ${credentialResolution.reason ?? "unknown"}`,
+    );
+  }
+
   const payload = {
     adapterId: resolvedAdapterId,
     period: {
@@ -141,6 +200,7 @@ async function runIngest(
       endDate: request.endDate,
       currency: request.currency,
     },
+    ingestMode,
     credentialRef: request.credentialRef,
     authMode: request.authMode,
     workspaceScope: request.workspaceScope,
@@ -164,6 +224,7 @@ async function runIngest(
       traceId: context.traceId,
       workspaceId: context.workspaceId,
       mode: context.mode,
+      ingestMode,
       status: "failed",
       durationMs: Date.now() - startedAt,
       usedFallback,
@@ -189,6 +250,7 @@ async function runIngest(
       traceId: context.traceId,
       workspaceId: context.workspaceId,
       mode: context.mode,
+      ingestMode,
       status: "success",
       durationMs: Date.now() - startedAt,
       usedFallback,
@@ -203,6 +265,7 @@ async function runIngest(
       traceId: context.traceId,
       workspaceId: context.workspaceId,
       mode: context.mode,
+      ingestMode,
       status: "success",
       usedFallback,
       mappingSummary: {
@@ -228,6 +291,7 @@ async function runIngest(
       traceId: context.traceId,
       workspaceId: context.workspaceId,
       mode: context.mode,
+      ingestMode,
       status: "failed",
       durationMs: Date.now() - startedAt,
       usedFallback,

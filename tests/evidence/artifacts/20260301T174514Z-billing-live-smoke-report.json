@@ -1,0 +1,66 @@
+{
+  "configPath": "tests/contracts/live-smoke/billing-live-smoke.config.json",
+  "generatedAt": "2026-03-01T17:45:14.521106+00:00",
+  "mode": "dry-run",
+  "providers": [
+    {
+      "adapterId": "openops-billing",
+      "canonicalTotal": 1194.0,
+      "credentialRefEnv": "FICECAL_OPENOPS_CREDENTIAL_REF",
+      "credentialRefPresent": true,
+      "currency": "USD",
+      "providerId": "openops",
+      "providerTotal": 1194.0,
+      "reason": "dry-run fixture baseline",
+      "smokeCommandEnv": "FICECAL_OPENOPS_LIVE_SMOKE_CMD",
+      "status": "passed",
+      "variancePct": 0.0
+    },
+    {
+      "adapterId": "aws-billing",
+      "canonicalTotal": 1251.0,
+      "credentialRefEnv": "FICECAL_AWS_CREDENTIAL_REF",
+      "credentialRefPresent": true,
+      "currency": "USD",
+      "providerId": "aws",
+      "providerTotal": 1251.0,
+      "reason": "dry-run fixture baseline",
+      "smokeCommandEnv": "FICECAL_AWS_LIVE_SMOKE_CMD",
+      "status": "passed",
+      "variancePct": 0.0
+    },
+    {
+      "adapterId": "azure-billing",
+      "canonicalTotal": 1736.0,
+      "credentialRefEnv": "FICECAL_AZURE_CREDENTIAL_REF",
+      "credentialRefPresent": true,
+      "currency": "USD",
+      "providerId": "azure",
+      "providerTotal": 1736.0,
+      "reason": "dry-run fixture baseline",
+      "smokeCommandEnv": "FICECAL_AZURE_LIVE_SMOKE_CMD",
+      "status": "passed",
+      "variancePct": 0.0
+    },
+    {
+      "adapterId": "gcp-billing",
+      "canonicalTotal": 1325.0,
+      "credentialRefEnv": "FICECAL_GCP_CREDENTIAL_REF",
+      "credentialRefPresent": true,
+      "currency": "USD",
+      "providerId": "gcp",
+      "providerTotal": 1325.0,
+      "reason": "dry-run fixture baseline",
+      "smokeCommandEnv": "FICECAL_GCP_LIVE_SMOKE_CMD",
+      "status": "passed",
+      "variancePct": 0.0
+    }
+  ],
+  "runId": "billing-live-smoke-20260301T174514Z",
+  "summary": {
+    "failed": 0,
+    "passed": 4,
+    "skipped": 0,
+    "total": 4
+  }
+}

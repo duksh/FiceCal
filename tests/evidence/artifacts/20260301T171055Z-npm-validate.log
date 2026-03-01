@@ -1,0 +1,34 @@
+
+> ficecal-monorepo@0.1.0 validate
+> npm run validate:feature-catalog && npm run validate:fixture-coverage && npm run validate:legacy-alias-parity && npm run validate:billing-canonical-handoff && npm run validate:qa-evidence-policy && npm run validate:docs-links
+
+
+> ficecal-monorepo@0.1.0 validate:feature-catalog
+> python3 scripts/validate-feature-catalog.py
+
+[feature-catalog] OK: validated 6 modules in src/features/feature-catalog.json
+
+> ficecal-monorepo@0.1.0 validate:fixture-coverage
+> python3 scripts/validate-fixture-coverage.py
+
+[fixture-coverage] OK: validated 2 module packs and 7 required MCP packs (parity fixture version 1.0)
+
+> ficecal-monorepo@0.1.0 validate:legacy-alias-parity
+> python3 scripts/validate-legacy-alias-parity.py
+
+[legacy-alias-parity] OK: validated 4 rows in tests/contracts/fixtures/mcp/legacy-alias-parity/1.0/parity.rows.json
+
+> ficecal-monorepo@0.1.0 validate:billing-canonical-handoff
+> python3 scripts/validate-billing-canonical-handoff.py
+
+[billing-canonical-handoff] OK: validated 4 billing tool fixture packs
+
+> ficecal-monorepo@0.1.0 validate:qa-evidence-policy
+> python3 scripts/validate-qa-evidence-policy.py
+
+[qa-evidence-policy] OK: validated 2 P05 evidence file(s) and 15 P07 evidence file(s)
+
+> ficecal-monorepo@0.1.0 validate:docs-links
+> python3 scripts/validate-doc-links.py
+
+[docs-links] OK: validated 61 markdown files, 0 local links

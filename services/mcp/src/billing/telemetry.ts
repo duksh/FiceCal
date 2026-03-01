@@ -1,5 +1,5 @@
 import { McpRequestContext } from "../mcp";
-import { BillingAdapterId, BillingCanonicalHandoff } from "./types";
+import { BillingAdapterId, BillingCanonicalHandoff, BillingIngestMode } from "./types";
 
 export type BillingTelemetryEventName = "billing.run" | "billing.mapping.summary";
 
@@ -12,6 +12,7 @@ export type BillingTelemetryEvent = {
   traceId: string;
   workspaceId: string;
   mode: McpRequestContext["mode"];
+  ingestMode?: BillingIngestMode;
   status?: "success" | "failed";
   durationMs?: number;
   usedFallback?: boolean;

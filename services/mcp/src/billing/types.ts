@@ -16,6 +16,8 @@ export type MappingConfidence = "low" | "medium" | "high";
 
 export type BillingAuthMode = "read-only";
 
+export type BillingIngestMode = "deterministic" | "live";
+
 export type BillingScope = {
   startDate: string;
   endDate: string;
@@ -27,6 +29,7 @@ export type BillingProviderScope = Record<string, unknown>;
 export type BillingIngestRequest = BillingScope & {
   integrationRunId: string;
   mappingProfile: string;
+  ingestMode?: BillingIngestMode;
   credentialRef?: string;
   authMode?: BillingAuthMode;
   workspaceScope?: string[];

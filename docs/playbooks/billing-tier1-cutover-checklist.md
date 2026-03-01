@@ -9,6 +9,7 @@ Applies to OpenOps, AWS, Azure, and GCP billing ingest adapters.
 ## 2. Pre-cutover controls
 
 - [ ] Canonical fixture validation passes (`python3 scripts/validate-billing-canonical-handoff.py`)
+- [ ] Live readiness validation passes (`python3 scripts/validate-billing-live-readiness.py`)
 - [ ] Full validation chain passes (`npm run validate`)
 - [ ] Provider contracts updated and cross-linked
 - [ ] Evidence artifacts exist for fail/fix/retest for all tier-1 stories/tasks
@@ -19,6 +20,8 @@ Applies to OpenOps, AWS, Azure, and GCP billing ingest adapters.
 - [ ] `authMode` constrained to `read-only`
 - [ ] `.env` policy reviewed against `docs/environment-secret-management-contract.md`
 - [ ] `BILLING_ADAPTER_RESOLUTION_MODE=strict` in stage/prod
+- [ ] `BILLING_INGEST_MODE=live` in stage/prod live smoke runs
+- [ ] Credential resolver wiring verified (`FICECAL_CREDENTIALS_BACKEND`, `FICECAL_SECRET_RESOLVER_ENDPOINT`)
 
 ## 4. Telemetry and observability controls
 
@@ -31,6 +34,8 @@ Applies to OpenOps, AWS, Azure, and GCP billing ingest adapters.
 - [ ] Non-zero canonical baselines verified for all tier-1 adapters
 - [ ] Mapping confidence/coverage meets acceptance baseline
 - [ ] Edge-case fixtures present for each tier-1 provider
+- [ ] Live smoke run passes for tier-1 providers (`python3 scripts/run-billing-live-smoke.py --mode live --require-provider-commands`)
+- [ ] Reconciliation gate passes (`python3 scripts/validate-billing-live-reconciliation.py`)
 
 ## 6. Rollback readiness
 

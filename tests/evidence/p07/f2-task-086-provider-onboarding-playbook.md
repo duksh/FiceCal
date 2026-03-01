@@ -22,8 +22,8 @@ Document repeatable plug-in onboarding workflow for adding future cloud billing 
 
 ## Proof Artifacts
 
-- log: `[docs-links] OK: validated 61 markdown files, 0 local links`
-- log: `[validate] OK: root validation chain passed`
+- log: `tests/evidence/artifacts/20260301T171055Z-qa-evidence-policy.log` (sha256: `3d7b93a09cc4ff373afefab28a0ee4c14afaeaadd9abf1340f1d97b537ab0941`)
+- log: `tests/evidence/artifacts/20260301T171055Z-npm-validate.log` (sha256: `8f31139696a7b785be0150cab2a42ad110c0c4c6304f95629e36d85348cda407`)
 
 ## Evidence Checklist
 

@@ -61,6 +61,15 @@ jobs:
             echo "scripts/validate-doc-links.py not found. Skipping."
           fi
 
+      - name: Run billing live readiness validation (if present)
+        shell: bash
+        run: |
+          if [ -f scripts/validate-billing-live-readiness.py ]; then
+            python3 scripts/validate-billing-live-readiness.py
+          else
+            echo "scripts/validate-billing-live-readiness.py not found. Skipping."
+          fi
+
       - name: Enforce no absolute local paths in tracked text files
         shell: bash
         run: |

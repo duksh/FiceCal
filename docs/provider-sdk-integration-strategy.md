@@ -82,6 +82,12 @@ Scope controls:
 1. Provider-specific scope values can be supplied using `providerScope` envelope.
 2. Avoid adding new top-level request keys for every new provider unless contract-wide reuse is justified.
 
+Ingest-mode controls:
+
+1. `ingestMode=deterministic` keeps fixture-safe baseline behavior.
+2. `ingestMode=live` enforces resolver-backed credential checks before canonical mapping.
+3. Live ingest execution evidence is produced by `scripts/run-billing-live-smoke.py`.
+
 ## Error normalization contract
 
 Provider failures must be normalized into shared categories before crossing boundaries:
@@ -116,3 +122,4 @@ For each adapter PR:
 - Any contract-affecting mapping change requires fixture updates in the same PR.
 - Any boundary violation is treated as contract drift and blocks merge.
 - Provider integration cannot be promoted to release-ready without boundary checklist evidence.
+- Release-ready promotion requires live smoke reconciliation checks (`scripts/validate-billing-live-reconciliation.py`).

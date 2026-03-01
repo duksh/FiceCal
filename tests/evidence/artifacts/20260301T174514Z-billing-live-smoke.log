@@ -1,0 +1,6 @@
+[billing-live-smoke] OK: mode=dry-run, providers=4, passed=4, failed=0, skipped=0
+[billing-live-smoke] report: tests/evidence/artifacts/20260301T174514Z-billing-live-smoke-report.json
+[billing-live-smoke] log: tests/evidence/artifacts/20260301T174514Z-billing-live-smoke.log
+[billing-live-smoke] latest report: tests/evidence/artifacts/latest-billing-live-smoke-report.json
+us=passed variancePct=0.0 reason=dry-run fixture baseline
+[billing-live-smoke] provider=gcp status=passed variancePct=0.0 reason=dry-run fixture baseline

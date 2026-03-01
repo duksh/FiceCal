@@ -19,12 +19,15 @@ export type {
   BillingAdapterId,
   BillingAuthMode,
   BillingCanonicalHandoff,
+  BillingIngestMode,
   BillingIngestRequest,
   BillingProviderScope,
   BillingProvenance,
   BuiltinBillingAdapterId,
 } from "./types";
 export { BUILTIN_BILLING_ADAPTER_IDS } from "./types";
+export { resolveBillingCredentialRef } from "./credentials";
+export type { BillingCredentialResolution } from "./credentials";
 export {
   BillingIngestError,
   billingAwsIngest,

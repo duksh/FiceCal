@@ -1,0 +1,80 @@
+name: Billing Live Smoke
+
+on:
+  workflow_dispatch:
+    inputs:
+      mode:
+        description: "dry-run (fixture baseline) or live (provider commands)"
+        required: true
+        default: "dry-run"
+        type: choice
+        options:
+          - dry-run
+          - live
+      require_provider_commands:
+        description: "Fail if provider smoke commands are missing"
+        required: true
+        default: false
+        type: boolean
+  schedule:
+    - cron: "25 2 * * *"
+
+jobs:
+  billing-live-smoke:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Resolve smoke mode
+        id: mode
+        shell: bash
+        run: |
+          mode="${{ inputs.mode }}"
+          if [[ -z "$mode" ]]; then
+            mode="live"
+          fi
+          echo "mode=$mode" >> "$GITHUB_OUTPUT"
+
+      - name: Run billing live smoke
+        shell: bash
+        env:
+          BILLING_LIVE_SMOKE_MODE: ${{ steps.mode.outputs.mode }}
+          FICECAL_OPENOPS_CREDENTIAL_REF: ${{ secrets['FICECAL_OPENOPS_CREDENTIAL_REF'] }}
+          FICECAL_AWS_CREDENTIAL_REF: ${{ secrets['FICECAL_AWS_CREDENTIAL_REF'] }}
+          FICECAL_AZURE_CREDENTIAL_REF: ${{ secrets['FICECAL_AZURE_CREDENTIAL_REF'] }}
+          FICECAL_GCP_CREDENTIAL_REF: ${{ secrets['FICECAL_GCP_CREDENTIAL_REF'] }}
+          FICECAL_OPENOPS_LIVE_SMOKE_CMD: ${{ secrets['FICECAL_OPENOPS_LIVE_SMOKE_CMD'] }}
+          FICECAL_AWS_LIVE_SMOKE_CMD: ${{ secrets['FICECAL_AWS_LIVE_SMOKE_CMD'] }}
+          FICECAL_AZURE_LIVE_SMOKE_CMD: ${{ secrets['FICECAL_AZURE_LIVE_SMOKE_CMD'] }}
+          FICECAL_GCP_LIVE_SMOKE_CMD: ${{ secrets['FICECAL_GCP_LIVE_SMOKE_CMD'] }}
+        run: |
+          if [[ "${{ inputs.require_provider_commands }}" == "true" ]]; then
+            python3 scripts/run-billing-live-smoke.py --mode "$BILLING_LIVE_SMOKE_MODE" --require-provider-commands
+          else
+            python3 scripts/run-billing-live-smoke.py --mode "$BILLING_LIVE_SMOKE_MODE"
+          fi
+
+      - name: Validate reconciliation report
+        shell: bash
+        run: |
+          if [[ "${{ steps.mode.outputs.mode }}" == "live" ]]; then
+            python3 scripts/validate-billing-live-reconciliation.py
+          else
+            python3 scripts/validate-billing-live-reconciliation.py --allow-skipped
+          fi
+
+      - name: Upload live smoke artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: billing-live-smoke-artifacts
+          path: |
+            tests/evidence/artifacts/*billing-live-smoke-report.json
+            tests/evidence/artifacts/*billing-live-smoke.log
+            tests/evidence/artifacts/latest-billing-live-smoke-report.json

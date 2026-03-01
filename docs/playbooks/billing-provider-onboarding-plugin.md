@@ -21,6 +21,9 @@ Applies to provider onboarding after P07 baseline:
 5. Add or extend validator expectations (`scripts/validate-billing-canonical-handoff.py`) for provider invariants.
 6. Document provider contract (`docs/billing-adapter-<provider>-contract.md`).
 7. Add evidence artifacts under `tests/evidence/p07/` with fail/fix/retest summary.
+8. Add live smoke config entry in `tests/contracts/live-smoke/billing-live-smoke.config.json`.
+9. Define provider smoke command contract (`providerTotal`, `canonicalTotal`, `currency`) for `scripts/run-billing-live-smoke.py`.
+10. Ensure provider participates in reconciliation gate (`scripts/validate-billing-live-reconciliation.py`).
 
 ## 4. Scope and payload guidance
 
@@ -39,8 +42,11 @@ Applies to provider onboarding after P07 baseline:
 Required checks before merge:
 
 1. `python3 scripts/validate-billing-canonical-handoff.py`
-2. `npm run validate`
-3. Contract + fixtures + evidence shipped together in the same PR.
+2. `python3 scripts/validate-billing-live-readiness.py`
+3. `python3 scripts/run-billing-live-smoke.py --mode dry-run`
+4. `python3 scripts/validate-billing-live-reconciliation.py --allow-skipped`
+5. `npm run validate`
+6. Contract + fixtures + evidence shipped together in the same PR.
 
 ## 7. Security rules
 
@@ -51,5 +57,6 @@ Required checks before merge:
 ## 8. Related references
 
 - `docs/billing-direct-integration-contract.md`
+- `docs/playbooks/billing-live-integration-readiness.md`
 - `docs/provider-sdk-integration-strategy.md`
 - `docs/environment-secret-management-contract.md`

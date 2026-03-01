@@ -174,9 +174,22 @@ Baseline implementation requirements:
 ## 19. Validation command anchors
 
 - `python3 scripts/validate-billing-canonical-handoff.py`
+- `python3 scripts/validate-billing-live-readiness.py`
+- `python3 scripts/run-billing-live-smoke.py --mode dry-run`
+- `python3 scripts/validate-billing-live-reconciliation.py --allow-skipped`
 - `npm run validate`
 
-## 20. Exit criteria for P06-P07 foundation slice
+## 20. Live ingest readiness and reconciliation gate
+
+Before release promotion, tier-1 adapters must satisfy live gate requirements:
+
+1. `BillingIngestRequest.ingestMode` supports deterministic/local and live/stage flows.
+2. Live mode requires credential resolver wiring (`FICECAL_CREDENTIALS_BACKEND`, `FICECAL_SECRET_RESOLVER_ENDPOINT`).
+3. Tier-1 provider smoke run is executed via `scripts/run-billing-live-smoke.py --mode live`.
+4. Reconciliation report freshness and provider variance thresholds are enforced by `scripts/validate-billing-live-reconciliation.py`.
+5. Release flow blocks when live reconciliation gate fails.
+
+## 21. Exit criteria for P06-P07 foundation slice
 
 P06-P07 foundation slice is ready when:
 
@@ -190,3 +203,4 @@ P06-P07 foundation slice is ready when:
 8. Tier-1 real-ingest baselines include GCP with telemetry and recommender-ready provenance.
 9. Tier-1 provider fixture packs include documented edge-case scenarios.
 10. Tier-1 cutover checklist is published and ready for stage/prod rollout governance.
+11. Live smoke and reconciliation gates are configured and documented for release decisions.
