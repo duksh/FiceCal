@@ -15,6 +15,7 @@ permissions:
 
 jobs:
   health-smoke:
+    if: ${{ github.event_name == 'workflow_dispatch' || vars.ENABLE_RENDER_HEALTH_SMOKE == 'true' }}
     runs-on: ubuntu-latest
     timeout-minutes: 10
 

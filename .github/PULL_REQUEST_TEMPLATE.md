@@ -33,7 +33,7 @@
 ## Security and Privacy
 
 - [ ] No secrets, credentials, or local environment sensitive data committed
-- [ ] No absolute local paths committed (for example `/Users/...`)
+- [ ] No absolute local paths committed (for example `~/...` should be preferred in docs)
 - [ ] Paths in docs/config/examples are repository-relative
 
 ## Release Impact
