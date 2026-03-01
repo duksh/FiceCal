@@ -73,8 +73,31 @@ jobs:
           done
 
           if [ -z "$site_dir" ]; then
-            echo "No static output directory found. Expected one of: apps/web/dist, apps/web/build, apps/web/out, dist, build, out"
-            exit 1
+            echo "No static output directory found. Generating fallback site."
+            mkdir -p .github/pages-fallback
+            cat > .github/pages-fallback/index.html <<'EOF'
+            <!doctype html>
+            <html lang="en">
+            <head>
+              <meta charset="utf-8" />
+              <meta name="viewport" content="width=device-width, initial-scale=1" />
+              <title>FiceCal</title>
+              <style>
+                body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; margin: 2rem; line-height: 1.5; }
+                main { max-width: 720px; margin: 0 auto; }
+                code { background: #f3f4f6; padding: 0.1rem 0.3rem; border-radius: 4px; }
+              </style>
+            </head>
+            <body>
+              <main>
+                <h1>FiceCal</h1>
+                <p>Public UI bootstrap is active.</p>
+                <p>No built frontend artifact was found in this run. Expected one of <code>apps/web/dist</code>, <code>apps/web/build</code>, <code>apps/web/out</code>, <code>dist</code>, <code>build</code>, or <code>out</code>.</p>
+              </main>
+            </body>
+            </html>
+            EOF
+            site_dir=".github/pages-fallback"
           fi
 
           echo "site_dir=$site_dir" >> "$GITHUB_OUTPUT"
