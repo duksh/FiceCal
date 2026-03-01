@@ -35,6 +35,24 @@ Use this file to:
 | P12 | Production cutover and hypercare | `F2-EPIC-145` to `F2-TASK-152` | close before stable-state handover |
 | P13 | Tier-2 provider expansion | `F2-EPIC-155` to `F2-TASK-162` | post-stabilization growth |
 
+## Domain and operations RACI (F2-TASK-003)
+
+RACI legend: **R** = Responsible, **A** = Accountable, **C** = Consulted, **I** = Informed.
+
+| Domain / operation | R | A | C | I | Primary artifact anchors |
+|---|---|---|---|---|---|
+| Program governance and phase control | `governance-office` | `governance-office` | `platform-core`, `security-team` | all teams | `docs/roadmap/ficecal-v2-execution-plan-updated.md` |
+| Monorepo platform baseline and GitOps controls | `platform-core` | `platform-core` | `governance-office`, `qa-team` | `security-team` | `.github/`; `README.md` |
+| Core runtime boundaries and module contracts | `platform-core` | `platform-core` | `agent-platform`, `integration-team`, `recommendation-team` | `qa-team` | `docs/modularization-playbook.md` |
+| MCP v2 contract and tool lifecycle | `agent-platform` | `agent-platform` | `platform-core`, `qa-team` | `governance-office` | `docs/mcp-evolution-contract.md` |
+| Billing adapters and provider ingest mapping | `integration-team` | `integration-team` | `security-team`, `agent-platform`, `qa-team` | `platform-core` | `services/mcp/src/billing/`; `docs/provider-sdk-integration-strategy.md` |
+| Recommendation intelligence and next-move ranking | `recommendation-team` | `recommendation-team` | `integration-team`, `agent-platform` | `platform-core` | `docs/recommendation-module-contract.md` |
+| UI foundation and user journey quality | `ui-foundation-team` | `ui-foundation-team` | `qa-team`, `platform-core` | `governance-office` | `docs/ui-foundation-hci-metrics-contract.md` |
+| QA evidence and fixture parity operations | `qa-team` | `qa-team` | `platform-core`, `agent-platform`, `integration-team` | `governance-office` | `tests/contracts/fixtures/`; `docs/qa-evidence-storage-convention.md` |
+| Security, SBOM, and secret hygiene operations | `security-team` | `security-team` | `platform-core`, `qa-team` | `governance-office` | `docs/security-compliance-ops-runbook.md`; `docs/environment-secret-management-contract.md` |
+| Community/AI policy enforcement and onboarding | `governance-office`, `docs-team` | `governance-office` | `platform-core`, `security-team` | `qa-team` | `docs/community-module-contribution-contract.md`; `docs/ai-agent-contribution-policy.md` |
+| Cutover rehearsal and hypercare coordination | `platform-core` | `platform-core` | `qa-team`, `security-team`, `governance-office` | all teams | `docs/monorepo-cutover-runbook.md` |
+
 ## Complete catalog (grouped by phase)
 
 ## P00 - Program lock
