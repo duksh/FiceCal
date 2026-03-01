@@ -6,7 +6,8 @@
   "packageManager": "pnpm@10.6.0",
   "scripts": {
     "validate:feature-catalog": "python3 scripts/validate-feature-catalog.py",
+    "validate:legacy-alias-parity": "python3 scripts/validate-legacy-alias-parity.py",
     "validate:docs-links": "python3 scripts/validate-doc-links.py",
-    "validate": "npm run validate:feature-catalog && npm run validate:docs-links"
+    "validate": "npm run validate:feature-catalog && npm run validate:legacy-alias-parity && npm run validate:docs-links"
   }
 }

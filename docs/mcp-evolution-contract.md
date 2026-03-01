@@ -81,6 +81,9 @@ Initial alias-to-canonical parity rows:
 
 Parity definition: identical canonical response shape and compatible error taxonomy between alias and canonical entry points.
 
+Executable parity automation anchor: `scripts/validate-legacy-alias-parity.py`.
+Evidence anchor: `tests/evidence/p03/f2-task-033-legacy-alias-parity.md`.
+
 ## Telemetry event contracts (`F2-TASK-034`)
 
 ### Event: `mcp.tool.call`

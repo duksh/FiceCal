@@ -65,6 +65,8 @@ Use this when implementation context must be reconstructed only from repository 
 
 - `docs/mcp-evolution-contract.md`
 - `tests/contracts/fixtures/mcp/legacy-alias-parity/1.0/`
+- `scripts/validate-legacy-alias-parity.py`
+- `tests/evidence/p03/f2-task-033-legacy-alias-parity.md`
 
 ### Backlog and project traceability
 
