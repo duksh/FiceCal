@@ -39,6 +39,32 @@ Use this file to:
 
 RACI legend: **R** = Responsible, **A** = Accountable, **C** = Consulted, **I** = Informed.
 
+### Current operating mode (now)
+
+FiceCal v2 is currently operating in a single-operator execution mode:
+
+- **Accountable owner (A):** `duksh`
+- **Responsible execution (R):** `duksh` with AI pairing support from Cascade
+- **Consulted/Informed (C/I):** self-review and asynchronous project artifacts
+
+Team labels below are kept intentionally as target operating model placeholders.
+
+### Future scale-out model (target)
+
+When contributors are onboarded, ownership transitions from single-operator mode to the mapped team model.
+
+| Placeholder label | Current mode owner | Future intended owner |
+|---|---|---|
+| `governance-office` | `duksh` | governance and release management lead(s) |
+| `platform-core` | `duksh` | platform engineering team |
+| `agent-platform` | `duksh` | MCP/agent runtime maintainers |
+| `integration-team` | `duksh` | provider integration engineers |
+| `recommendation-team` | `duksh` | optimization/recommendation specialists |
+| `ui-foundation-team` | `duksh` | frontend UX/platform team |
+| `qa-team` | `duksh` | QA and test automation team |
+| `security-team` | `duksh` | security/compliance engineering |
+| `docs-team` | `duksh` | documentation/program ops support |
+
 | Domain / operation | R | A | C | I | Primary artifact anchors |
 |---|---|---|---|---|---|
 | Program governance and phase control | `governance-office` | `governance-office` | `platform-core`, `security-team` | all teams | `docs/roadmap/ficecal-v2-execution-plan-updated.md` |
