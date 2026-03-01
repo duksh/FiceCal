@@ -23,6 +23,16 @@ jobs:
         with:
           python-version: '3.12'
 
+      - name: Secret scan (gitleaks)
+        shell: bash
+        run: |
+          set -euo pipefail
+          version="8.24.2"
+          url="https://github.com/gitleaks/gitleaks/releases/download/v${version}/gitleaks_${version}_linux_x64.tar.gz"
+          curl -sSL "$url" -o /tmp/gitleaks.tar.gz
+          tar -xzf /tmp/gitleaks.tar.gz -C /tmp gitleaks
+          /tmp/gitleaks detect --source . --no-git --redact --verbose
+
       - name: Install workspace dependencies (if lockfile exists)
         shell: bash
         run: |
