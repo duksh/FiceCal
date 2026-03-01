@@ -31,8 +31,8 @@ F2-TASK-034,P03,TASK,Define MCP telemetry event contracts,F2-STORY-032,agent-pla
 F2-TASK-035,P03,TASK,Create MCP tool ownership matrix,F2-STORY-032,governance-office,P1,Done,"Ownership for each module tool namespace assigned","docs/mcp-evolution-contract.md","review-required","ownership,mcp"
 F2-TASK-036,P03,TASK,Add MCP release gate checklist,F2-STORY-031,qa-team,P1,Done,"MCP release requires parity and schema checks","docs/mcp-evolution-contract.md","contract-drift;security-sbom","release,mcp"
 
-F2-EPIC-040,P04,EPIC,Contract fixture parity infrastructure,F2-EPIC-030,qa-team,P0,Todo,"Fixtures are first-class release artifacts","docs/contract-test-fixture-pack.md","contract-drift","epic,fixtures"
-F2-STORY-041,P04,STORY,Enforce fixture-delta-with-contract policy,F2-EPIC-040,qa-team,P0,Todo,"Contract change PRs include fixture updates","docs/contract-test-fixture-pack.md","contract-drift","fixtures,policy"
+F2-EPIC-040,P04,EPIC,Contract fixture parity infrastructure,F2-EPIC-030,qa-team,P0,In Progress,"Fixtures are first-class release artifacts","docs/contract-test-fixture-pack.md","contract-drift","epic,fixtures"
+F2-STORY-041,P04,STORY,Enforce fixture-delta-with-contract policy,F2-EPIC-040,qa-team,P0,In Progress,"Contract change PRs include fixture updates","docs/contract-test-fixture-pack.md","contract-drift","fixtures,policy"
 F2-STORY-042,P04,STORY,Enable deterministic fixture validation,F2-EPIC-040,qa-team,P0,Todo,"Fixture outputs stable and reproducible","tests/contracts/fixtures/","contract-drift","fixtures,determinism"
 F2-TASK-043,P04,TASK,Seed module fixture coverage baseline,F2-STORY-042,qa-team,P1,Todo,"All phase-active modules have valid/invalid/expected fixtures","tests/contracts/fixtures/","contract-drift","fixtures,module"
 F2-TASK-044,P04,TASK,Seed MCP fixture coverage baseline,F2-STORY-042,qa-team,P1,Todo,"All phase-active MCP tools have request/response fixtures","tests/contracts/fixtures/mcp/","contract-drift","fixtures,mcp"

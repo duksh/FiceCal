@@ -68,6 +68,10 @@ Use this when implementation context must be reconstructed only from repository 
 - `scripts/validate-legacy-alias-parity.py`
 - `tests/evidence/p03/f2-task-033-legacy-alias-parity.md`
 
+### Contract fixture parity baseline
+
+- `docs/contract-test-fixture-pack.md`
+
 ### Backlog and project traceability
 
 - `docs/roadmap/ficecal-v2-task-issue-registry.csv`
