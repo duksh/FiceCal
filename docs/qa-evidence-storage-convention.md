@@ -93,7 +93,11 @@ Before approving QA evidence updates, reviewers confirm:
 - retention and privacy requirements are satisfied
 - linked commands or CI checks are reproducible
 
-## 9. Related documents
+## 9. Validation command anchor
+
+- `python3 scripts/validate-qa-evidence-policy.py`
+
+## 10. Related documents
 
 - `docs/ui-foundation-hci-metrics-contract.md`
 - `docs/contract-test-fixture-pack.md`

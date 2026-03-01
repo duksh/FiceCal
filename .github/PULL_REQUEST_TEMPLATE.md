@@ -21,6 +21,7 @@
 - [ ] `python3 scripts/validate-feature-catalog.py` (if present)
 - [ ] `python3 scripts/validate-fixture-coverage.py` (if present)
 - [ ] `python3 scripts/validate-doc-links.py` (if present)
+- [ ] `python3 scripts/validate-qa-evidence-policy.py` (if present)
 - [ ] MCP/tool schema checks (if applicable)
 - [ ] Unit/integration tests passed
 
