@@ -1,5 +1,5 @@
 # billing.aws.ingest fixture notes (1.0)
 
-- Valid request uses `accountScope` per AWS adapter contract.
-- Invalid request sets `accountScope` as string instead of array.
-- Expected response mirrors Phase 1 stub output contract.
+- Valid request uses `accountScope` plus read-only credential metadata (`credentialRef`, `authMode`).
+- Invalid request covers unsupported `authMode` and malformed `accountScope`.
+- Expected response reflects deterministic AWS read-only baseline with retry-policy provenance.

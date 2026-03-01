@@ -7,15 +7,15 @@
     "currency": "USD"
   },
   "canonical": {
-    "infraTotal": 0,
-    "cudPct": 0,
-    "budgetCap": 0,
-    "nRef": 0
+    "infraTotal": 1251,
+    "cudPct": 64,
+    "budgetCap": 1401.12,
+    "nRef": 4
   },
   "provenance": {
-    "sourceVersion": "aws-stub-v0.1.0",
-    "coveragePct": 0,
-    "mappingConfidence": "low",
-    "warnings": ["Stub adapter: replace with AWS Cost Explorer/CUR + mapping profile implementation."]
+    "sourceVersion": "aws-readonly-v1.0.0",
+    "coveragePct": 88.6,
+    "mappingConfidence": "medium",
+    "warnings": ["Retry policy configured: maxAttempts=3, baseBackoffMs=250."]
   }
 }

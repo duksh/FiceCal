@@ -158,6 +158,26 @@ def validate_phase1_tool(tool_name: str, expected_adapter_id: str) -> None:
         if infra_total <= 0:
             fail(f"{tool_name}.response.canonical.infraTotal must be > 0 for OpenOps real ingest baseline")
 
+    if tool_name == "billing.aws.ingest":
+        source_version = require_non_empty_string(
+            provenance, "sourceVersion", f"{tool_name}.response.provenance"
+        )
+        if not source_version.startswith("aws-readonly-"):
+            fail(
+                f"{tool_name}.response.provenance.sourceVersion must start with "
+                "'aws-readonly-' for P07 baseline"
+            )
+
+        infra_total = require_number(canonical, "infraTotal", f"{tool_name}.response.canonical")
+        if infra_total <= 0:
+            fail(f"{tool_name}.response.canonical.infraTotal must be > 0 for AWS real ingest baseline")
+
+        retry_warning_prefix = "Retry policy configured: maxAttempts="
+        if not any(isinstance(item, str) and item.startswith(retry_warning_prefix) for item in warnings):
+            fail(
+                f"{tool_name}.response.provenance.warnings must include retry policy baseline entry"
+            )
+
 
 def validate() -> None:
     for tool_name, expected_adapter_id in PHASE1_BILLING_TOOLS.items():

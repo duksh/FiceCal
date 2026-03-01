@@ -48,6 +48,21 @@ Each mapped provider payload must include canonical metadata:
 - `collectedAt`
 - `mappingProfileVersion`
 
+## P07 mapping profile baseline (`F2-TASK-081`)
+
+Initial tier-1 profile namespaces:
+
+- OpenOps: `default-openops-billing-v1`
+- AWS: `default-aws-billing-v1`
+- Azure: `default-azure-billing-v1` (planned)
+- GCP: `default-gcp-billing-v1` (planned)
+
+Versioning rules:
+
+1. Profile names are immutable once referenced by released fixtures.
+2. Behavioral mapping changes require a new profile version suffix (`v2`, `v3`, ...).
+3. Contract + fixture + evidence deltas must land in the same PR.
+
 ## Error normalization contract
 
 Provider failures must be normalized into shared categories before crossing boundaries:

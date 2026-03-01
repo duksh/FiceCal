@@ -14,7 +14,10 @@ This contract covers:
 - `F2-TASK-063` Harden registry and adapter routing
 - `F2-TASK-064` Define canonical handoff validation checks
 - `F2-STORY-071` Implement OpenOps real ingestion
+- `F2-STORY-072` Implement AWS real ingestion
 - `F2-TASK-075` Define credentials contract for tier-1 providers
+- `F2-TASK-076` Implement retry and rate-limit strategy
+- `F2-TASK-081` Document provider-specific mapping profiles
 
 ## 3. Shared adapter interface contract
 
@@ -84,12 +87,27 @@ Baseline implementation requirements:
 3. Fixture baseline for `billing.openops.ingest` reflects read-only credential contract.
 4. Canonical handoff validation script enforces OpenOps real-ingest invariants.
 
-## 8. Validation command anchors
+## 8. AWS real-ingest baseline (`F2-STORY-072`, `F2-TASK-076`)
+
+Baseline implementation requirements:
+
+1. AWS adapter emits deterministic non-zero canonical snapshot fields.
+2. Provenance source version uses `aws-readonly-*` namespace.
+3. Retry/rate-limit policy baseline is declared in provenance warnings.
+4. Fixture baseline for `billing.aws.ingest` reflects read-only credential and retry controls.
+
+## 9. Mapping profile governance (`F2-TASK-081`)
+
+1. Provider profile namespaces are versioned and immutable once released.
+2. Profile changes require fixture deltas and evidence in the same PR.
+3. AWS profile baseline is documented in `docs/billing-adapter-aws-contract.md`.
+
+## 10. Validation command anchors
 
 - `python3 scripts/validate-billing-canonical-handoff.py`
 - `npm run validate`
 
-## 9. Exit criteria for P06-P07 foundation slice
+## 11. Exit criteria for P06-P07 foundation slice
 
 P06-P07 foundation slice is ready when:
 
@@ -97,3 +115,4 @@ P06-P07 foundation slice is ready when:
 2. Shared adapter interface contract remains provider-neutral.
 3. Canonical handoff checks are executable against fixture baselines.
 4. Tier-1 credential policy is documented and enforceable via adapter validation.
+5. Tier-1 real-ingest baselines (OpenOps + AWS) are contract-validated with deterministic fixtures.
