@@ -60,6 +60,8 @@ Use this when implementation context must be reconstructed only from repository 
 - `docs/roadmap/ficecal-v2-task-issue-registry.md`
 - `docs/roadmap/ficecal-v2-github-issue-map.csv`
 - `docs/playbooks/ficecal-v2-issue-seeding.md`
+- `docs/playbooks/github-actions-setup.md`
+- `docs/ficecal-monorepo-copy-checklist.md`
 
 ### Contribution governance contracts
 

@@ -17,6 +17,7 @@ It provides:
 3. Enable branch protection on `main` using `.github/branch-protection-checklist.md`.
 4. Configure repository secrets required by release/deploy workflows (if any).
 5. Replace placeholder `.gitkeep` files with real module/app code.
+6. Validate bootstrap integrity with `docs/ficecal-monorepo-copy-checklist.md`.
 
 ## Target structure
 
@@ -90,6 +91,10 @@ docs/
   - `docs/playbooks/ficecal-v2-issue-seeding.md`
 - Workflow inventory validation snapshot:
   - `docs/playbooks/ficecal-v2-workflow-inventory.md`
+- GitHub Actions and Pages/Render configuration playbook:
+  - `docs/playbooks/github-actions-setup.md`
+- Bootstrap verification checklist:
+  - `docs/ficecal-monorepo-copy-checklist.md`
 
 ## GitOps expectations
 
