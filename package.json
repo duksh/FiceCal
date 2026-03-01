@@ -8,8 +8,9 @@
     "validate:feature-catalog": "python3 scripts/validate-feature-catalog.py",
     "validate:fixture-coverage": "python3 scripts/validate-fixture-coverage.py",
     "validate:legacy-alias-parity": "python3 scripts/validate-legacy-alias-parity.py",
+    "validate:billing-canonical-handoff": "python3 scripts/validate-billing-canonical-handoff.py",
     "validate:qa-evidence-policy": "python3 scripts/validate-qa-evidence-policy.py",
     "validate:docs-links": "python3 scripts/validate-doc-links.py",
-    "validate": "npm run validate:feature-catalog && npm run validate:fixture-coverage && npm run validate:legacy-alias-parity && npm run validate:qa-evidence-policy && npm run validate:docs-links"
+    "validate": "npm run validate:feature-catalog && npm run validate:fixture-coverage && npm run validate:legacy-alias-parity && npm run validate:billing-canonical-handoff && npm run validate:qa-evidence-policy && npm run validate:docs-links"
   }
 }

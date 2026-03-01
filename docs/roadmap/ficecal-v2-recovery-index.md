@@ -87,6 +87,16 @@ Use this when implementation context must be reconstructed only from repository 
 - `tests/evidence/p05/f2-task-053-smoke-journeys-baseline.md`
 - `scripts/validate-qa-evidence-policy.py`
 
+### Billing adapter framework baseline
+
+- `docs/billing-direct-integration-contract.md`
+- `services/mcp/src/billing/types.ts`
+- `services/mcp/src/billing/registry.ts`
+- `services/mcp/src/billing/tools/billing-ingest-tools.ts`
+- `scripts/validate-billing-canonical-handoff.py`
+- `tests/evidence/p06/f2-task-063-registry-routing-hardening.md`
+- `tests/evidence/p06/f2-task-064-canonical-handoff-validation.md`
+
 ### Backlog and project traceability
 
 - `docs/roadmap/ficecal-v2-task-issue-registry.csv`

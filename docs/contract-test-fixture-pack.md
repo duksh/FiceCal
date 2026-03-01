@@ -107,6 +107,7 @@ Triage handling:
 - `python3 scripts/validate-feature-catalog.py`
 - `python3 scripts/validate-fixture-coverage.py`
 - `python3 scripts/validate-legacy-alias-parity.py`
+- `python3 scripts/validate-billing-canonical-handoff.py`
 
 Additional validators can be added as fixture coverage expands.
 

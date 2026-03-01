@@ -1,4 +1,4 @@
-import { getBillingAdapter } from "../registry";
+import { resolveBillingAdapter } from "../registry";
 import { BillingAdapterId, BillingCanonicalHandoff, BillingIngestRequest } from "../types";
 import { createDefaultMcpContext, McpRequestContext, McpToolEnvelope, validateMcpContext } from "../../mcp";
 
@@ -35,13 +35,14 @@ function normalizeEnvelope(
 }
 
 async function runIngest(
-  adapterId: BillingAdapterId,
+  adapterId: BillingAdapterId | string,
   request: BillingIngestRequest,
   _context: McpRequestContext,
 ): Promise<BillingCanonicalHandoff> {
-  const adapter = getBillingAdapter(adapterId);
+  const resolution = resolveBillingAdapter(adapterId);
+  const { adapter, resolvedAdapterId } = resolution;
   const payload = {
-    adapterId,
+    adapterId: resolvedAdapterId,
     period: {
       startDate: request.startDate,
       endDate: request.endDate,
@@ -51,7 +52,7 @@ async function runIngest(
 
   const validation = adapter.validateBillingPayload(payload);
   if (!validation.valid) {
-    throw new Error(`Invalid payload for ${adapterId}: ${validation.errors.join(", ")}`);
+    throw new Error(`Invalid payload for ${resolvedAdapterId}: ${validation.errors.join(", ")}`);
   }
 
   return adapter.mapToCanonical(request, payload);

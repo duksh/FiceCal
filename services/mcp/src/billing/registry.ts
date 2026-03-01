@@ -4,6 +4,8 @@ import { gcpBillingAdapter } from "./adapters/gcp";
 import { openopsBillingAdapter } from "./adapters/openops";
 import { BillingAdapter, BillingAdapterId } from "./types";
 
+const DEFAULT_BILLING_ADAPTER_ID: BillingAdapterId = "openops-billing";
+
 function createPlaceholderAdapter(adapterId: BillingAdapterId): BillingAdapter {
   const placeholderVersion = `${adapterId.replace("-billing", "")}-placeholder-v0.1.0`;
 
@@ -58,8 +60,40 @@ const adapters: Record<BillingAdapterId, BillingAdapter> = {
   "huawei-billing": createPlaceholderAdapter("huawei-billing"),
 };
 
-export function getBillingAdapter(adapterId: BillingAdapterId): BillingAdapter {
-  return adapters[adapterId];
+export type BillingAdapterResolution = {
+  requestedAdapterId: string;
+  resolvedAdapterId: BillingAdapterId;
+  usedFallback: boolean;
+  adapter: BillingAdapter;
+};
+
+export function isBillingAdapterId(value: string): value is BillingAdapterId {
+  return value in adapters;
+}
+
+export function resolveBillingAdapter(
+  adapterId: BillingAdapterId | string,
+  fallbackAdapterId: BillingAdapterId = DEFAULT_BILLING_ADAPTER_ID,
+): BillingAdapterResolution {
+  if (isBillingAdapterId(adapterId)) {
+    return {
+      requestedAdapterId: adapterId,
+      resolvedAdapterId: adapterId,
+      usedFallback: false,
+      adapter: adapters[adapterId],
+    };
+  }
+
+  return {
+    requestedAdapterId: adapterId,
+    resolvedAdapterId: fallbackAdapterId,
+    usedFallback: true,
+    adapter: adapters[fallbackAdapterId],
+  };
+}
+
+export function getBillingAdapter(adapterId: BillingAdapterId | string): BillingAdapter {
+  return resolveBillingAdapter(adapterId).adapter;
 }
 
 export function listBillingAdapterIds(): BillingAdapterId[] {

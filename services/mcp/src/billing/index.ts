@@ -1,4 +1,10 @@
-export { getBillingAdapter, listBillingAdapterIds } from "./registry";
+export {
+  getBillingAdapter,
+  isBillingAdapterId,
+  listBillingAdapterIds,
+  resolveBillingAdapter,
+} from "./registry";
+export type { BillingAdapterResolution } from "./registry";
 export type {
   BillingAdapter,
   BillingAdapterId,
