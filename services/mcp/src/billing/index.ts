@@ -1,18 +1,30 @@
 export {
   getBillingAdapter,
   isBillingAdapterId,
+  isBillingAdapterIdFormat,
   listBillingAdapterIds,
+  registerBillingAdapter,
+  registerBillingAdapters,
   resolveBillingAdapter,
 } from "./registry";
-export type { BillingAdapterResolution } from "./registry";
+export { BillingAdapterResolutionError } from "./registry";
+export type {
+  BillingAdapterRegistrationOptions,
+  BillingAdapterResolution,
+  BillingAdapterResolutionMode,
+  BillingAdapterResolutionOptions,
+} from "./registry";
 export type {
   BillingAdapter,
   BillingAdapterId,
   BillingAuthMode,
   BillingCanonicalHandoff,
   BillingIngestRequest,
+  BillingProviderScope,
   BillingProvenance,
+  BuiltinBillingAdapterId,
 } from "./types";
+export { BUILTIN_BILLING_ADAPTER_IDS } from "./types";
 export {
   BillingIngestError,
   billingAwsIngest,

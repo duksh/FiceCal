@@ -106,9 +106,12 @@ Use this when implementation context must be reconstructed only from repository 
 - `services/mcp/src/billing/adapters/aws.ts`
 - `services/mcp/src/billing/adapters/azure.ts`
 - `services/mcp/src/billing/tools/billing-ingest-tools.ts`
+- `services/mcp/src/billing/registry.ts`
+- `services/mcp/src/billing/types.ts`
 - `docs/environment-secret-management-contract.md`
 - `docs/billing-adapter-aws-contract.md`
 - `docs/billing-adapter-azure-contract.md`
+- `docs/playbooks/billing-provider-onboarding-plugin.md`
 - `tests/contracts/fixtures/mcp/billing.openops.ingest/1.0/`
 - `tests/contracts/fixtures/mcp/billing.aws.ingest/1.0/`
 - `tests/contracts/fixtures/mcp/billing.azure.ingest/1.0/`
@@ -120,6 +123,9 @@ Use this when implementation context must be reconstructed only from repository 
 - `tests/evidence/p07/f2-story-073-azure-real-ingest.md`
 - `tests/evidence/p07/f2-task-077-pagination-incremental-sync.md`
 - `tests/evidence/p07/f2-task-082-error-normalization.md`
+- `tests/evidence/p07/f2-task-084-plugin-registry-hardening.md`
+- `tests/evidence/p07/f2-task-085-provider-scope-envelope.md`
+- `tests/evidence/p07/f2-task-086-provider-onboarding-playbook.md`
 
 ### Backlog and project traceability
 

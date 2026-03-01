@@ -136,6 +136,7 @@ Enforcement policy: any required gate in red state for the active phase is treat
   - read-first production-safe ingest is implemented
   - auth, retry, and rate-limit controls are validated
   - provider-to-canonical mapping thresholds meet acceptance targets
+  - provider onboarding path supports plugin registration and strict unknown-provider controls
 - **Gate references:** `G-002`, `G-003`, `G-005`
 
 ### Phase P08 - Provider optimization intelligence and next-move engine

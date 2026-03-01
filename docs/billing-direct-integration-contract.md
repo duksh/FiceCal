@@ -21,6 +21,9 @@ This contract covers:
 - `F2-TASK-077` Implement pagination and incremental sync
 - `F2-TASK-081` Document provider-specific mapping profiles
 - `F2-TASK-082` Add ingest error normalization
+- `F2-TASK-084` Harden adapter registry for plugin onboarding
+- `F2-TASK-085` Introduce generic provider scope envelope
+- `F2-TASK-086` Document provider onboarding plug-in playbook
 
 ## 3. Shared adapter interface contract
 
@@ -120,12 +123,31 @@ Baseline implementation requirements:
 2. Normalized error payload includes adapter identity context.
 3. `BillingIngestError` surface is exported for MCP/UI consumers.
 
-## 12. Validation command anchors
+## 12. Provider plug-in registry baseline (`F2-TASK-084`)
+
+1. Adapter IDs follow `*-billing` format and are validated at registration time.
+2. Registry supports runtime `registerBillingAdapter`/`registerBillingAdapters` without editing core map literals.
+3. Unknown adapter resolution supports strict mode via `BILLING_ADAPTER_RESOLUTION_MODE=strict`.
+4. Production default resolution mode is strict unless explicitly overridden.
+
+## 13. Generic provider scope envelope (`F2-TASK-085`)
+
+1. Shared request contract includes optional `providerScope: Record<string, unknown>`.
+2. Provider-specific scoping metadata can be passed without adding new top-level request keys.
+3. Ingest payload handoff includes `providerScope` for adapter-local validation.
+
+## 14. Provider onboarding playbook baseline (`F2-TASK-086`)
+
+1. Onboarding checklist defines adapter registration, fixture pack, validator, and evidence requirements.
+2. New providers can be integrated without mutating shared union type lists.
+3. Strict-mode rollout guidance is documented for stage/prod promotion.
+
+## 15. Validation command anchors
 
 - `python3 scripts/validate-billing-canonical-handoff.py`
 - `npm run validate`
 
-## 13. Exit criteria for P06-P07 foundation slice
+## 16. Exit criteria for P06-P07 foundation slice
 
 P06-P07 foundation slice is ready when:
 
@@ -135,3 +157,4 @@ P06-P07 foundation slice is ready when:
 4. Tier-1 credential policy is documented and enforceable via adapter validation.
 5. Tier-1 real-ingest baselines (OpenOps + AWS + Azure) are contract-validated with deterministic fixtures.
 6. Ingest error normalization is available for adapter validation and runtime failures.
+7. Provider onboarding path is plug-in capable with strict unknown-provider guardrails.

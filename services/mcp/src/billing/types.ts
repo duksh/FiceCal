@@ -1,12 +1,16 @@
-export type BillingAdapterId =
-  | "openops-billing"
-  | "aws-billing"
-  | "azure-billing"
-  | "gcp-billing"
-  | "oci-billing"
-  | "ibm-billing"
-  | "alibaba-billing"
-  | "huawei-billing";
+export const BUILTIN_BILLING_ADAPTER_IDS = [
+  "openops-billing",
+  "aws-billing",
+  "azure-billing",
+  "gcp-billing",
+  "oci-billing",
+  "ibm-billing",
+  "alibaba-billing",
+  "huawei-billing",
+] as const;
+
+export type BuiltinBillingAdapterId = (typeof BUILTIN_BILLING_ADAPTER_IDS)[number];
+export type BillingAdapterId = `${string}-billing`;
 
 export type MappingConfidence = "low" | "medium" | "high";
 
@@ -18,6 +22,8 @@ export type BillingScope = {
   currency: string;
 };
 
+export type BillingProviderScope = Record<string, unknown>;
+
 export type BillingIngestRequest = BillingScope & {
   integrationRunId: string;
   mappingProfile: string;
@@ -28,6 +34,7 @@ export type BillingIngestRequest = BillingScope & {
   subscriptionScope?: string[];
   billingAccountScope?: string[];
   tenantScope?: string[];
+  providerScope?: BillingProviderScope;
 };
 
 export type CanonicalBillingSnapshot = {

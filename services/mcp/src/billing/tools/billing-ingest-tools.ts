@@ -1,4 +1,4 @@
-import { resolveBillingAdapter } from "../registry";
+import { BillingAdapterResolutionError, isBillingAdapterIdFormat, resolveBillingAdapter } from "../registry";
 import { BillingAdapterId, BillingCanonicalHandoff, BillingIngestRequest } from "../types";
 import { createDefaultMcpContext, McpRequestContext, McpToolEnvelope, validateMcpContext } from "../../mcp";
 
@@ -97,7 +97,25 @@ async function runIngest(
   request: BillingIngestRequest,
   _context: McpRequestContext,
 ): Promise<BillingCanonicalHandoff> {
-  const resolution = resolveBillingAdapter(adapterId);
+  const resolution = (() => {
+    try {
+      return resolveBillingAdapter(adapterId);
+    } catch (error) {
+      if (error instanceof BillingAdapterResolutionError) {
+        const normalizedAdapterId = isBillingAdapterIdFormat(error.requestedAdapterId)
+          ? error.requestedAdapterId
+          : "openops-billing";
+
+        throw new BillingIngestError(
+          "validation_error",
+          normalizedAdapterId,
+          `Adapter resolution failed for '${error.requestedAdapterId}': ${error.message}`,
+        );
+      }
+      throw error;
+    }
+  })();
+
   const { adapter, resolvedAdapterId } = resolution;
   const payload = {
     adapterId: resolvedAdapterId,
@@ -113,6 +131,7 @@ async function runIngest(
     subscriptionScope: request.subscriptionScope,
     billingAccountScope: request.billingAccountScope,
     tenantScope: request.tenantScope,
+    providerScope: request.providerScope,
   };
 
   const validation = adapter.validateBillingPayload(payload);

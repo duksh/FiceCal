@@ -36,12 +36,14 @@ Optional secret-indirection keys (examples):
 
 - `FICECAL_CREDENTIALS_BACKEND`
 - `FICECAL_SECRET_RESOLVER_ENDPOINT`
+- `BILLING_ADAPTER_RESOLUTION_MODE` (`fallback` or `strict`)
 
 Policy:
 
 - `.env.example` may include key names and safe placeholder values only.
 - Real secrets must be injected via runtime environment or secret manager.
 - No secrets in git history, fixtures, screenshots, logs, or evidence artifacts.
+- Stage/prod should set `BILLING_ADAPTER_RESOLUTION_MODE=strict`.
 
 ## 5. Rotation and hygiene requirements
 

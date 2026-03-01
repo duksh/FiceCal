@@ -63,6 +63,25 @@ Versioning rules:
 2. Behavioral mapping changes require a new profile version suffix (`v2`, `v3`, ...).
 3. Contract + fixture + evidence deltas must land in the same PR.
 
+## P07.5 provider plug-in hardening baseline
+
+Registration controls:
+
+1. New providers register via `registerBillingAdapter` / `registerBillingAdapters`.
+2. Adapter IDs must follow `*-billing` format.
+3. Built-in provider map literals are no longer required for every future provider.
+
+Resolution controls:
+
+1. Resolver supports `fallback` and `strict` unknown-provider modes.
+2. `BILLING_ADAPTER_RESOLUTION_MODE=strict` is recommended for stage/prod.
+3. Production defaults to strict mode unless explicitly overridden.
+
+Scope controls:
+
+1. Provider-specific scope values can be supplied using `providerScope` envelope.
+2. Avoid adding new top-level request keys for every new provider unless contract-wide reuse is justified.
+
 ## Error normalization contract
 
 Provider failures must be normalized into shared categories before crossing boundaries:
