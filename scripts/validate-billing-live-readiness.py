@@ -106,10 +106,12 @@ def validate_live_smoke_config(config: dict) -> None:
 
 def validate_release_gate() -> None:
     content = RELEASE_WORKFLOW_PATH.read_text(encoding="utf-8")
-    if "require_live_smoke" not in content:
-        fail("release workflow missing 'require_live_smoke' input")
+    if "Run billing live smoke gate" not in content:
+        fail("release workflow missing mandatory billing live smoke gate step")
     if "scripts/validate-billing-live-reconciliation.py" not in content:
         fail("release workflow missing billing live reconciliation gate step")
+    if "inputs.require_live_smoke" in content:
+        fail("release workflow must not make live smoke gate optional")
 
 
 def validate() -> None:

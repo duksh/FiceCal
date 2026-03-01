@@ -25,7 +25,7 @@ Implement and validate the live-ingest readiness baseline for tier-1 billing pro
 
 - Live readiness contract now defines all seven controls from readiness criteria through release reconciliation gates.
 - Tier-1 provider live smoke orchestration is executable in dry-run mode and ready for sandbox live command wiring.
-- Release workflow now supports an explicit `require_live_smoke` gate backed by live smoke + reconciliation validation.
+- Release workflow now enforces a mandatory live smoke + reconciliation gate before tag/release creation.
 - Local and live environment templates now include credential-reference and ingest-mode keys required for controlled rollout.
 
 ## Proof Artifacts

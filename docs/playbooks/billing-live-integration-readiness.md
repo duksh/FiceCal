@@ -129,7 +129,7 @@ Workflows:
 - `.github/workflows/billing-live-smoke.yml`
   - manual + scheduled live smoke with artifacts upload
 - `.github/workflows/release.yml`
-  - optional `require_live_smoke` release gate
+  - mandatory live smoke + reconciliation gate before tag/release creation
   - blocks release when reconciliation validation fails
 
 ## 10. Evidence expectations

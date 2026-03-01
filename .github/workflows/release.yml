@@ -30,11 +30,6 @@ on:
         required: true
         default: false
         type: boolean
-      require_live_smoke:
-        description: "Require billing live smoke reconciliation gate"
-        required: true
-        default: true
-        type: boolean
 
 permissions:
   contents: write
@@ -83,29 +78,26 @@ jobs:
           fi
 
       - name: Set up Python
-        if: ${{ inputs.require_live_smoke }}
         uses: actions/setup-python@v5
         with:
           python-version: '3.12'
 
       - name: Run billing live smoke gate
-        if: ${{ inputs.require_live_smoke }}
         shell: bash
         env:
           BILLING_LIVE_SMOKE_MODE: live
-          FICECAL_OPENOPS_CREDENTIAL_REF: ${{ secrets.FICECAL_OPENOPS_CREDENTIAL_REF }}
-          FICECAL_AWS_CREDENTIAL_REF: ${{ secrets.FICECAL_AWS_CREDENTIAL_REF }}
-          FICECAL_AZURE_CREDENTIAL_REF: ${{ secrets.FICECAL_AZURE_CREDENTIAL_REF }}
-          FICECAL_GCP_CREDENTIAL_REF: ${{ secrets.FICECAL_GCP_CREDENTIAL_REF }}
-          FICECAL_OPENOPS_LIVE_SMOKE_CMD: ${{ secrets.FICECAL_OPENOPS_LIVE_SMOKE_CMD }}
-          FICECAL_AWS_LIVE_SMOKE_CMD: ${{ secrets.FICECAL_AWS_LIVE_SMOKE_CMD }}
-          FICECAL_AZURE_LIVE_SMOKE_CMD: ${{ secrets.FICECAL_AZURE_LIVE_SMOKE_CMD }}
-          FICECAL_GCP_LIVE_SMOKE_CMD: ${{ secrets.FICECAL_GCP_LIVE_SMOKE_CMD }}
+          FICECAL_OPENOPS_CREDENTIAL_REF: ${{ secrets['FICECAL_OPENOPS_CREDENTIAL_REF'] }}
+          FICECAL_AWS_CREDENTIAL_REF: ${{ secrets['FICECAL_AWS_CREDENTIAL_REF'] }}
+          FICECAL_AZURE_CREDENTIAL_REF: ${{ secrets['FICECAL_AZURE_CREDENTIAL_REF'] }}
+          FICECAL_GCP_CREDENTIAL_REF: ${{ secrets['FICECAL_GCP_CREDENTIAL_REF'] }}
+          FICECAL_OPENOPS_LIVE_SMOKE_CMD: ${{ secrets['FICECAL_OPENOPS_LIVE_SMOKE_CMD'] }}
+          FICECAL_AWS_LIVE_SMOKE_CMD: ${{ secrets['FICECAL_AWS_LIVE_SMOKE_CMD'] }}
+          FICECAL_AZURE_LIVE_SMOKE_CMD: ${{ secrets['FICECAL_AZURE_LIVE_SMOKE_CMD'] }}
+          FICECAL_GCP_LIVE_SMOKE_CMD: ${{ secrets['FICECAL_GCP_LIVE_SMOKE_CMD'] }}
         run: |
           python3 scripts/run-billing-live-smoke.py --mode live --require-provider-commands
 
       - name: Billing live reconciliation gate
-        if: ${{ inputs.require_live_smoke }}
         shell: bash
         run: |
           python3 scripts/validate-billing-live-reconciliation.py
