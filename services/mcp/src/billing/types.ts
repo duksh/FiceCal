@@ -10,6 +10,8 @@ export type BillingAdapterId =
 
 export type MappingConfidence = "low" | "medium" | "high";
 
+export type BillingAuthMode = "read-only";
+
 export type BillingScope = {
   startDate: string;
   endDate: string;
@@ -19,6 +21,8 @@ export type BillingScope = {
 export type BillingIngestRequest = BillingScope & {
   integrationRunId: string;
   mappingProfile: string;
+  credentialRef?: string;
+  authMode?: BillingAuthMode;
   workspaceScope?: string[];
   accountScope?: string[];
   subscriptionScope?: string[];

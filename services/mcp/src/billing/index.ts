@@ -8,6 +8,7 @@ export type { BillingAdapterResolution } from "./registry";
 export type {
   BillingAdapter,
   BillingAdapterId,
+  BillingAuthMode,
   BillingCanonicalHandoff,
   BillingIngestRequest,
   BillingProvenance,

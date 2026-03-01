@@ -100,6 +100,14 @@ def validate_phase1_tool(tool_name: str, expected_adapter_id: str) -> None:
     request_end = require_non_empty_string(request_payload, "endDate", f"{tool_name}.request")
     request_currency = require_non_empty_string(request_payload, "currency", f"{tool_name}.request")
 
+    auth_mode = request_payload.get("authMode")
+    if auth_mode is not None and auth_mode != "read-only":
+        fail(f"{tool_name}.request.authMode must be 'read-only' when provided")
+
+    credential_ref = request_payload.get("credentialRef")
+    if credential_ref is not None and not isinstance(credential_ref, str):
+        fail(f"{tool_name}.request.credentialRef must be a string when provided")
+
     scope_start = require_non_empty_string(response_scope, "startDate", f"{tool_name}.response.scope")
     scope_end = require_non_empty_string(response_scope, "endDate", f"{tool_name}.response.scope")
     scope_currency = require_non_empty_string(response_scope, "currency", f"{tool_name}.response.scope")
@@ -135,6 +143,20 @@ def validate_phase1_tool(tool_name: str, expected_adapter_id: str) -> None:
     warnings = provenance.get("warnings")
     if not isinstance(warnings, list) or not all(isinstance(item, str) for item in warnings):
         fail(f"{tool_name}.response.provenance.warnings must be an array of strings")
+
+    if tool_name == "billing.openops.ingest":
+        source_version = require_non_empty_string(
+            provenance, "sourceVersion", f"{tool_name}.response.provenance"
+        )
+        if not source_version.startswith("openops-readonly-"):
+            fail(
+                f"{tool_name}.response.provenance.sourceVersion must start with "
+                "'openops-readonly-' for P07 baseline"
+            )
+
+        infra_total = require_number(canonical, "infraTotal", f"{tool_name}.response.canonical")
+        if infra_total <= 0:
+            fail(f"{tool_name}.response.canonical.infraTotal must be > 0 for OpenOps real ingest baseline")
 
 
 def validate() -> None:

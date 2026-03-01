@@ -7,15 +7,15 @@
     "currency": "USD"
   },
   "canonical": {
-    "infraTotal": 0,
-    "cudPct": 0,
-    "budgetCap": 0,
-    "nRef": 0
+    "infraTotal": 1194,
+    "cudPct": 66,
+    "budgetCap": 1373.1,
+    "nRef": 4
   },
   "provenance": {
-    "sourceVersion": "openops-stub-v0.1.0",
-    "coveragePct": 0,
-    "mappingConfidence": "low",
-    "warnings": ["Stub adapter: replace with OpenOps API + mapping profile implementation."]
+    "sourceVersion": "openops-readonly-v1.0.0",
+    "coveragePct": 88,
+    "mappingConfidence": "medium",
+    "warnings": []
   }
 }

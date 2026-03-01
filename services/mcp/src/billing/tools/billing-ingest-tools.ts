@@ -48,6 +48,13 @@ async function runIngest(
       endDate: request.endDate,
       currency: request.currency,
     },
+    credentialRef: request.credentialRef,
+    authMode: request.authMode,
+    workspaceScope: request.workspaceScope,
+    accountScope: request.accountScope,
+    subscriptionScope: request.subscriptionScope,
+    billingAccountScope: request.billingAccountScope,
+    tenantScope: request.tenantScope,
   };
 
   const validation = adapter.validateBillingPayload(payload);

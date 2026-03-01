@@ -4,5 +4,6 @@
   "endDate": "2026-01-31",
   "currency": "USD",
   "mappingProfile": "default-openops-billing-v1",
+  "authMode": "write",
   "workspaceScope": "workspace-alpha"
 }

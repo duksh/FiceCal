@@ -100,6 +100,15 @@ Use this when implementation context must be reconstructed only from repository 
 - `tests/evidence/p06/f2-task-065-phase1-stub-playbook.md`
 - `tests/evidence/p06/f2-task-066-stub-fixture-version-mapping.md`
 
+### Tier-1 ingest rollout baseline (OpenOps + credentials)
+
+- `services/mcp/src/billing/adapters/openops.ts`
+- `services/mcp/src/billing/tools/billing-ingest-tools.ts`
+- `docs/environment-secret-management-contract.md`
+- `tests/contracts/fixtures/mcp/billing.openops.ingest/1.0/`
+- `tests/evidence/p07/f2-story-071-openops-real-ingest.md`
+- `tests/evidence/p07/f2-task-075-credentials-contract.md`
+
 ### Backlog and project traceability
 
 - `docs/roadmap/ficecal-v2-task-issue-registry.csv`
