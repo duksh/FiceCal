@@ -70,6 +70,7 @@ Use this when implementation context must be reconstructed only from repository 
 
 - `docs/playbooks/community-contribution-guide.md`
 - `docs/playbooks/community-first-pr-bundle.md`
+- `docs/playbooks/react-best-practices-checklist.md`
 - `docs/playbooks/github-project-community-seed.md`
 - `docs/playbooks/ficecal-v2-workflow-inventory.md`
 

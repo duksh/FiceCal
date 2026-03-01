@@ -23,6 +23,12 @@ All lanes must pass the same quality, security, and governance checks.
 - Attach screenshot/log evidence in PR.
 - If tests fail, fix and re-test before completion.
 
+## Required for React/Next user-facing changes
+
+- Apply the React performance review checklist before requesting review.
+- Document non-applicable checklist items in the PR summary when needed.
+- Reference: `docs/playbooks/react-best-practices-checklist.md`
+
 ## Required for AI/agent-assisted contributions
 
 - Disclose model/tool used.
@@ -47,3 +53,4 @@ See:
 - `docs/contracts/community-module-contribution-contract.md`
 - `docs/contracts/ai-agent-contribution-policy.md`
 - `docs/playbooks/community-contribution-guide.md`
+- `docs/playbooks/react-best-practices-checklist.md`

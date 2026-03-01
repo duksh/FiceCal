@@ -52,6 +52,7 @@ docs/
   - `docs/contracts/community-module-contribution-contract.md`
   - `docs/contracts/ai-agent-contribution-policy.md`
   - `docs/playbooks/community-contribution-guide.md`
+  - `docs/playbooks/react-best-practices-checklist.md`
   - `docs/playbooks/github-project-community-seed.md`
   - `docs/playbooks/community-first-pr-bundle.md`
 - Starter sample module:

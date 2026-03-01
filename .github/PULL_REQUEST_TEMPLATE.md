@@ -30,6 +30,12 @@
 - [ ] Test run proof added (log excerpt, report, or CI link)
 - [ ] If failed initially, fix -> re-test evidence included before marking done
 
+## React/Next Performance Review (required for React/Next user-facing changes)
+
+- [ ] `docs/playbooks/react-best-practices-checklist.md` reviewed
+- [ ] Critical checks (1-4) passed or remediated
+- [ ] Non-applicable checklist items documented in PR summary
+
 ## Security and Privacy
 
 - [ ] No secrets, credentials, or local environment sensitive data committed
