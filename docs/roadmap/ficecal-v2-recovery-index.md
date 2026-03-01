@@ -75,6 +75,12 @@ Use this when implementation context must be reconstructed only from repository 
 - `docs/operational-incident-playbooks.md`
 - `tests/evidence/p04/f2-task-044-mcp-fixture-coverage.md`
 
+### UI foundation and QA evidence baseline
+
+- `docs/ui-foundation-hci-metrics-contract.md`
+- `docs/qa-evidence-storage-convention.md`
+- `tests/e2e/smoke-journeys.md`
+
 ### Backlog and project traceability
 
 - `docs/roadmap/ficecal-v2-task-issue-registry.csv`
