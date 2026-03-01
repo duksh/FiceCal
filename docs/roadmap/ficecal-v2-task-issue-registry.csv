@@ -17,10 +17,10 @@ F2-TASK-016,P01,TASK,Add bootstrap verification checkpoints,F2-STORY-011,qa-team
 
 F2-EPIC-020,P02,EPIC,Core runtime boundaries and module baseline,F2-EPIC-010,platform-core,P0,In Progress,"Core interfaces and module boundaries are frozen for v2 train","docs/modularization-playbook.md","contract-drift","epic,core"
 F2-STORY-021,P02,STORY,Define domain-owned interfaces,F2-EPIC-020,platform-core,P0,In Progress,"Economics, health, recommendation, integration boundaries explicit","docs/modularization-playbook.md","contract-drift","architecture,core"
-F2-STORY-022,P02,STORY,Enforce adapter isolation pattern,F2-EPIC-020,platform-core,P0,Todo,"Provider-specific logic isolated from core calculations","docs/provider-sdk-integration-strategy.md","contract-drift","architecture,adapters"
+F2-STORY-022,P02,STORY,Enforce adapter isolation pattern,F2-EPIC-020,platform-core,P0,In Progress,"Provider-specific logic isolated from core calculations","docs/provider-sdk-integration-strategy.md","contract-drift","architecture,adapters"
 F2-TASK-023,P02,TASK,Map module dependency graph,F2-STORY-021,platform-core,P1,Done,"Dependencies recorded and validated for optional modules","src/features/feature-catalog.json","validate-feature-catalog","modules,dependency"
-F2-TASK-024,P02,TASK,Define module failure fallback policy,F2-STORY-021,qa-team,P1,Todo,"Optional module failures do not break core experience","docs/modularization-playbook.md","qa-playwright-evidence","resilience,ux"
-F2-TASK-025,P02,TASK,Document API boundary do-not-cross rules,F2-STORY-022,governance-office,P1,Todo,"No SDK type leaks into canonical contracts","docs/provider-sdk-integration-strategy.md","contract-drift","contracts,boundary"
+F2-TASK-024,P02,TASK,Define module failure fallback policy,F2-STORY-021,qa-team,P1,In Progress,"Optional module failures do not break core experience","docs/modularization-playbook.md","qa-playwright-evidence","resilience,ux"
+F2-TASK-025,P02,TASK,Document API boundary do-not-cross rules,F2-STORY-022,governance-office,P1,Done,"No SDK type leaks into canonical contracts","docs/provider-sdk-integration-strategy.md","contract-drift","contracts,boundary"
 F2-TASK-026,P02,TASK,Create architecture decision traceability map,F2-STORY-021,platform-core,P2,Todo,"ADRs linked to implementation modules and issues","docs/adr-0001-d3-first-chart-policy.md;docs/adr-0002-fastify-mcp-sdk-stack.md;docs/adr-0003-monorepo-structure-choice.md","docs-link-validation","adr,traceability"
 
 F2-EPIC-030,P03,EPIC,MCP v2 baseline and compatibility,F2-EPIC-020,agent-platform,P0,Todo,"MCP surface is module-aware with compatibility guarantees","docs/mcp-evolution-contract.md","contract-drift","epic,mcp"
