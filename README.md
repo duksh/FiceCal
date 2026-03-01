@@ -80,6 +80,13 @@ docs/
   - `docs/roadmap/ficecal-v2-recovery-index.md`
 - Phase sequencing, entry criteria, exit criteria, and gate references:
   - `docs/roadmap/ficecal-v2-execution-plan-updated.md`
+- Backlog registry (machine + human):
+  - `docs/roadmap/ficecal-v2-task-issue-registry.csv`
+  - `docs/roadmap/ficecal-v2-task-issue-registry.md`
+- GitHub issue/project mapping snapshot:
+  - `docs/roadmap/ficecal-v2-github-issue-map.csv`
+- Issue seeding and maintenance playbook:
+  - `docs/playbooks/ficecal-v2-issue-seeding.md`
 
 ## GitOps expectations
 
