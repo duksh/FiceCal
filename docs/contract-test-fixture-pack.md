@@ -105,6 +105,7 @@ Triage handling:
 ## 9. Validation command anchors
 
 - `python3 scripts/validate-feature-catalog.py`
+- `python3 scripts/validate-fixture-coverage.py`
 - `python3 scripts/validate-legacy-alias-parity.py`
 
 Additional validators can be added as fixture coverage expands.

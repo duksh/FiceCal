@@ -71,6 +71,7 @@ Use this when implementation context must be reconstructed only from repository 
 ### Contract fixture parity baseline
 
 - `docs/contract-test-fixture-pack.md`
+- `scripts/validate-fixture-coverage.py`
 
 ### Backlog and project traceability
 

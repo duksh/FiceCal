@@ -33,8 +33,8 @@ F2-TASK-036,P03,TASK,Add MCP release gate checklist,F2-STORY-031,qa-team,P1,Done
 
 F2-EPIC-040,P04,EPIC,Contract fixture parity infrastructure,F2-EPIC-030,qa-team,P0,In Progress,"Fixtures are first-class release artifacts","docs/contract-test-fixture-pack.md","contract-drift","epic,fixtures"
 F2-STORY-041,P04,STORY,Enforce fixture-delta-with-contract policy,F2-EPIC-040,qa-team,P0,In Progress,"Contract change PRs include fixture updates","docs/contract-test-fixture-pack.md","contract-drift","fixtures,policy"
-F2-STORY-042,P04,STORY,Enable deterministic fixture validation,F2-EPIC-040,qa-team,P0,Todo,"Fixture outputs stable and reproducible","tests/contracts/fixtures/","contract-drift","fixtures,determinism"
-F2-TASK-043,P04,TASK,Seed module fixture coverage baseline,F2-STORY-042,qa-team,P1,Todo,"All phase-active modules have valid/invalid/expected fixtures","tests/contracts/fixtures/","contract-drift","fixtures,module"
+F2-STORY-042,P04,STORY,Enable deterministic fixture validation,F2-EPIC-040,qa-team,P0,In Progress,"Fixture outputs stable and reproducible","tests/contracts/fixtures/","contract-drift","fixtures,determinism"
+F2-TASK-043,P04,TASK,Seed module fixture coverage baseline,F2-STORY-042,qa-team,P1,In Progress,"All phase-active modules have valid/invalid/expected fixtures","tests/contracts/fixtures/","contract-drift","fixtures,module"
 F2-TASK-044,P04,TASK,Seed MCP fixture coverage baseline,F2-STORY-042,qa-team,P1,Todo,"All phase-active MCP tools have request/response fixtures","tests/contracts/fixtures/mcp/","contract-drift","fixtures,mcp"
 F2-TASK-045,P04,TASK,Define fixture review checklist,F2-STORY-041,qa-team,P2,Todo,"PR checklist includes fixture quality checks","blueprints/ficecal-monorepo/.github/PULL_REQUEST_TEMPLATE.md","ci-guardrails","fixtures,review"
 F2-TASK-046,P04,TASK,Add drift triage process for fixture failures,F2-STORY-041,platform-core,P1,Todo,"Fixture failures route to schema/update/bug triage path","docs/operational-incident-playbooks.md","contract-drift","drift,operations"
