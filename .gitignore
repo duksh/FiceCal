@@ -21,3 +21,6 @@ pnpm-debug.log*
 
 # OS
 .DS_Store
+.windsurf
+WINDSURF.md
+docs/playbooks/windsurf-operator-guide.md

@@ -65,8 +65,15 @@ jobs:
         shell: bash
         run: |
           set -e
-          if grep -RInE '/Users/|[A-Za-z]:\\\\Users\\\\' . \
+          if grep -RInE \
+            -e '/Users/' \
+            -e '/home/' \
+            -e 'file:///' \
+            -e '(^|[[:space:]])~/' \
+            -e '[A-Za-z]:[\\/]+Users[\\/]' \
+            . \
             --exclude-dir=.git \
+            --exclude-dir=.windsurf \
             --exclude-dir=node_modules \
             --exclude='ci-guardrails.yml' \
             --exclude='*.png' --exclude='*.jpg' --exclude='*.jpeg' --exclude='*.gif' --exclude='*.pdf' \
