@@ -15,7 +15,7 @@ This plan is memory-loss safe: sequencing, dependencies, and acceptance gates ar
 ## 2) Scope and ownership baseline
 
 - Program epic: `F2-EPIC-000`
-- Current focus: `F2-EPIC-030` (MCP v2 baseline and compatibility)
+- Current focus: `F2-EPIC-040` (Contract fixture parity infrastructure)
 - Sequencing source: phase order in this file
 - Recovery anchor: `docs/roadmap/ficecal-v2-recovery-index.md`
 
