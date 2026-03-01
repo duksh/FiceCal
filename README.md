@@ -87,6 +87,8 @@ docs/
   - `docs/roadmap/ficecal-v2-github-issue-map.csv`
 - Issue seeding and maintenance playbook:
   - `docs/playbooks/ficecal-v2-issue-seeding.md`
+- Workflow inventory validation snapshot:
+  - `docs/playbooks/ficecal-v2-workflow-inventory.md`
 
 ## GitOps expectations
 

@@ -19,9 +19,10 @@ Use this index to recover baseline governance context directly from the reposito
 6. `docs/roadmap/ficecal-v2-task-issue-registry.md`
 7. `docs/roadmap/ficecal-v2-github-issue-map.csv`
 8. `docs/playbooks/ficecal-v2-issue-seeding.md`
-9. `.github/branch-protection-checklist.md`
-10. `.github/PULL_REQUEST_TEMPLATE.md`
-11. `.github/CODEOWNERS`
+9. `docs/playbooks/ficecal-v2-workflow-inventory.md`
+10. `.github/branch-protection-checklist.md`
+11. `.github/PULL_REQUEST_TEMPLATE.md`
+12. `.github/CODEOWNERS`
 
 ## Cold-start restart protocol (no chat memory)
 
@@ -70,6 +71,7 @@ Use this when implementation context must be reconstructed only from repository 
 - `docs/playbooks/community-contribution-guide.md`
 - `docs/playbooks/community-first-pr-bundle.md`
 - `docs/playbooks/github-project-community-seed.md`
+- `docs/playbooks/ficecal-v2-workflow-inventory.md`
 
 ### Billing integration starter (Phase 1)
 
