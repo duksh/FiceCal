@@ -7,15 +7,18 @@
     "currency": "USD"
   },
   "canonical": {
-    "infraTotal": 0,
-    "cudPct": 0,
-    "budgetCap": 0,
-    "nRef": 0
+    "infraTotal": 1325,
+    "cudPct": 66,
+    "budgetCap": 1444.25,
+    "nRef": 5
   },
   "provenance": {
-    "sourceVersion": "gcp-stub-v0.1.0",
-    "coveragePct": 0,
-    "mappingConfidence": "low",
-    "warnings": ["Stub adapter: replace with GCP Billing/Recommender APIs + mapping profile implementation."]
+    "sourceVersion": "gcp-readonly-v1.0.0",
+    "coveragePct": 91.25,
+    "mappingConfidence": "medium",
+    "warnings": [
+      "Telemetry baseline: billing.run and billing.mapping.summary emitted.",
+      "Recommender-ready provenance baseline enabled."
+    ]
   }
 }

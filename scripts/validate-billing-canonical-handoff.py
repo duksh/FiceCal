@@ -204,6 +204,32 @@ def validate_phase1_tool(tool_name: str, expected_adapter_id: str) -> None:
                 f"{tool_name}.response.provenance.warnings must include incremental sync baseline entry"
             )
 
+    if tool_name == "billing.gcp.ingest":
+        source_version = require_non_empty_string(
+            provenance, "sourceVersion", f"{tool_name}.response.provenance"
+        )
+        if not source_version.startswith("gcp-readonly-"):
+            fail(
+                f"{tool_name}.response.provenance.sourceVersion must start with "
+                "'gcp-readonly-' for P07 baseline"
+            )
+
+        infra_total = require_number(canonical, "infraTotal", f"{tool_name}.response.canonical")
+        if infra_total <= 0:
+            fail(f"{tool_name}.response.canonical.infraTotal must be > 0 for GCP real ingest baseline")
+
+        telemetry_warning = "Telemetry baseline: billing.run and billing.mapping.summary emitted."
+        if telemetry_warning not in warnings:
+            fail(
+                f"{tool_name}.response.provenance.warnings must include telemetry baseline entry"
+            )
+
+        recommender_warning = "Recommender-ready provenance baseline enabled."
+        if recommender_warning not in warnings:
+            fail(
+                f"{tool_name}.response.provenance.warnings must include recommender-ready baseline entry"
+            )
+
 
 def validate() -> None:
     for tool_name, expected_adapter_id in PHASE1_BILLING_TOOLS.items():

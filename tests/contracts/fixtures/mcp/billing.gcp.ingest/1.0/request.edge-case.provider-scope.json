@@ -6,6 +6,9 @@
   "mappingProfile": "default-gcp-billing-v1",
   "credentialRef": "cred://gcp/01A2B3-4C5D6E-7F8A9B/readonly",
   "authMode": "read-only",
-  "providerScope": {"datasetRegion": "us-central1"},
-  "billingAccountScope": ["01A2B3-4C5D6E-7F8A9B"]
+  "billingAccountScope": ["01A2B3-4C5D6E-7F8A9B", "11B2C3-4D5E6F-7A8B9C"],
+  "providerScope": {
+    "datasetRegion": "europe-west1",
+    "exportSink": "bigquery://finops.billing_export"
+  }
 }

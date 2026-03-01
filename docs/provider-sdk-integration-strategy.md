@@ -54,8 +54,8 @@ Initial tier-1 profile namespaces:
 
 - OpenOps: `default-openops-billing-v1`
 - AWS: `default-aws-billing-v1`
-- Azure: `default-azure-billing-v1` (planned)
-- GCP: `default-gcp-billing-v1` (planned)
+- Azure: `default-azure-billing-v1`
+- GCP: `default-gcp-billing-v1`
 
 Versioning rules:
 

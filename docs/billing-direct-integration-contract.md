@@ -16,11 +16,15 @@ This contract covers:
 - `F2-STORY-071` Implement OpenOps real ingestion
 - `F2-STORY-072` Implement AWS real ingestion
 - `F2-STORY-073` Implement Azure real ingestion
+- `F2-STORY-074` Implement GCP real ingestion
 - `F2-TASK-075` Define credentials contract for tier-1 providers
 - `F2-TASK-076` Implement retry and rate-limit strategy
 - `F2-TASK-077` Implement pagination and incremental sync
+- `F2-TASK-078` Add integration telemetry for ingest runs
+- `F2-TASK-079` Expand provider-specific fixture coverage
 - `F2-TASK-081` Document provider-specific mapping profiles
 - `F2-TASK-082` Add ingest error normalization
+- `F2-TASK-083` Create tier-1 cutover checklist
 - `F2-TASK-084` Harden adapter registry for plugin onboarding
 - `F2-TASK-085` Introduce generic provider scope envelope
 - `F2-TASK-086` Document provider onboarding plug-in playbook
@@ -142,12 +146,37 @@ Baseline implementation requirements:
 2. New providers can be integrated without mutating shared union type lists.
 3. Strict-mode rollout guidance is documented for stage/prod promotion.
 
-## 15. Validation command anchors
+## 15. GCP real-ingest baseline (`F2-STORY-074`)
+
+1. GCP adapter emits deterministic non-zero canonical snapshot fields.
+2. Provenance source version uses `gcp-readonly-*` namespace.
+3. Provenance warnings include telemetry baseline and recommender-ready baseline entries.
+4. Fixture baseline for `billing.gcp.ingest` reflects read-only credential and providerScope envelope controls.
+
+## 16. Ingest telemetry baseline (`F2-TASK-078`)
+
+1. Ingest flow emits `billing.run` telemetry for success/failure.
+2. Ingest flow emits `billing.mapping.summary` telemetry with canonical rollup context.
+3. Telemetry includes request/trace/workspace context and fallback metadata.
+
+## 17. Provider fixture expansion baseline (`F2-TASK-079`)
+
+1. Tier-1 fixture packs include provider-specific edge-case requests.
+2. Edge-case fixture additions preserve existing `1.0` request/response contract anchors.
+3. Fixture notes document each added edge-case scenario.
+
+## 18. Tier-1 cutover checklist baseline (`F2-TASK-083`)
+
+1. Checklist captures pre-cutover validation, security, telemetry, and rollback checkpoints.
+2. Checklist includes stage strict-mode resolver guard (`BILLING_ADAPTER_RESOLUTION_MODE=strict`).
+3. Checklist must be completed before replacing remaining tier-1 stubs.
+
+## 19. Validation command anchors
 
 - `python3 scripts/validate-billing-canonical-handoff.py`
 - `npm run validate`
 
-## 16. Exit criteria for P06-P07 foundation slice
+## 20. Exit criteria for P06-P07 foundation slice
 
 P06-P07 foundation slice is ready when:
 
@@ -158,3 +187,6 @@ P06-P07 foundation slice is ready when:
 5. Tier-1 real-ingest baselines (OpenOps + AWS + Azure) are contract-validated with deterministic fixtures.
 6. Ingest error normalization is available for adapter validation and runtime failures.
 7. Provider onboarding path is plug-in capable with strict unknown-provider guardrails.
+8. Tier-1 real-ingest baselines include GCP with telemetry and recommender-ready provenance.
+9. Tier-1 provider fixture packs include documented edge-case scenarios.
+10. Tier-1 cutover checklist is published and ready for stage/prod rollout governance.

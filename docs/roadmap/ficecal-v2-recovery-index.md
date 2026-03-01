@@ -100,21 +100,26 @@ Use this when implementation context must be reconstructed only from repository 
 - `tests/evidence/p06/f2-task-065-phase1-stub-playbook.md`
 - `tests/evidence/p06/f2-task-066-stub-fixture-version-mapping.md`
 
-### Tier-1 ingest rollout baseline (OpenOps + credentials)
+### Tier-1 ingest rollout baseline (OpenOps + AWS + Azure + GCP)
 
 - `services/mcp/src/billing/adapters/openops.ts`
 - `services/mcp/src/billing/adapters/aws.ts`
 - `services/mcp/src/billing/adapters/azure.ts`
+- `services/mcp/src/billing/adapters/gcp.ts`
 - `services/mcp/src/billing/tools/billing-ingest-tools.ts`
+- `services/mcp/src/billing/telemetry.ts`
 - `services/mcp/src/billing/registry.ts`
 - `services/mcp/src/billing/types.ts`
 - `docs/environment-secret-management-contract.md`
 - `docs/billing-adapter-aws-contract.md`
 - `docs/billing-adapter-azure-contract.md`
+- `docs/billing-adapter-gcp-contract.md`
 - `docs/playbooks/billing-provider-onboarding-plugin.md`
+- `docs/playbooks/billing-tier1-cutover-checklist.md`
 - `tests/contracts/fixtures/mcp/billing.openops.ingest/1.0/`
 - `tests/contracts/fixtures/mcp/billing.aws.ingest/1.0/`
 - `tests/contracts/fixtures/mcp/billing.azure.ingest/1.0/`
+- `tests/contracts/fixtures/mcp/billing.gcp.ingest/1.0/`
 - `tests/evidence/p07/f2-story-071-openops-real-ingest.md`
 - `tests/evidence/p07/f2-task-075-credentials-contract.md`
 - `tests/evidence/p07/f2-story-072-aws-real-ingest.md`
@@ -123,6 +128,10 @@ Use this when implementation context must be reconstructed only from repository 
 - `tests/evidence/p07/f2-story-073-azure-real-ingest.md`
 - `tests/evidence/p07/f2-task-077-pagination-incremental-sync.md`
 - `tests/evidence/p07/f2-task-082-error-normalization.md`
+- `tests/evidence/p07/f2-story-074-gcp-real-ingest.md`
+- `tests/evidence/p07/f2-task-078-ingest-telemetry.md`
+- `tests/evidence/p07/f2-task-079-provider-fixture-expansion.md`
+- `tests/evidence/p07/f2-task-083-tier1-cutover-checklist.md`
 - `tests/evidence/p07/f2-task-084-plugin-registry-hardening.md`
 - `tests/evidence/p07/f2-task-085-provider-scope-envelope.md`
 - `tests/evidence/p07/f2-task-086-provider-onboarding-playbook.md`

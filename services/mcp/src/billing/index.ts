@@ -37,3 +37,9 @@ export {
   billingOpenopsIngestV2,
 } from "./tools/billing-ingest-tools";
 export type { BillingIngestEnvelope, BillingIngestErrorCode } from "./tools/billing-ingest-tools";
+export {
+  emitBillingTelemetryEvent,
+  listBillingTelemetryEvents,
+  resetBillingTelemetryEvents,
+} from "./telemetry";
+export type { BillingTelemetryEvent, BillingTelemetryEventName } from "./telemetry";

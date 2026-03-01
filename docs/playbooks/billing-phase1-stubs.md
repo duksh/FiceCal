@@ -75,6 +75,16 @@ Use this checklist when updating phase-1 stubs:
 4. Add provider-specific retry, pagination, and rate-limit controls.
 5. Expand fixtures with edge-case payloads (currency variance, partial fields, schema drift).
 
+## Tier-1 cutover checklist (`F2-TASK-083`)
+
+Before production cutover, complete:
+
+1. `docs/playbooks/billing-tier1-cutover-checklist.md`
+2. `python3 scripts/validate-billing-canonical-handoff.py`
+3. `npm run validate`
+4. Stage/prod resolver mode set to strict:
+   - `BILLING_ADAPTER_RESOLUTION_MODE=strict`
+
 ## Governance checks
 
 - contract updates + fixture changes in same PR

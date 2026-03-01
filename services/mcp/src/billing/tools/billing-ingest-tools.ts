@@ -1,6 +1,7 @@
 import { BillingAdapterResolutionError, isBillingAdapterIdFormat, resolveBillingAdapter } from "../registry";
 import { BillingAdapterId, BillingCanonicalHandoff, BillingIngestRequest } from "../types";
 import { createDefaultMcpContext, McpRequestContext, McpToolEnvelope, validateMcpContext } from "../../mcp";
+import { emitBillingTelemetryEvent } from "../telemetry";
 
 export type BillingIngestEnvelope = McpToolEnvelope<BillingIngestRequest>;
 
@@ -95,8 +96,10 @@ function normalizeEnvelope(
 async function runIngest(
   adapterId: BillingAdapterId | string,
   request: BillingIngestRequest,
-  _context: McpRequestContext,
+  context: McpRequestContext,
 ): Promise<BillingCanonicalHandoff> {
+  const startedAt = Date.now();
+
   const resolution = (() => {
     try {
       return resolveBillingAdapter(adapterId);
@@ -105,6 +108,20 @@ async function runIngest(
         const normalizedAdapterId = isBillingAdapterIdFormat(error.requestedAdapterId)
           ? error.requestedAdapterId
           : "openops-billing";
+
+        emitBillingTelemetryEvent({
+          eventName: "billing.run",
+          timestamp: new Date().toISOString(),
+          adapterId: normalizedAdapterId,
+          integrationRunId: request.integrationRunId,
+          requestId: context.requestId,
+          traceId: context.traceId,
+          workspaceId: context.workspaceId,
+          mode: context.mode,
+          status: "failed",
+          durationMs: Date.now() - startedAt,
+          errorCode: "validation_error",
+        });
 
         throw new BillingIngestError(
           "validation_error",
@@ -116,7 +133,7 @@ async function runIngest(
     }
   })();
 
-  const { adapter, resolvedAdapterId } = resolution;
+  const { adapter, resolvedAdapterId, usedFallback } = resolution;
   const payload = {
     adapterId: resolvedAdapterId,
     period: {
@@ -136,17 +153,88 @@ async function runIngest(
 
   const validation = adapter.validateBillingPayload(payload);
   if (!validation.valid) {
+    const code = inferValidationErrorCode(validation.errors);
+
+    emitBillingTelemetryEvent({
+      eventName: "billing.run",
+      timestamp: new Date().toISOString(),
+      adapterId: resolvedAdapterId,
+      integrationRunId: request.integrationRunId,
+      requestId: context.requestId,
+      traceId: context.traceId,
+      workspaceId: context.workspaceId,
+      mode: context.mode,
+      status: "failed",
+      durationMs: Date.now() - startedAt,
+      usedFallback,
+      errorCode: code,
+    });
+
     throw new BillingIngestError(
-      inferValidationErrorCode(validation.errors),
+      code,
       resolvedAdapterId,
       `Invalid payload for ${resolvedAdapterId}: ${validation.errors.join(", ")}`,
     );
   }
 
   try {
-    return adapter.mapToCanonical(request, payload);
+    const result = adapter.mapToCanonical(request, payload);
+
+    emitBillingTelemetryEvent({
+      eventName: "billing.run",
+      timestamp: new Date().toISOString(),
+      adapterId: resolvedAdapterId,
+      integrationRunId: request.integrationRunId,
+      requestId: context.requestId,
+      traceId: context.traceId,
+      workspaceId: context.workspaceId,
+      mode: context.mode,
+      status: "success",
+      durationMs: Date.now() - startedAt,
+      usedFallback,
+    });
+
+    emitBillingTelemetryEvent({
+      eventName: "billing.mapping.summary",
+      timestamp: new Date().toISOString(),
+      adapterId: resolvedAdapterId,
+      integrationRunId: request.integrationRunId,
+      requestId: context.requestId,
+      traceId: context.traceId,
+      workspaceId: context.workspaceId,
+      mode: context.mode,
+      status: "success",
+      usedFallback,
+      mappingSummary: {
+        infraTotal: result.canonical.infraTotal,
+        cudPct: result.canonical.cudPct,
+        budgetCap: result.canonical.budgetCap,
+        nRef: result.canonical.nRef,
+        mappingConfidence: result.provenance.mappingConfidence,
+        coveragePct: result.provenance.coveragePct,
+      },
+    });
+
+    return result;
   } catch (error) {
-    throw normalizeRuntimeError(resolvedAdapterId, error);
+    const normalizedError = normalizeRuntimeError(resolvedAdapterId, error);
+
+    emitBillingTelemetryEvent({
+      eventName: "billing.run",
+      timestamp: new Date().toISOString(),
+      adapterId: resolvedAdapterId,
+      integrationRunId: request.integrationRunId,
+      requestId: context.requestId,
+      traceId: context.traceId,
+      workspaceId: context.workspaceId,
+      mode: context.mode,
+      status: "failed",
+      durationMs: Date.now() - startedAt,
+      usedFallback,
+      errorCode: normalizedError.code,
+    });
+
+    throw normalizedError;
   }
 }
 
