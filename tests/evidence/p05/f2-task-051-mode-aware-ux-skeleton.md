@@ -28,6 +28,11 @@ Implement and validate the P05 mode-aware UI skeleton for `quick`, `operator`, a
 - Unsupported architect-only action remains disabled outside `architect` mode.
 - Degraded-state banner messaging remains visible and understandable across modes.
 
+## Proof Artifacts
+
+- log: `[qa-evidence-policy] OK: validated 2 P05 evidence file(s) and 15 P07 evidence file(s)`
+- log: `[docs-links] OK: validated 61 markdown files, 0 local links`
+
 ## Evidence Checklist
 
 - [x] Fail evidence captured or not applicable

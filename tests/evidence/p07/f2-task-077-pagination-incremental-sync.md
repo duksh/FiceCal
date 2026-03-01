@@ -21,6 +21,11 @@ Implement and validate Azure adapter pagination and incremental sync baseline fo
 - Provenance warnings include pagination policy and incremental sync baseline entries.
 - Canonical output remains deterministic for repeated runs with unchanged inputs.
 
+## Proof Artifacts
+
+- log: `[billing-canonical-handoff] OK: validated 4 billing tool fixture packs`
+- log: `[validate] OK: root validation chain passed`
+
 ## Evidence Checklist
 
 - [x] Fail evidence captured or not applicable

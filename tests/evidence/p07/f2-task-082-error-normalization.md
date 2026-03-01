@@ -21,6 +21,11 @@ Normalize billing ingest validation and runtime errors into shared contract cate
 - Validation failures now emit normalized error categories.
 - Runtime adapter exceptions are mapped to normalized categories with adapter context.
 
+## Proof Artifacts
+
+- log: `[billing-canonical-handoff] OK: validated 4 billing tool fixture packs`
+- log: `[validate] OK: root validation chain passed`
+
 ## Evidence Checklist
 
 - [x] Fail evidence captured or not applicable

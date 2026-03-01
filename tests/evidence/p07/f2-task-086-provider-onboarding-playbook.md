@@ -20,6 +20,11 @@ Document repeatable plug-in onboarding workflow for adding future cloud billing 
 - Strict/fallback resolver mode policy is documented for local vs stage/prod.
 - Playbook reduces future provider integration overhead and shared contract churn.
 
+## Proof Artifacts
+
+- log: `[docs-links] OK: validated 61 markdown files, 0 local links`
+- log: `[validate] OK: root validation chain passed`
+
 ## Evidence Checklist
 
 - [x] Fail evidence captured or not applicable

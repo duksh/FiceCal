@@ -20,6 +20,11 @@ Publish operational checklist for tier-1 billing adapter cutover readiness.
 - Stage/prod strict resolver mode (`BILLING_ADAPTER_RESOLUTION_MODE=strict`) is explicitly required.
 - Cutover governance path is documented for P07 completion and rollout approvals.
 
+## Proof Artifacts
+
+- log: `[docs-links] OK: validated 61 markdown files, 0 local links`
+- log: `[validate] OK: root validation chain passed`
+
 ## Evidence Checklist
 
 - [x] Fail evidence captured or not applicable

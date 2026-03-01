@@ -21,6 +21,11 @@ Harden billing adapter registry to support runtime provider registration and str
 - Adapter IDs are validated against `*-billing` format.
 - Resolver supports strict mode for unknown providers with explicit resolution errors.
 
+## Proof Artifacts
+
+- log: `[billing-canonical-handoff] OK: validated 4 billing tool fixture packs`
+- log: `[validate] OK: root validation chain passed`
+
 ## Evidence Checklist
 
 - [x] Fail evidence captured or not applicable

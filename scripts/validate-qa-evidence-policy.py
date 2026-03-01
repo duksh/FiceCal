@@ -1,12 +1,13 @@
 #!/usr/bin/env python3
-"""Validate P05 QA evidence policy baseline.
+"""Validate QA evidence policy baseline.
 
 Checks:
 - required P05 contract docs and smoke journeys file exist
 - required P05 baseline evidence doc exists
-- P05 evidence file naming follows convention
-- each P05 evidence file contains required sections
-- each P05 evidence file contains fail-fix-retest, retention, and privacy checklist markers
+- P05 and P07 evidence file naming follows convention
+- each evidence file contains required sections, including proof artifacts
+- each evidence file contains fail-fix-retest, retention, privacy checklist markers
+- each evidence file contains at least one verifiable proof artifact entry
 """
 
 from __future__ import annotations
@@ -21,14 +22,17 @@ QA_CONVENTION_PATH = REPO_ROOT / "docs" / "qa-evidence-storage-convention.md"
 UI_CONTRACT_PATH = REPO_ROOT / "docs" / "ui-foundation-hci-metrics-contract.md"
 SMOKE_JOURNEYS_PATH = REPO_ROOT / "tests" / "e2e" / "smoke-journeys.md"
 P05_EVIDENCE_DIR = REPO_ROOT / "tests" / "evidence" / "p05"
+P07_EVIDENCE_DIR = REPO_ROOT / "tests" / "evidence" / "p07"
 BASELINE_EVIDENCE_PATH = P05_EVIDENCE_DIR / "f2-task-053-smoke-journeys-baseline.md"
 
-EVIDENCE_FILE_NAME_PATTERN = re.compile(r"^f2-task-\d{3}-[a-z0-9-]+\.md$")
+P05_EVIDENCE_FILE_NAME_PATTERN = re.compile(r"^f2-task-\d{3}-[a-z0-9-]+\.md$")
+P07_EVIDENCE_FILE_NAME_PATTERN = re.compile(r"^f2-(task|story)-\d{3}-[a-z0-9-]+\.md$")
 
 REQUIRED_HEADINGS = (
     "## Scope",
     "## Commands",
     "## Outcome",
+    "## Proof Artifacts",
     "## Evidence Checklist",
 )
 
@@ -44,6 +48,8 @@ RETENTION_LINE_PATTERN = re.compile(
     re.MULTILINE,
 )
 
+PROOF_ARTIFACT_LINE_PATTERN = re.compile(r"^- (log|ci|screenshot): .+", re.MULTILINE)
+
 
 def fail(message: str) -> None:
     print(f"[qa-evidence-policy] ERROR: {message}")
@@ -55,12 +61,12 @@ def assert_exists(path: Path, context: str) -> None:
         fail(f"Missing {context}: {path.relative_to(REPO_ROOT)}")
 
 
-def validate_evidence_file(path: Path) -> None:
+def validate_evidence_file(path: Path, filename_pattern: re.Pattern[str], phase_label: str) -> None:
     rel_path = path.relative_to(REPO_ROOT)
 
-    if not EVIDENCE_FILE_NAME_PATTERN.match(path.name):
+    if not filename_pattern.match(path.name):
         fail(
-            f"P05 evidence filename does not follow convention '{EVIDENCE_FILE_NAME_PATTERN.pattern}': "
+            f"{phase_label} evidence filename does not follow convention '{filename_pattern.pattern}': "
             f"{rel_path}"
         )
 
@@ -80,24 +86,40 @@ def validate_evidence_file(path: Path) -> None:
             "Expected one of: routine-30d | phase-close-90d | release-critical-180d"
         )
 
+    if PROOF_ARTIFACT_LINE_PATTERN.search(content) is None:
+        fail(
+            f"{rel_path} missing proof artifacts entries. "
+            "Expected at least one line in '## Proof Artifacts' section matching "
+            "'- log: ...' or '- ci: ...' or '- screenshot: ...'"
+        )
+
 
 def validate() -> None:
     assert_exists(QA_CONVENTION_PATH, "QA evidence convention doc")
     assert_exists(UI_CONTRACT_PATH, "UI foundation contract doc")
     assert_exists(SMOKE_JOURNEYS_PATH, "smoke journeys baseline")
     assert_exists(P05_EVIDENCE_DIR, "P05 evidence directory")
+    assert_exists(P07_EVIDENCE_DIR, "P07 evidence directory")
     assert_exists(BASELINE_EVIDENCE_PATH, "P05 baseline smoke journey evidence doc")
 
-    evidence_files = sorted(P05_EVIDENCE_DIR.glob("*.md"))
-    if not evidence_files:
-        fail("No P05 evidence markdown files found")
+    p05_evidence_files = sorted(P05_EVIDENCE_DIR.glob("*.md"))
+    p07_evidence_files = sorted(P07_EVIDENCE_DIR.glob("*.md"))
 
-    for evidence_file in evidence_files:
-        validate_evidence_file(evidence_file)
+    if not p05_evidence_files:
+        fail("No P05 evidence markdown files found")
+    if not p07_evidence_files:
+        fail("No P07 evidence markdown files found")
+
+    for evidence_file in p05_evidence_files:
+        validate_evidence_file(evidence_file, P05_EVIDENCE_FILE_NAME_PATTERN, "P05")
+
+    for evidence_file in p07_evidence_files:
+        validate_evidence_file(evidence_file, P07_EVIDENCE_FILE_NAME_PATTERN, "P07")
 
     print(
         "[qa-evidence-policy] OK: validated "
-        f"{len(evidence_files)} P05 evidence file(s) in {P05_EVIDENCE_DIR.relative_to(REPO_ROOT)}"
+        f"{len(p05_evidence_files)} P05 evidence file(s) and "
+        f"{len(p07_evidence_files)} P07 evidence file(s)"
     )
 
 

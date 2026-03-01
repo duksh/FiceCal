@@ -22,6 +22,11 @@ Emit ingest telemetry events for run status and canonical mapping summary across
 - `billing.mapping.summary` telemetry emitted with canonical rollup fields and confidence metadata.
 - Telemetry events include context and fallback metadata for troubleshooting.
 
+## Proof Artifacts
+
+- log: `[billing-canonical-handoff] OK: validated 4 billing tool fixture packs`
+- log: `[validate] OK: root validation chain passed`
+
 ## Evidence Checklist
 
 - [x] Fail evidence captured or not applicable

@@ -24,6 +24,11 @@ Define and operationalize the credential and secret-handling contract for tier-1
 - Fixture and validator checks enforce allowed auth mode and OpenOps baseline source version.
 - Environment example includes secret-resolution key placeholders without exposing secrets.
 
+## Proof Artifacts
+
+- log: `[billing-canonical-handoff] OK: validated 4 billing tool fixture packs`
+- log: `[validate] OK: root validation chain passed`
+
 ## Evidence Checklist
 
 - [x] Fail evidence captured or not applicable

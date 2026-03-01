@@ -21,6 +21,11 @@ Publish and validate the baseline smoke journeys for P05 mode-aware UI coverage.
 - QA evidence policy validator confirms the baseline evidence file structure and checklist markers.
 - Root validation chain remains green after adding P05 evidence baseline.
 
+## Proof Artifacts
+
+- log: `[qa-evidence-policy] OK: validated 2 P05 evidence file(s) and 15 P07 evidence file(s)`
+- log: `[feature-catalog] OK: validated 6 modules in src/features/feature-catalog.json`
+
 ## Evidence Checklist
 
 - [x] Fail evidence captured or not applicable

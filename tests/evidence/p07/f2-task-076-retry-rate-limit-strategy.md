@@ -21,6 +21,11 @@ Implement and validate AWS adapter retry/rate-limit control baseline for P07.
 - Provenance warnings include retry policy declaration for all ingest runs.
 - Rate-limit fallback path emits deterministic warning details when activated.
 
+## Proof Artifacts
+
+- log: `[billing-canonical-handoff] OK: validated 4 billing tool fixture packs`
+- log: `[validate] OK: root validation chain passed`
+
 ## Evidence Checklist
 
 - [x] Fail evidence captured or not applicable

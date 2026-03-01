@@ -37,12 +37,17 @@ Each evidence document must include:
 3. Commands executed.
 4. Outcome and pass/fail state.
 5. If failed initially, linked fix + retest proof.
+6. Proof artifacts section containing at least one verifiable artifact.
 
-Optional attachments:
+Proof artifacts (at least one required):
 
-- screenshots
-- CI run links
-- log snippets
+- command output snippet(s)
+- CI run link(s)
+- screenshot path(s)
+
+Required heading in each evidence file:
+
+- `## Proof Artifacts`
 
 ## 5. Fail-fix-retest rule (`F2-TASK-054`)
 
@@ -90,6 +95,7 @@ Before approving QA evidence updates, reviewers confirm:
 
 - naming/path follows convention
 - fail-fix-retest chain is complete when needed
+- proof artifact section exists and contains at least one verifiable entry
 - retention and privacy requirements are satisfied
 - linked commands or CI checks are reproducible
 

@@ -22,6 +22,11 @@ Implement Azure billing adapter real-ingest baseline with deterministic non-zero
 - Adapter payload validation enforces auth mode and subscription scope shape constraints.
 - Fixture pack for `billing.azure.ingest` reflects Azure read-only real-ingest baseline.
 
+## Proof Artifacts
+
+- log: `[billing-canonical-handoff] OK: validated 4 billing tool fixture packs`
+- log: `[validate] OK: root validation chain passed`
+
 ## Evidence Checklist
 
 - [x] Fail evidence captured or not applicable
