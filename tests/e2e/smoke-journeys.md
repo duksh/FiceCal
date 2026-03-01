@@ -4,6 +4,13 @@
 
 Define critical user-facing smoke journeys for the UI foundation phase.
 
+## Execution target
+
+- UI entrypoint: `apps/web/src/index.html`
+- Mode contract implementation:
+  - `apps/web/src/mode-aware-ux.js`
+  - `apps/web/src/mode-aware-ux.css`
+
 ## Journey matrix
 
 | Journey ID | Mode | Goal | Minimum assertion set |
@@ -13,6 +20,16 @@ Define critical user-facing smoke journeys for the UI foundation phase.
 | SJ-003 | architect | User can access deeper analysis and traceability view | advanced context visible, traceability/evidence panel reachable |
 | SJ-004 | mode-switch | User can switch between modes without context loss | selected context persists across mode switches |
 | SJ-005 | degraded-path | User sees clear degraded-state fallback and recovery hint | degraded state message visible, next action guidance shown |
+
+## Mode-aware baseline assertions
+
+For every smoke run, also verify:
+
+1. Active mode badge reflects selected mode (`quick`, `operator`, `architect`).
+2. Shared context values are retained when switching modes.
+3. Operator panel is hidden in `quick` and shown in `operator`/`architect`.
+4. Architect traceability action remains disabled until `architect` mode.
+5. Error banner remains understandable across all modes.
 
 ## Execution contract
 

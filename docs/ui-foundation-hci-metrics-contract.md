@@ -20,6 +20,12 @@ All user-facing flows must support deterministic mode gating for:
 - `operator`
 - `architect`
 
+Implementation anchors:
+
+- `apps/web/src/index.html`
+- `apps/web/src/mode-aware-ux.js`
+- `apps/web/src/mode-aware-ux.css`
+
 ### 3.1 Required behavior
 
 1. Current mode must be visible in UI state (badge/label/header context).

@@ -80,6 +80,10 @@ Use this when implementation context must be reconstructed only from repository 
 - `docs/ui-foundation-hci-metrics-contract.md`
 - `docs/qa-evidence-storage-convention.md`
 - `tests/e2e/smoke-journeys.md`
+- `apps/web/src/index.html`
+- `apps/web/src/mode-aware-ux.js`
+- `apps/web/src/mode-aware-ux.css`
+- `tests/evidence/p05/f2-task-051-mode-aware-ux-skeleton.md`
 - `tests/evidence/p05/f2-task-053-smoke-journeys-baseline.md`
 - `scripts/validate-qa-evidence-policy.py`
 

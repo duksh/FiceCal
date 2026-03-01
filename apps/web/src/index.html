@@ -1,0 +1,115 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>FiceCal Mode-Aware UX Skeleton</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="./mode-aware-ux.css" />
+  </head>
+  <body>
+    <main class="shell" aria-label="FiceCal UI foundation shell">
+      <header class="topbar">
+        <div>
+          <p class="eyebrow">FiceCal v2</p>
+          <h1>Mode-Aware UX Skeleton</h1>
+          <p class="subtitle">Quick, operator, and architect views with shared context continuity.</p>
+        </div>
+        <div class="mode-status" aria-live="polite">
+          <span class="mode-status-label">Active mode</span>
+          <strong id="active-mode-badge" class="mode-badge">quick</strong>
+        </div>
+      </header>
+
+      <section class="panel" aria-label="Mode selection">
+        <h2>Mode</h2>
+        <div class="mode-switch" role="tablist" aria-label="UX mode switcher">
+          <button type="button" class="mode-button is-active" data-mode="quick">Quick</button>
+          <button type="button" class="mode-button" data-mode="operator">Operator</button>
+          <button type="button" class="mode-button" data-mode="architect">Architect</button>
+        </div>
+      </section>
+
+      <section class="panel" aria-label="Shared context">
+        <h2>Shared Context</h2>
+        <form id="shared-context-form" class="context-grid" novalidate>
+          <label>
+            Workspace ID
+            <input id="workspace-id" name="workspaceId" type="text" value="workspace-finops-001" required />
+          </label>
+          <label>
+            Start date
+            <input id="start-date" name="startDate" type="date" value="2026-01-01" required />
+          </label>
+          <label>
+            End date
+            <input id="end-date" name="endDate" type="date" value="2026-01-31" required />
+          </label>
+          <label>
+            Currency
+            <select id="currency" name="currency">
+              <option value="USD">USD</option>
+              <option value="EUR">EUR</option>
+              <option value="MUR" selected>MUR</option>
+            </select>
+          </label>
+        </form>
+      </section>
+
+      <section id="error-banner" class="panel error-banner is-hidden" role="alert" aria-live="assertive">
+        <h2>Input validation issue</h2>
+        <p id="error-message">Fill all required fields before continuing.</p>
+      </section>
+
+      <section class="grid-two" aria-label="Mode-aware content">
+        <article class="panel" id="quick-panel">
+          <h2>Quick view</h2>
+          <p class="hint">Concise summary and immediate next action.</p>
+          <div class="metric-row">
+            <span>Estimated spend in scope</span>
+            <strong id="quick-spend">MUR 1,240,000</strong>
+          </div>
+          <button id="quick-next-action" type="button" class="action-button">Open top savings opportunity</button>
+        </article>
+
+        <article class="panel" id="operator-panel">
+          <h2>Operator controls</h2>
+          <p class="hint">Operational diagnostics and run controls.</p>
+          <ul class="status-list">
+            <li><span class="label">Ingest status</span><strong>Healthy</strong></li>
+            <li><span class="label">Mapping quality</span><strong>92%</strong></li>
+            <li><span class="label">Retry queue</span><strong>0 blocked</strong></li>
+          </ul>
+          <button id="operator-refresh" type="button" class="action-button">Refresh diagnostics</button>
+        </article>
+
+        <article class="panel" id="architect-panel">
+          <h2>Architect view</h2>
+          <p class="hint">Deep analysis, tradeoffs, and traceability links.</p>
+          <ul class="status-list">
+            <li><span class="label">Contract version</span><strong>mcp=2.0 / fixture=1.0</strong></li>
+            <li><span class="label">Evidence chain</span><strong>Complete for P05 baseline</strong></li>
+            <li><span class="label">Risk note</span><strong>No blocker in current baseline</strong></li>
+          </ul>
+          <button id="architect-trace" type="button" class="action-button">Open traceability pack</button>
+        </article>
+      </section>
+
+      <section class="panel" aria-label="Validation controls">
+        <h2>UX contract checks</h2>
+        <div class="check-actions">
+          <button id="run-validation" type="button" class="action-button">Validate context</button>
+          <button id="simulate-error" type="button" class="ghost-button">Simulate degraded state</button>
+        </div>
+        <p id="contract-note" class="hint">Unsupported actions are disabled outside their required mode.</p>
+      </section>
+    </main>
+
+    <script src="./mode-aware-ux.js"></script>
+  </body>
+</html>
