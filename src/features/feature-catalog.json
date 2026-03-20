@@ -1,6 +1,6 @@
 {
-  "version": "1.0.0-draft",
-  "updatedAt": "2026-03-01",
+  "version": "1.1.0",
+  "updatedAt": "2026-03-20",
   "modules": [
     {
       "id": "core-economics",
@@ -21,7 +21,8 @@
       "path": "packages/schemas",
       "dependsOn": [],
       "optional": false,
-      "status": "planned"
+      "status": "active",
+      "note": "packages/schemas/model-catalog/index.ts delivered in PR #118 — ModelPricingReference, APPROVED_BENCHMARKS, PricingSourceType, PricingUnit"
     },
     {
       "id": "integrations",
@@ -30,7 +31,8 @@
         "schemas"
       ],
       "optional": true,
-      "status": "planned"
+      "status": "active",
+      "note": "packages/integrations/models-pricing delivered in PR #118 — duksh-models-adapter with snapshot versioning, transform, and fixture tests"
     },
     {
       "id": "mcp-tooling",

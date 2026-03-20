@@ -1,0 +1,24 @@
+{
+  "id": "integrations.duksh-models-adapter",
+  "name": "FiceCal Model Lens Adapter (duksh-models)",
+  "version": "0.1.0",
+  "owner": "@duksh",
+  "sponsor": "@duksh",
+  "status": "experimental",
+  "required": false,
+  "contributionType": "ai-assisted",
+  "trustTier": "tier-1",
+  "dependsOn": ["schemas/model-catalog"],
+  "uiModes": ["operator", "architect"],
+  "inputs": ["dataJsonUrl", "dataJsonContent", "ingestedAt"],
+  "outputs": ["records", "sourceVersion", "skippedCount", "strippedBenchmarkCount", "warnings"],
+  "healthSignals": [
+    "models_adapter.ingest_success_rate",
+    "models_adapter.snapshot_age_days",
+    "models_adapter.benchmark_strip_rate",
+    "models_adapter.skip_rate"
+  ],
+  "contracts": [
+    "docs/contracts/model-catalog-adapter-contract.md"
+  ]
+}
