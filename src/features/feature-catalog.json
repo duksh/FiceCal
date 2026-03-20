@@ -1,5 +1,5 @@
 {
-  "version": "1.1.0",
+  "version": "1.2.0",
   "updatedAt": "2026-03-20",
   "modules": [
     {
@@ -7,7 +7,8 @@
       "path": "packages/core-economics",
       "dependsOn": [],
       "optional": false,
-      "status": "planned"
+      "status": "active",
+      "note": "packages/core-economics — Phase 1 economics kernel with decimal.js, period normalization, currency conversion via ForexRateProvider, formula registry, vitest tests"
     },
     {
       "id": "feature-registry",
@@ -54,6 +55,14 @@
       ],
       "optional": true,
       "status": "experimental"
+    },
+    {
+      "id": "schemas.normalized-cost-record",
+      "path": "packages/schemas/normalized-cost-record",
+      "dependsOn": [],
+      "optional": false,
+      "status": "active",
+      "note": "NormalizedCostRecord contract v1.0.0 — FOCUS-informed billing record type"
     }
   ]
 }

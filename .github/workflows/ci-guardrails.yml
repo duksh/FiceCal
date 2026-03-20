@@ -21,7 +21,7 @@ jobs:
       - name: Set up Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: '20'
+          node-version: '22'
 
       - name: Set up Python
         uses: actions/setup-python@v5
@@ -103,7 +103,7 @@ jobs:
         shell: bash
         run: |
           if [ -f pnpm-lock.yaml ]; then
-            pnpm -r test --if-present
+            pnpm -r run --if-present test
           elif [ -f package.json ]; then
             npm test --if-present
           else
