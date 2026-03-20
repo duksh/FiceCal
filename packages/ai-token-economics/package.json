@@ -1,0 +1,22 @@
+{
+  "name": "@ficecal/ai-token-economics",
+  "version": "0.1.0",
+  "description": "FiceCal v2 AI-specific pricing unit economics — token, image, request, and time-based cost computation",
+  "type": "module",
+  "exports": {
+    ".": "./src/index.ts"
+  },
+  "scripts": {
+    "test": "node --experimental-vm-modules node_modules/vitest/vitest.mjs run",
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@ficecal/core-economics": "workspace:*",
+    "decimal.js": "^10.4.3"
+  },
+  "devDependencies": {
+    "@types/node": "^22.0.0",
+    "typescript": "^5.4.0",
+    "vitest": "^2.0.0"
+  }
+}
