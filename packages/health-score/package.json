@@ -1,0 +1,16 @@
+{
+  "name": "@ficecal/health-score",
+  "version": "0.1.0",
+  "description": "FiceCal v2 deterministic health signal scoring",
+  "type": "module",
+  "exports": { ".": "./src/index.ts" },
+  "scripts": {
+    "test": "node --experimental-vm-modules node_modules/vitest/vitest.mjs run",
+    "typecheck": "tsc --noEmit"
+  },
+  "devDependencies": {
+    "@types/node": "^22.0.0",
+    "typescript": "^5.4.0",
+    "vitest": "^2.0.0"
+  }
+}
