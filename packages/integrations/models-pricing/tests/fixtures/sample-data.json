@@ -1,0 +1,89 @@
+{
+  "scrapedAt": "2026-03-20T06:00:00.000Z",
+  "vendors": {
+    "openai": {
+      "cleanName": "OpenAI",
+      "learnMoreUrl": "https://openai.com/pricing",
+      "euOrUKRegions": [],
+      "usaRegions": ["global"],
+      "regionCleanNames": { "": { "global": "Global" } }
+    },
+    "aws": {
+      "cleanName": "AWS Bedrock",
+      "learnMoreUrl": "https://aws.amazon.com/bedrock/pricing/",
+      "euOrUKRegions": ["eu-west-1"],
+      "usaRegions": ["us-east-1"],
+      "regionCleanNames": { "": { "us-east-1": "US East (N. Virginia)" } }
+    }
+  },
+  "models": {
+    "gpt-4o": {
+      "cleanName": "GPT-4o",
+      "company": "OpenAI",
+      "companyCountryCode": "US",
+      "vendors": [
+        {
+          "vendorRef": "openai",
+          "regionPricing": {
+            "global": [0.0000025, 0.00001, null, null]
+          },
+          "latencyMs": 800,
+          "tokensPerSecond": 90,
+          "lowCapacity": false,
+          "priceSource": "scraped"
+        }
+      ],
+      "selfhostable": false,
+      "reasoning": false,
+      "maxInputTokens": 128000,
+      "maxOutputTokens": 16384,
+      "sweBenchResolvedPercentage": 49.0
+    },
+    "claude-3-5-sonnet-20241022": {
+      "cleanName": "Claude 3.5 Sonnet",
+      "company": "Anthropic",
+      "companyCountryCode": "US",
+      "vendors": [
+        {
+          "vendorRef": "aws",
+          "regionPricing": {
+            "us-east-1": [0.000003, 0.000015, 0.0000003, null]
+          },
+          "latencyMs": 1200,
+          "tokensPerSecond": 70,
+          "lowCapacity": false,
+          "priceSource": "scraped"
+        }
+      ],
+      "selfhostable": false,
+      "reasoning": false,
+      "maxInputTokens": 200000,
+      "maxOutputTokens": 8096
+    }
+  },
+  "imageModels": {
+    "dall-e-3": {
+      "cleanName": "DALL-E 3",
+      "company": "OpenAI",
+      "companyCountryCode": "US",
+      "vendors": [
+        {
+          "vendorRef": "openai",
+          "regionPricing": {
+            "global": [
+              { "resolution": "1024x1024", "pricePerImage": 0.04 },
+              { "resolution": "1024x1792", "pricePerImage": 0.08 }
+            ]
+          },
+          "latencyMs": 0,
+          "lowCapacity": false,
+          "priceSource": "hardcoded",
+          "priceVerifiedAt": "2026-03-20"
+        }
+      ],
+      "selfhostable": false,
+      "supportedResolutions": ["1024x1024", "1024x1792"],
+      "supportsNegativePrompts": false
+    }
+  }
+}
