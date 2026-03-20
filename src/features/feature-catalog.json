@@ -1,5 +1,5 @@
 {
-  "version": "1.2.0",
+  "version": "1.3.0",
   "updatedAt": "2026-03-20",
   "modules": [
     {
@@ -63,6 +63,44 @@
       "optional": false,
       "status": "active",
       "note": "NormalizedCostRecord contract v1.0.0 — FOCUS-informed billing record type"
+    },
+    {
+      "id": "chart-presentation",
+      "path": "packages/chart-presentation",
+      "dependsOn": [
+        "core-economics"
+      ],
+      "optional": false,
+      "status": "active",
+      "note": "Phase 2 — ChartPayload DTO contract, ADR-0001 D3-first policy, builders (period-cost, model-comparison, unresolvable), validators; 47 vitest tests"
+    },
+    {
+      "id": "health-score",
+      "path": "packages/health-score",
+      "dependsOn": [],
+      "optional": false,
+      "status": "active",
+      "note": "Phase 2 — deterministic health signal engine; 6 signal categories, weighted aggregate, worst-severity propagation; 22 vitest tests"
+    },
+    {
+      "id": "recommendation-module",
+      "path": "packages/recommendation-module",
+      "dependsOn": [
+        "health-score"
+      ],
+      "optional": false,
+      "status": "active",
+      "note": "Phase 2 — audience-aware recommendation engine; 17 declarative rules, 4 personas, critical→low sort; 31 vitest tests"
+    },
+    {
+      "id": "ai-token-economics",
+      "path": "packages/ai-token-economics",
+      "dependsOn": [
+        "core-economics"
+      ],
+      "optional": false,
+      "status": "active",
+      "note": "Phase 2 — AI pricing unit dispatcher closing Gap 1; per_token/1k/1m, per_image (resolution+steps multipliers), per_request, per_second; 32 vitest tests"
     }
   ]
 }
