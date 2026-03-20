@@ -51,6 +51,22 @@ importers:
         specifier: ^2.0.0
         version: 2.1.9(@types/node@22.19.15)
 
+  packages/recommendation-module:
+    dependencies:
+      '@ficecal/health-score':
+        specifier: workspace:*
+        version: link:../health-score
+    devDependencies:
+      '@types/node':
+        specifier: ^22.0.0
+        version: 22.19.15
+      typescript:
+        specifier: ^5.4.0
+        version: 5.9.3
+      vitest:
+        specifier: ^2.0.0
+        version: 2.1.9(@types/node@22.19.15)
+
 packages:
 
   '@esbuild/aix-ppc64@0.21.5':
