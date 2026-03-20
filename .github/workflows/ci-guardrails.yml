@@ -3,7 +3,12 @@ name: CI Guardrails
 on:
   pull_request:
   push:
-    branches: [main]
+    branches:
+      - main
+      - develop
+      - "feature/**"
+      - "fix/**"
+      - "release/**"
 
 jobs:
   validate:
