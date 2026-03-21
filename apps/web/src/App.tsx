@@ -1,3 +1,9 @@
+// ─── App ──────────────────────────────────────────────────────────────────────
+//
+// Phase 4: full single-page layout — all four panels visible simultaneously,
+// NavBar for smooth-scroll anchoring, ScenarioBar for preset loading,
+// economicsResult lifted from CostEstimator into HealthDashboard.
+
 import { useState, useEffect } from "react";
 import type { SharedContext } from "./types.js";
 import { useUiFoundation } from "./hooks/useUiFoundation.js";
@@ -5,9 +11,10 @@ import { SharedContextForm } from "./components/SharedContextForm.js";
 import { CostEstimator } from "./components/CostEstimator.js";
 import { HealthDashboard } from "./components/HealthDashboard.js";
 import { ArchitectPanel } from "./components/ArchitectPanel.js";
-import { ThemeToggle } from "./components/ThemeToggle.js";
-import { IntentScopeBar } from "./components/IntentScopeBar.js";
-import type { Mode } from "@ficecal/ui-foundation";
+import { NavBar } from "./components/NavBar.js";
+import { ScenarioBar } from "./components/ScenarioBar.js";
+import type { AiCostResult } from "@ficecal/ai-token-economics";
+import type { DemoScenario } from "@ficecal/demo-scenarios";
 
 const DEFAULT_CONTEXT: SharedContext = {
   workspaceId: "workspace-finops-001",
@@ -17,11 +24,11 @@ const DEFAULT_CONTEXT: SharedContext = {
 };
 
 export function App() {
-  const { theme, intentScope, i18n, preferences } = useUiFoundation();
+  const { theme, i18n, preferences } = useUiFoundation();
 
-  // Sync mode from IntentScopeState → local React state for panel routing.
-  const [mode, setMode] = useState<Mode>(intentScope.get().mode);
   const [context, setContext] = useState<SharedContext>(DEFAULT_CONTEXT);
+  const [economicsResult, setEconomicsResult] = useState<AiCostResult | null>(null);
+  const [activeScenario, setActiveScenario] = useState<DemoScenario | null>(null);
 
   // Keep currency preference in sync with context currency.
   useEffect(() => {
@@ -36,43 +43,72 @@ export function App() {
     theme.apply();
   }, [theme]);
 
+  function handleScenarioLoad(scenario: DemoScenario) {
+    setActiveScenario(scenario);
+    // If scenario has a currency override, apply it to context
+    const overrideCurrency = scenario.inputs?.aiCost?.currency;
+    if (overrideCurrency && typeof overrideCurrency === "string") {
+      setContext((c) => ({ ...c, currency: overrideCurrency }));
+    }
+  }
+
   return (
     <div className="shell">
-      <header className="topbar">
-        <div className="topbar-brand">
+      <NavBar theme={theme} i18n={i18n} />
+
+      {/* ── Hero header ─────────────────────────────────────────────────────── */}
+      <header className="hero">
+        <div className="hero-brand">
           <p className="eyebrow">{i18n.t("ui.title")} v2</p>
           <h1>{i18n.t("ui.tagline")}</h1>
-          <p className="subtitle">
+          <p className="hero-sub">
             Deterministic cost intelligence — decimal-precise, audit-traceable.
           </p>
         </div>
-        <div className="topbar-actions">
-          <div className="mode-status" aria-live="polite">
-            <span className="mode-status-label">Active mode</span>
-            <strong className={`mode-badge mode-badge--${mode}`}>{mode}</strong>
-          </div>
-          <ThemeToggle theme={theme} i18n={i18n} />
+        <div className="hero-meta">
+          <span className="phase-tag">Phase 4 complete</span>
+          <span className="phase-tag phase-tag--muted">decimal.js 28dp</span>
+          <span className="phase-tag phase-tag--muted">formula-traced</span>
         </div>
       </header>
 
-      <IntentScopeBar
-        intentScope={intentScope}
-        i18n={i18n}
-        onModeChange={setMode}
-      />
-
+      {/* ── Workspace context ────────────────────────────────────────────────── */}
       <SharedContextForm context={context} onChange={setContext} />
 
+      {/* ── Scenario presets ─────────────────────────────────────────────────── */}
+      <ScenarioBar
+        onLoad={handleScenarioLoad}
+        activeId={activeScenario?.id}
+      />
+
       <main className="content-area" role="main">
-        {mode === "quick" && <CostEstimator context={context} />}
-        {mode === "operator" && <HealthDashboard context={context} />}
-        {mode === "architect" && <ArchitectPanel context={context} />}
+        {/* ── Cost estimator ──────────────────────────────────────────────── */}
+        <section id="calculator" className="anchor-section">
+          <CostEstimator
+            context={context}
+            onResult={setEconomicsResult}
+            scenarioOverride={activeScenario}
+          />
+        </section>
+
+        {/* ── Health dashboard ────────────────────────────────────────────── */}
+        <section id="health" className="anchor-section">
+          <HealthDashboard
+            context={context}
+            economicsResult={economicsResult}
+          />
+        </section>
+
+        {/* ── Architect panel ─────────────────────────────────────────────── */}
+        <section id="architect" className="anchor-section">
+          <ArchitectPanel context={context} />
+        </section>
       </main>
 
       <footer className="footer">
         <p>
-          {i18n.t("ui.title")} v2 · Phase 3 complete · All arithmetic via{" "}
-          <code>decimal.js</code> (28dp)
+          {i18n.t("ui.title")} v2 · Phase 4 complete · All arithmetic via{" "}
+          <code>decimal.js</code> (28dp) · formula-traced
         </p>
       </footer>
     </div>
