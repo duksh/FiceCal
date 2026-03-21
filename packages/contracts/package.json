@@ -1,0 +1,13 @@
+{
+  "name": "@ficecal/contracts",
+  "version": "1.0.0",
+  "description": "FiceCal v2 shared cross-package contract types — the canonical boundary definitions consumed by multiple packages",
+  "type": "module",
+  "exports": { ".": "./src/index.ts" },
+  "scripts": {
+    "typecheck": "tsc --noEmit"
+  },
+  "devDependencies": {
+    "typescript": "^5.4.0"
+  }
+}

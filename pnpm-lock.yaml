@@ -92,6 +92,12 @@ importers:
         specifier: ^2.0.0
         version: 2.1.9(@types/node@22.19.15)
 
+  packages/contracts:
+    devDependencies:
+      typescript:
+        specifier: ^5.4.0
+        version: 5.9.3
+
   packages/core-economics:
     dependencies:
       decimal.js:
@@ -333,6 +339,25 @@ importers:
       vitest:
         specifier: ^3.1.1
         version: 3.2.4(@types/node@22.19.15)
+
+  services/mcp:
+    dependencies:
+      '@ficecal/economics-module':
+        specifier: workspace:*
+        version: link:../../packages/economics-module
+      '@ficecal/health-score':
+        specifier: workspace:*
+        version: link:../../packages/health-score
+      '@ficecal/mcp-tooling':
+        specifier: workspace:*
+        version: link:../../packages/mcp-tooling
+      '@ficecal/recommendation-module':
+        specifier: workspace:*
+        version: link:../../packages/recommendation-module
+    devDependencies:
+      typescript:
+        specifier: ^5.4.0
+        version: 5.9.3
 
 packages:
 

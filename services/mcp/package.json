@@ -1,0 +1,25 @@
+{
+  "name": "@ficecal/service-mcp",
+  "version": "0.1.0",
+  "description": "FiceCal v2 MCP service layer — Fastify transport around mcp-tooling (Phase 5)",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "echo 'MCP service scaffold — Phase 5 implementation pending'",
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@ficecal/mcp-tooling": "workspace:*",
+    "@ficecal/economics-module": "workspace:*",
+    "@ficecal/health-score": "workspace:*",
+    "@ficecal/recommendation-module": "workspace:*"
+  },
+  "devDependencies": {
+    "typescript": "^5.4.0"
+  },
+  "ficecal": {
+    "phase": 5,
+    "status": "scaffold",
+    "note": "Phase 5 deliverable — Fastify + @modelcontextprotocol/sdk transport to be implemented after Phase 4 apps/web production wiring is stable"
+  }
+}

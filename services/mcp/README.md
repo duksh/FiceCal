@@ -1,29 +1,17 @@
-# MCP Service (Blueprint Stub)
+# @ficecal/service-mcp — MCP Service Layer (Phase 5 scaffold)
 
-This service folder contains Phase 1 billing ingestion stubs for provider adapters.
+**Status: scaffold** — Phase 5 implementation pending.
 
-## Included Phase 1 tools
+This package will house the Fastify + `@modelcontextprotocol/sdk` transport that exposes
+`@ficecal/mcp-tooling` tools over HTTP/stdio to MCP-capable clients.
 
-- `billing.openops.ingest`
-- `billing.aws.ingest`
-- `billing.azure.ingest`
-- `billing.gcp.ingest`
+## Planned stack
+- `fastify` — HTTP transport
+- `@modelcontextprotocol/sdk` — MCP protocol handling
+- `zod` — schema validation at transport boundary
+- `@ficecal/mcp-tooling` — economics, health, and recommendation tools (already built)
 
-## MCP v2 baseline surface
-
-- `mcpCapabilitiesGet()` capability handshake helper
-- shared MCP context envelope types and validators (`services/mcp/src/mcp/`)
-- v2 billing tool entrypoints that consume context envelopes
-
-## Source layout
-
-```text
-services/mcp/src/billing/
-  adapters/
-  tools/
-  types.ts
-  registry.ts
-  index.ts
-```
-
-These are contract-aligned stubs (not production SDK integrations yet).
+## Phase 5 entry criteria
+- `apps/web` production wiring complete (Phase 4)
+- `mcp-tooling` contracts stable and fixture-tested
+- ADR-0002 (Fastify MCP SDK stack) accepted ✅
