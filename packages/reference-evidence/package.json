@@ -1,0 +1,17 @@
+{
+  "name": "@ficecal/reference-evidence",
+  "version": "1.0.0",
+  "description": "FiceCal v2 — explanatory evidence library: framework citations, methodology notes, and source references for recommendations and calculations",
+  "type": "module",
+  "main": "./src/index.ts",
+  "exports": {
+    ".": "./src/index.ts"
+  },
+  "scripts": {
+    "test": "node --experimental-vm-modules node_modules/vitest/vitest.mjs run"
+  },
+  "devDependencies": {
+    "vitest": "^3.1.1",
+    "typescript": "^5.8.3"
+  }
+}
