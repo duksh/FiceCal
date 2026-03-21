@@ -15,11 +15,17 @@
     "@ficecal/core-economics": "workspace:*",
     "@ficecal/health-score": "workspace:*",
     "@ficecal/recommendation-module": "workspace:*",
+    "@ficecal/budgeting-forecasting": "workspace:*",
+    "@ficecal/chart-presentation": "workspace:*",
+    "@ficecal/demo-scenarios": "workspace:*",
+    "@ficecal/multi-tech-normalization": "workspace:*",
     "@ficecal/ui-foundation": "workspace:*",
+    "d3": "^7.9.0",
     "react": "^18.3.0",
     "react-dom": "^18.3.0"
   },
   "devDependencies": {
+    "@types/d3": "^7.4.0",
     "@types/react": "^18.3.0",
     "@types/react-dom": "^18.3.0",
     "@vitejs/plugin-react": "^4.3.0",
