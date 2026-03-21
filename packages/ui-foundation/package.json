@@ -1,0 +1,17 @@
+{
+  "name": "@ficecal/ui-foundation",
+  "version": "1.0.0",
+  "description": "FiceCal v2 — UI foundation: theme, intent/scope/mode shell, preferences, localization, keyboard, telemetry, and breakpoint contracts",
+  "type": "module",
+  "main": "./src/index.ts",
+  "exports": {
+    ".": "./src/index.ts"
+  },
+  "scripts": {
+    "test": "node --experimental-vm-modules node_modules/vitest/vitest.mjs run"
+  },
+  "devDependencies": {
+    "vitest": "^3.1.1",
+    "typescript": "^5.8.3"
+  }
+}
