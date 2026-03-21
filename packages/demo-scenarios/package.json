@@ -1,0 +1,26 @@
+{
+  "name": "@ficecal/demo-scenarios",
+  "version": "1.0.0",
+  "description": "FiceCal v2 — canonical demo scenarios: fixture inputs + pre-seeded expected outputs for every economics engine",
+  "type": "module",
+  "main": "./src/index.ts",
+  "exports": {
+    ".": "./src/index.ts"
+  },
+  "scripts": {
+    "test": "node --experimental-vm-modules node_modules/vitest/vitest.mjs run"
+  },
+  "dependencies": {
+    "@ficecal/core-economics": "workspace:*",
+    "@ficecal/ai-token-economics": "workspace:*",
+    "@ficecal/sla-slo-sli-economics": "workspace:*",
+    "@ficecal/multi-tech-normalization": "workspace:*",
+    "@ficecal/budgeting-forecasting": "workspace:*",
+    "@ficecal/health-score": "workspace:*",
+    "@ficecal/recommendation-module": "workspace:*"
+  },
+  "devDependencies": {
+    "vitest": "^3.1.1",
+    "typescript": "^5.8.3"
+  }
+}

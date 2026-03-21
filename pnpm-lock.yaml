@@ -108,6 +108,37 @@ importers:
         specifier: ^2.0.0
         version: 2.1.9(@types/node@22.19.15)
 
+  packages/demo-scenarios:
+    dependencies:
+      '@ficecal/ai-token-economics':
+        specifier: workspace:*
+        version: link:../ai-token-economics
+      '@ficecal/budgeting-forecasting':
+        specifier: workspace:*
+        version: link:../budgeting-forecasting
+      '@ficecal/core-economics':
+        specifier: workspace:*
+        version: link:../core-economics
+      '@ficecal/health-score':
+        specifier: workspace:*
+        version: link:../health-score
+      '@ficecal/multi-tech-normalization':
+        specifier: workspace:*
+        version: link:../multi-tech-normalization
+      '@ficecal/recommendation-module':
+        specifier: workspace:*
+        version: link:../recommendation-module
+      '@ficecal/sla-slo-sli-economics':
+        specifier: workspace:*
+        version: link:../sla-slo-sli-economics
+    devDependencies:
+      typescript:
+        specifier: ^5.8.3
+        version: 5.9.3
+      vitest:
+        specifier: ^3.1.1
+        version: 3.2.4(@types/node@22.19.15)
+
   packages/economics-module:
     dependencies:
       '@ficecal/ai-token-economics':
