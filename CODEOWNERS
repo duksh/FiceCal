@@ -1,0 +1,28 @@
+# FiceCal v2 CODEOWNERS
+# Each line is a file pattern followed by one or more owners.
+# Order matters — last matching pattern takes precedence.
+
+# Default owner for everything
+* @duksh
+
+# Core economics kernel — changes require economics review
+/packages/core-economics/   @duksh
+/packages/economics-module/ @duksh
+
+# UI foundation — changes require UI/UX review
+/packages/ui-foundation/    @duksh
+
+# Shared contracts — any change here affects all consumers
+/packages/contracts/        @duksh
+
+# Apps — production runtime changes
+/apps/web/                  @duksh
+
+# Services — transport layer changes
+/services/                  @duksh
+
+# CI/CD — workflow changes require maintainer approval
+/.github/                   @duksh
+
+# Plan and governance docs
+/docs/roadmap/              @duksh

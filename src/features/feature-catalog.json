@@ -1,5 +1,5 @@
 {
-  "version": "1.5.0",
+  "version": "1.6.0",
   "updatedAt": "2026-03-21",
   "modules": [
     {
@@ -128,6 +128,27 @@
       "optional": false,
       "status": "active",
       "note": "Phase 2 — AI pricing unit dispatcher closing Gap 1; per_token/1k/1m, per_image (resolution+steps multipliers), per_request, per_second; 32 vitest tests"
+    },
+    {
+      "id": "contracts",
+      "path": "packages/contracts",
+      "dependsOn": [],
+      "optional": false,
+      "status": "active",
+      "note": "Phase 4 — shared cross-package boundary types (WorkspaceContext, IntentScopeSnapshot, EconomicsResultSummary, HealthSignalSummary, RecommendationSummary, TelemetryBase); no business logic; consumed by all packages as the contract boundary"
+    },
+    {
+      "id": "service-mcp",
+      "path": "services/mcp",
+      "dependsOn": [
+        "mcp-tooling",
+        "economics-module",
+        "health-score",
+        "recommendation-module"
+      ],
+      "optional": false,
+      "status": "scaffold",
+      "note": "Phase 5 scaffold — Fastify + @modelcontextprotocol/sdk transport around mcp-tooling; implementation deferred to Phase 5 after apps/web production wiring is complete"
     }
   ]
 }
