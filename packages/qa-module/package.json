@@ -1,0 +1,30 @@
+{
+  "name": "@ficecal/qa-module",
+  "version": "1.0.0",
+  "description": "FiceCal v2 — cross-module integration harness: contract parity, output schema validation, and regression guards",
+  "type": "module",
+  "main": "./src/index.ts",
+  "exports": {
+    ".": "./src/index.ts"
+  },
+  "scripts": {
+    "test": "node --experimental-vm-modules node_modules/vitest/vitest.mjs run"
+  },
+  "dependencies": {
+    "@ficecal/core-economics": "workspace:*",
+    "@ficecal/economics-module": "workspace:*",
+    "@ficecal/ai-token-economics": "workspace:*",
+    "@ficecal/sla-slo-sli-economics": "workspace:*",
+    "@ficecal/multi-tech-normalization": "workspace:*",
+    "@ficecal/budgeting-forecasting": "workspace:*",
+    "@ficecal/health-score": "workspace:*",
+    "@ficecal/recommendation-module": "workspace:*",
+    "@ficecal/feature-registry": "workspace:*",
+    "@ficecal/demo-scenarios": "workspace:*",
+    "@ficecal/reference-evidence": "workspace:*"
+  },
+  "devDependencies": {
+    "vitest": "^3.1.1",
+    "typescript": "^5.8.3"
+  }
+}
