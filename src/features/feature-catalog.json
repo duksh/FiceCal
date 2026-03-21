@@ -1,5 +1,5 @@
 {
-  "version": "1.3.0",
+  "version": "1.4.0",
   "updatedAt": "2026-03-20",
   "modules": [
     {
@@ -15,7 +15,8 @@
       "path": "packages/feature-registry",
       "dependsOn": [],
       "optional": false,
-      "status": "planned"
+      "status": "active",
+      "note": "Phase 3 — plugin registration contract; FeatureRegistry with Kahn topological sort, diamond-dep + circular-dep detection, capability-based discovery; 27 vitest tests"
     },
     {
       "id": "schemas",
@@ -39,11 +40,28 @@
       "id": "mcp-tooling",
       "path": "packages/mcp-tooling",
       "dependsOn": [
-        "schemas",
-        "feature-registry"
+        "feature-registry",
+        "core-economics",
+        "ai-token-economics",
+        "health-score",
+        "recommendation-module"
       ],
       "optional": false,
-      "status": "planned"
+      "status": "active",
+      "note": "Phase 3 — MCP tool registry + 3 tools (economics.estimate.cost, economics.period.normalize, health.score.query); closes Gap 5; 32 vitest tests"
+    },
+    {
+      "id": "web",
+      "path": "apps/web",
+      "dependsOn": [
+        "ai-token-economics",
+        "core-economics",
+        "health-score",
+        "recommendation-module"
+      ],
+      "optional": false,
+      "status": "active",
+      "note": "Phase 3 — Vite + React browser runtime; CostEstimator (all 6 pricing units), HealthDashboard (signals + recommendations), ArchitectPanel (package graph + ADRs); 64-module Vite build"
     },
     {
       "id": "community.sample-finops-adapter",
