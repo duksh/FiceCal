@@ -1,0 +1,23 @@
+{
+  "name": "@ficecal/economics-module",
+  "version": "1.0.0",
+  "description": "FiceCal v2 — unified economics umbrella: registry, dispatcher, and extension interface for all economics engines",
+  "type": "module",
+  "main": "./src/index.ts",
+  "exports": {
+    ".": "./src/index.ts"
+  },
+  "scripts": {
+    "test": "node --experimental-vm-modules node_modules/vitest/vitest.mjs run"
+  },
+  "dependencies": {
+    "@ficecal/core-economics": "workspace:*",
+    "@ficecal/ai-token-economics": "workspace:*",
+    "@ficecal/sla-slo-sli-economics": "workspace:*",
+    "@ficecal/multi-tech-normalization": "workspace:*"
+  },
+  "devDependencies": {
+    "vitest": "^3.1.1",
+    "typescript": "^5.8.3"
+  }
+}
