@@ -220,6 +220,15 @@ importers:
         specifier: ^2.0.0
         version: 2.1.9(@types/node@22.19.15)
 
+  packages/reference-evidence:
+    devDependencies:
+      typescript:
+        specifier: ^5.8.3
+        version: 5.9.3
+      vitest:
+        specifier: ^3.1.1
+        version: 3.2.4(@types/node@22.19.15)
+
   packages/sla-slo-sli-economics:
     dependencies:
       '@ficecal/core-economics':
