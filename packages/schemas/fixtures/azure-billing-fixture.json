@@ -1,0 +1,39 @@
+{
+  "provider": "azure",
+  "version": "1.0.0",
+  "rawFormat": "azure-cost-management",
+  "data": {
+    "provider": "azure",
+    "accountId": "ficecal-azure-subscription",
+    "billingPeriodStart": "2026-01-01",
+    "billingPeriodEnd": "2026-02-01",
+    "totalCost": 1123.88,
+    "currency": "USD",
+    "lineItems": [
+      {
+        "service": "Microsoft.CognitiveServices",
+        "sku": "OpenAI-GPT-4o-Input",
+        "usageType": "Azure.OpenAI.GPT4o.Input.1K.Tokens",
+        "cost": 743.20,
+        "currency": "USD",
+        "startDate": "2026-01-01",
+        "endDate": "2026-02-01",
+        "tags": { "Environment": "Production", "CostCenter": "AI-Platform" }
+      },
+      {
+        "service": "Microsoft.Storage",
+        "sku": "LRS-Data-Stored",
+        "usageType": "Azure.Storage.LRS.DataStored.GiB",
+        "cost": 380.68,
+        "currency": "USD",
+        "startDate": "2026-01-01",
+        "endDate": "2026-02-01"
+      }
+    ],
+    "metadata": {
+      "subscriptionName": "ficecal-production",
+      "exportGeneratedAt": "2026-02-01T00:00:00Z",
+      "source": "cost-management-monthly-export"
+    }
+  }
+}

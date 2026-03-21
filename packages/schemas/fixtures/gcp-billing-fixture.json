@@ -1,0 +1,39 @@
+{
+  "provider": "gcp",
+  "version": "1.0.0",
+  "rawFormat": "gcp-billing-export",
+  "data": {
+    "provider": "gcp",
+    "accountId": "ficecal-prod-gcp",
+    "billingPeriodStart": "2026-01-01",
+    "billingPeriodEnd": "2026-02-01",
+    "totalCost": 987.14,
+    "currency": "USD",
+    "lineItems": [
+      {
+        "service": "aiplatform.googleapis.com",
+        "sku": "Gemini-1.5-Pro-Input-Tokens",
+        "usageType": "online-prediction-tokens-input",
+        "cost": 612.40,
+        "currency": "USD",
+        "startDate": "2026-01-01",
+        "endDate": "2026-02-01",
+        "tags": { "project": "ficecal-ai", "env": "prod" }
+      },
+      {
+        "service": "storage.googleapis.com",
+        "sku": "GCS-Standard-Storage",
+        "usageType": "regional-storage-byte-seconds",
+        "cost": 374.74,
+        "currency": "USD",
+        "startDate": "2026-01-01",
+        "endDate": "2026-02-01"
+      }
+    ],
+    "metadata": {
+      "projectId": "ficecal-prod-gcp",
+      "exportGeneratedAt": "2026-02-01T00:00:00Z",
+      "source": "bigquery-billing-export"
+    }
+  }
+}

@@ -15,6 +15,7 @@
   },
   "dependencies": {
     "@ficecal/mcp-tooling": "workspace:*",
+    "@ficecal/plugin-api": "workspace:*",
     "@ficecal/economics-module": "workspace:*",
     "@ficecal/health-score": "workspace:*",
     "@ficecal/recommendation-module": "workspace:*",
@@ -31,7 +32,7 @@
     "vitest": "^1.6.0"
   },
   "ficecal": {
-    "phase": 5,
+    "phase": 6,
     "status": "active"
   }
 }

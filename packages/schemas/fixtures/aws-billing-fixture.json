@@ -1,0 +1,40 @@
+{
+  "provider": "aws",
+  "version": "1.0.0",
+  "rawFormat": "cost-explorer",
+  "data": {
+    "provider": "aws",
+    "accountId": "123456789012",
+    "billingPeriodStart": "2026-01-01",
+    "billingPeriodEnd": "2026-02-01",
+    "totalCost": 1450.32,
+    "currency": "USD",
+    "lineItems": [
+      {
+        "service": "AmazonBedrock",
+        "sku": "Bedrock-ClaudeTokens-Input",
+        "usageType": "USE1-Bedrock:claude-3-5-haiku-input-tokens",
+        "cost": 820.50,
+        "currency": "USD",
+        "startDate": "2026-01-01",
+        "endDate": "2026-02-01",
+        "tags": { "Environment": "production", "Team": "ai-platform" }
+      },
+      {
+        "service": "AmazonS3",
+        "sku": "S3-StorageObject",
+        "usageType": "USE1-TimedStorage-ByteHrs",
+        "cost": 629.82,
+        "currency": "USD",
+        "startDate": "2026-01-01",
+        "endDate": "2026-02-01",
+        "tags": { "Environment": "production" }
+      }
+    ],
+    "metadata": {
+      "accountAlias": "ficecal-production",
+      "exportGeneratedAt": "2026-02-01T00:00:00Z",
+      "source": "cost-explorer-monthly-report"
+    }
+  }
+}

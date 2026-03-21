@@ -1,0 +1,40 @@
+{
+  "provider": "openai",
+  "version": "1.0.0",
+  "rawFormat": "openai-usage-export",
+  "data": {
+    "provider": "openai",
+    "accountId": "org-ficecal",
+    "billingPeriodStart": "2026-01-01",
+    "billingPeriodEnd": "2026-02-01",
+    "totalCost": 634.75,
+    "currency": "USD",
+    "lineItems": [
+      {
+        "service": "openai",
+        "sku": "gpt-4o-input",
+        "usageType": "gpt-4o:input_tokens",
+        "cost": 412.30,
+        "currency": "USD",
+        "startDate": "2026-01-01",
+        "endDate": "2026-02-01",
+        "tags": { "project": "ficecal-prod", "model": "gpt-4o" }
+      },
+      {
+        "service": "openai",
+        "sku": "gpt-4o-output",
+        "usageType": "gpt-4o:output_tokens",
+        "cost": 222.45,
+        "currency": "USD",
+        "startDate": "2026-01-01",
+        "endDate": "2026-02-01",
+        "tags": { "project": "ficecal-prod", "model": "gpt-4o" }
+      }
+    ],
+    "metadata": {
+      "organizationName": "FiceCal",
+      "exportGeneratedAt": "2026-02-01T00:00:00Z",
+      "source": "openai-usage-dashboard-export"
+    }
+  }
+}

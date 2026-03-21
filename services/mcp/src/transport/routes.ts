@@ -23,8 +23,8 @@ export async function registerMcpRoutes(app: FastifyInstance): Promise<void> {
     return reply.code(200).send({
       status: "ok",
       service: "@ficecal/service-mcp",
-      version: "0.5.0",
-      phase: 5,
+      version: "0.6.0",
+      phase: 6,
       toolCount: registry.list().length,
       namespaces: registry.namespaces(),
       timestamp: new Date().toISOString(),

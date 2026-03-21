@@ -1,0 +1,18 @@
+{
+  "name": "@ficecal/plugin-api",
+  "version": "1.0.0",
+  "description": "FiceCal v2 — plugin API: FicecalPlugin interface, PluginHost, contribution point contracts for themes, billing, MCP tools, and UI panels",
+  "type": "module",
+  "main": "./src/index.ts",
+  "exports": {
+    ".": "./src/index.ts"
+  },
+  "scripts": {
+    "test": "vitest run",
+    "typecheck": "tsc --noEmit"
+  },
+  "devDependencies": {
+    "vitest": "^1.6.0",
+    "typescript": "~5.4.5"
+  }
+}

@@ -65,6 +65,16 @@ export {
   WCAG_CONTRAST,
 } from "./keyboard.js";
 
+// ─── Built-in theme plugins (contribution point objects) ──────────────────────
+export type { ThemeContribution } from "./theme-plugins.js";
+export {
+  lightThemeContribution,
+  darkThemeContribution,
+  highContrastThemeContribution,
+  oceanBlueThemeContribution,
+  BUILT_IN_THEMES,
+} from "./theme-plugins.js";
+
 // ─── Telemetry ────────────────────────────────────────────────────────────────
 export type {
   TelemetryEvent,

@@ -33,13 +33,13 @@ describe("GET /mcp/v1/health", () => {
     const body = res.json();
     expect(body.status).toBe("ok");
     expect(body.service).toBe("@ficecal/service-mcp");
-    expect(body.phase).toBe(5);
+    expect(body.phase).toBe(6);
   });
 
-  it("reports 3 registered tools", async () => {
+  it("reports 5 registered tools (3 economics + 2 billing)", async () => {
     const res = await app.inject({ method: "GET", url: "/mcp/v1/health" });
     const body = res.json();
-    expect(body.toolCount).toBe(3);
+    expect(body.toolCount).toBe(5);
   });
 
   it("reports economics and health namespaces", async () => {
@@ -81,12 +81,15 @@ describe("GET /mcp/v1/capabilities", () => {
     expect(healthNs.tools).toContain("health.score.query");
   });
 
-  it("all namespaces are stable", async () => {
+  it("includes billing namespace", async () => {
     const res = await app.inject({ method: "GET", url: "/mcp/v1/capabilities" });
     const body = res.json();
-    for (const ns of body.toolNamespaces as { stability: string }[]) {
-      expect(ns.stability).toBe("stable");
-    }
+    const billingNs = body.toolNamespaces.find(
+      (ns: { namespace: string }) => ns.namespace === "billing"
+    );
+    expect(billingNs).toBeDefined();
+    expect(billingNs.tools).toContain("billing.estimate.actual");
+    expect(billingNs.tools).toContain("billing.compare.period");
   });
 });
 
