@@ -15,6 +15,7 @@
     "@ficecal/core-economics": "workspace:*",
     "@ficecal/health-score": "workspace:*",
     "@ficecal/recommendation-module": "workspace:*",
+    "@ficecal/ui-foundation": "workspace:*",
     "react": "^18.3.0",
     "react-dom": "^18.3.0"
   },

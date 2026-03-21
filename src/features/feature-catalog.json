@@ -1,6 +1,6 @@
 {
-  "version": "1.4.0",
-  "updatedAt": "2026-03-20",
+  "version": "1.5.0",
+  "updatedAt": "2026-03-21",
   "modules": [
     {
       "id": "core-economics",
@@ -51,17 +51,26 @@
       "note": "Phase 3 — MCP tool registry + 3 tools (economics.estimate.cost, economics.period.normalize, health.score.query); closes Gap 5; 32 vitest tests"
     },
     {
+      "id": "ui-foundation",
+      "path": "packages/ui-foundation",
+      "dependsOn": [],
+      "optional": false,
+      "status": "active",
+      "note": "Phase 3 — framework-agnostic UI primitive layer; Intent/Scope/Mode taxonomy, PreferenceStore (StorageAdapter injectable), ThemeManager (light/dark/system toggle, CSS custom properties, no-FWOT), IntentScopeState (history stack, autoScope, deep-link serialization), LocalizationShell (en/fr/zh, {{var}} interpolation), KeyboardShortcutRegistry (WCAG focus-trap, contrast utilities), BufferedTelemetryEmitter (12-event schema); 75 vitest tests, zero DOM dependencies"
+    },
+    {
       "id": "web",
       "path": "apps/web",
       "dependsOn": [
         "ai-token-economics",
         "core-economics",
         "health-score",
-        "recommendation-module"
+        "recommendation-module",
+        "ui-foundation"
       ],
       "optional": false,
       "status": "active",
-      "note": "Phase 3 — Vite + React browser runtime; CostEstimator (all 6 pricing units), HealthDashboard (signals + recommendations), ArchitectPanel (package graph + ADRs); 64-module Vite build"
+      "note": "Phase 3 — Vite + React browser runtime; CostEstimator (all 6 pricing units), HealthDashboard (signals + recommendations), ArchitectPanel (package graph + ADRs); now wired to ui-foundation: ThemeToggle (light/dark/system), IntentScopeBar (intent/scope/mode selectors with back + scope-hint), useUiFoundation hook bootstraps ThemeManager + PreferenceStore + LocalizationShell + IntentScopeState as module-level singletons"
     },
     {
       "id": "community.sample-finops-adapter",
