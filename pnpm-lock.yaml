@@ -235,6 +235,49 @@ importers:
         specifier: ^2.0.0
         version: 2.1.9(@types/node@22.19.15)
 
+  packages/qa-module:
+    dependencies:
+      '@ficecal/ai-token-economics':
+        specifier: workspace:*
+        version: link:../ai-token-economics
+      '@ficecal/budgeting-forecasting':
+        specifier: workspace:*
+        version: link:../budgeting-forecasting
+      '@ficecal/core-economics':
+        specifier: workspace:*
+        version: link:../core-economics
+      '@ficecal/demo-scenarios':
+        specifier: workspace:*
+        version: link:../demo-scenarios
+      '@ficecal/economics-module':
+        specifier: workspace:*
+        version: link:../economics-module
+      '@ficecal/feature-registry':
+        specifier: workspace:*
+        version: link:../feature-registry
+      '@ficecal/health-score':
+        specifier: workspace:*
+        version: link:../health-score
+      '@ficecal/multi-tech-normalization':
+        specifier: workspace:*
+        version: link:../multi-tech-normalization
+      '@ficecal/recommendation-module':
+        specifier: workspace:*
+        version: link:../recommendation-module
+      '@ficecal/reference-evidence':
+        specifier: workspace:*
+        version: link:../reference-evidence
+      '@ficecal/sla-slo-sli-economics':
+        specifier: workspace:*
+        version: link:../sla-slo-sli-economics
+    devDependencies:
+      typescript:
+        specifier: ^5.8.3
+        version: 5.9.3
+      vitest:
+        specifier: ^3.1.1
+        version: 3.2.4(@types/node@22.19.15)
+
   packages/recommendation-module:
     dependencies:
       '@ficecal/health-score':
