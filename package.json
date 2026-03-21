@@ -16,5 +16,13 @@
     "validate:qa-evidence-policy": "python3 scripts/validate-qa-evidence-policy.py",
     "validate:docs-links": "python3 scripts/validate-doc-links.py",
     "validate": "npm run validate:feature-catalog && npm run validate:fixture-coverage && npm run validate:legacy-alias-parity && npm run validate:billing-canonical-handoff && npm run validate:billing-live-readiness && npm run validate:qa-evidence-policy && npm run validate:docs-links"
+  },
+  "devDependencies": {
+    "typescript": "~5.4.5"
+  },
+  "pnpm": {
+    "overrides": {
+      "typescript": "~5.4.5"
+    }
   }
 }

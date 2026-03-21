@@ -1,6 +1,7 @@
 import { computeHealthScore } from "@ficecal/health-score";
 import { computeRecommendations } from "@ficecal/recommendation-module";
 import type { HealthSignal } from "@ficecal/health-score";
+import type { RecommendationAudience } from "@ficecal/recommendation-module";
 import type { McpToolDescriptor, McpToolResult } from "../types.js";
 
 // ─── Input / Output ──────────────────────────────────────────────────────────
@@ -87,7 +88,7 @@ export const healthScoreQueryTool: McpToolDescriptor<HealthScoreQueryInput, Heal
     const healthResult = computeHealthScore(weightedSignals);
 
     const recResult = computeRecommendations(typedSignals, {
-      audiences: input.audiences as Parameters<typeof computeRecommendations>[1]["audiences"],
+      audiences: input.audiences as RecommendationAudience[] | undefined,
     });
 
     const output: HealthScoreQueryOutput = {
