@@ -82,6 +82,37 @@ importers:
         specifier: ^2.0.0
         version: 2.1.9(@types/node@22.19.15)
 
+  packages/mcp-tooling:
+    dependencies:
+      '@ficecal/ai-token-economics':
+        specifier: workspace:*
+        version: link:../ai-token-economics
+      '@ficecal/core-economics':
+        specifier: workspace:*
+        version: link:../core-economics
+      '@ficecal/feature-registry':
+        specifier: workspace:*
+        version: link:../feature-registry
+      '@ficecal/health-score':
+        specifier: workspace:*
+        version: link:../health-score
+      '@ficecal/recommendation-module':
+        specifier: workspace:*
+        version: link:../recommendation-module
+      decimal.js:
+        specifier: ^10.4.3
+        version: 10.6.0
+    devDependencies:
+      '@types/node':
+        specifier: ^22.0.0
+        version: 22.19.15
+      typescript:
+        specifier: ^5.4.0
+        version: 5.9.3
+      vitest:
+        specifier: ^2.0.0
+        version: 2.1.9(@types/node@22.19.15)
+
   packages/recommendation-module:
     dependencies:
       '@ficecal/health-score':
